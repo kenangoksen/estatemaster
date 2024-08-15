@@ -28,7 +28,7 @@
 											</li>
 											<!--end::Item-->
 											<!--begin::Item-->
-											<li class="breadcrumb-item text-muted">Dashboards</li>
+											<li class="breadcrumb-item text-muted">Dashboardsa</li>
 											<!--end::Item-->
 										</ul>
 										<!--end::Breadcrumb-->
