@@ -28,7 +28,7 @@
 								</li>
 								<!--end::Item-->
 								<!--begin::Item-->
-								<li class="breadcrumb-item text-muted">User Profile</li>
+								<li class="breadcrumb-item text-muted">User Profilea</li>
 								<!--end::Item-->
 							</ul>
 							<!--end::Breadcrumb-->
