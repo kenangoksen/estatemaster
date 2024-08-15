@@ -2645,12 +2645,14 @@
 										 <!--begin:Menu item-->
 										 <div class="menu-item">
 											 <!--begin:Menu link-->
-											 <a class="menu-link" href="apps/customers/list.html">
-												 <span class="menu-bullet">
-													 <span class="bullet bullet-dot"></span>
-												 </span>
-												 <span class="menu-title">Customer Listing</span>
-											 </a>
+											 		<router-link :to="{name: 'UserList'}">
+														<a class="menu-link">
+														 <span class="menu-bullet">
+															 <span class="bullet bullet-dot"></span>
+														 </span>
+														 <span class="menu-title">Customer Listing</span>
+													 </a>
+													</router-link>
 											 <!--end:Menu link-->
 										 </div>
 										 <!--end:Menu item-->
