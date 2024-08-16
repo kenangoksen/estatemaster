@@ -1,7 +1,10 @@
 import Home from '../views/front/Home.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import Overview from '@/components/UserProfile/Overview.vue';
+import UserProfileProjects from '@/components/UserProfile/Projects.vue';
 import UserList from '@/components/Users/List.vue';
+import UserCreate from '@/components/Users/Create.vue';
+import UserUpdate from '@/components/Users/Update.vue';
  
 const routes = [
      {
@@ -15,10 +18,25 @@ const routes = [
       component: Overview
      },
      {
-      path: '/users/list',
+      path: '/user-profile/projects',
+      name: 'Projects',
+      component: UserProfileProjects
+     },
+     {
+      path: '/user/list',
       name: 'UserList',
       component: UserList
-     }
+     },
+     {
+        path: '/user/create',
+        name: 'UserCreate',
+        component: UserCreate
+     },
+     {
+        path: '/user/update',
+        name: 'UserUpdate',
+        component: UserUpdate
+     },
 ];
 
 const router = createRouter({
