@@ -2943,7 +2943,7 @@
 													<!--end::Stepper-->
 												</div>
 												<!--begin::Modal body-->
-											</div>
+											</div>  
 										</div>
 									</div>
 									<!--end::Modal - Offer A Deal-->
