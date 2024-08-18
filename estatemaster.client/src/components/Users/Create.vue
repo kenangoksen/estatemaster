@@ -1048,7 +1048,17 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     name: 'UserCreate',
+    created() {
+        const parameters = {
+            name: 'Kenan',
+            surname: 'Gökşen',
+            phone: '5322327054',
+            state: 'Sakarya'
+        }
+        axios.post('/api/user/create', parameters, {"Content-Type": "application/json"}).then((response) => console.log(response));
+    },
 }
 </script>
