@@ -41,7 +41,7 @@ namespace EstateMaster.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("surnname")
+                    b.Property<string>("surname")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

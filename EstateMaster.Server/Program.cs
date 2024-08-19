@@ -13,9 +13,26 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<EMDBContext>(dbContextOptions =>
     dbContextOptions.UseSqlServer(builder.Configuration.GetConnectionString("MsSQLConnection")));
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "CorsPolicy",
+                builder =>
+                {
+                    builder.WithOrigins(
+                        "https://localhost:5173")
+                                .AllowAnyHeader()
+                                .AllowAnyMethod()
+                                .SetIsOriginAllowed(_ => true)
+                                .AllowCredentials();
+                });
+});
+
 var app = builder.Build();
 app.UseDefaultFiles();
 app.UseStaticFiles();
+
+app.UseCors("CorsPolicy");
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

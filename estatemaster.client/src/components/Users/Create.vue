@@ -33,7 +33,7 @@
                             </ul>
                             <!--end::Breadcrumb-->
                         </div>
-                        <!--end::Page title--> 
+                        <!--end::Page title-->
                     </div>
                     <!--end::Toolbar container-->
                 </div>
@@ -43,7 +43,7 @@
                     <!--begin::Content container-->
                     <div id="kt_app_content_container" class="app-container container-xxl">
                         <!--begin::Contacts App- Add New Contact-->
-                        <div class="row g-7"> 
+                        <div class="row g-7">
                             <!--begin::Content-->
                             <div class="col-xl-12">
                                 <!--begin::Contacts-->
@@ -140,7 +140,7 @@
                                             <div class="fv-row mb-7">
                                                 <!--begin::Label-->
                                                 <label class="fs-6 fw-semibold form-label mt-3">
-                                                    <span class="required">Name</span>
+                                                    <span class="required">İsim</span>
                                                     <span class="ms-1" data-bs-toggle="tooltip"
                                                         title="Enter the contact's name.">
                                                         <i class="ki-duotone ki-information fs-7">
@@ -153,7 +153,7 @@
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
                                                 <input type="text" class="form-control form-control-solid" name="name"
-                                                    value="" />
+                                                    value="" v-model="form.name" />
                                                 <!--end::Input-->
                                             </div>
                                             <!--end::Input group-->
@@ -161,7 +161,7 @@
                                             <div class="fv-row mb-7">
                                                 <!--begin::Label-->
                                                 <label class="fs-6 fw-semibold form-label mt-3">
-                                                    <span>Company Name</span>
+                                                    <span>Soyisim</span>
                                                     <span class="ms-1" data-bs-toggle="tooltip"
                                                         title="Enter the contact's company name (optional).">
                                                         <i class="ki-duotone ki-information fs-7">
@@ -174,7 +174,7 @@
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
                                                 <input type="text" class="form-control form-control-solid"
-                                                    name="company_name" value="" />
+                                                    name="company_name" value="" v-model="form.surname" />
                                                 <!--end::Input-->
                                             </div>
                                             <!--end::Input group-->
@@ -186,32 +186,7 @@
                                                     <div class="fv-row mb-7">
                                                         <!--begin::Label-->
                                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                                            <span class="required">Email</span>
-                                                            <span class="ms-1" data-bs-toggle="tooltip"
-                                                                title="Enter the contact's email.">
-                                                                <i class="ki-duotone ki-information fs-7">
-                                                                    <span class="path1"></span>
-                                                                    <span class="path2"></span>
-                                                                    <span class="path3"></span>
-                                                                </i>
-                                                            </span>
-                                                        </label>
-                                                        <!--end::Label-->
-                                                        <!--begin::Input-->
-                                                        <input type="email" class="form-control form-control-solid"
-                                                            name="email" value="" />
-                                                        <!--end::Input-->
-                                                    </div>
-                                                    <!--end::Input group-->
-                                                </div>
-                                                <!--end::Col-->
-                                                <!--begin::Col-->
-                                                <div class="col">
-                                                    <!--begin::Input group-->
-                                                    <div class="fv-row mb-7">
-                                                        <!--begin::Label-->
-                                                        <label class="fs-6 fw-semibold form-label mt-3">
-                                                            <span>Phone</span>
+                                                            <span>Telefon</span>
                                                             <span class="ms-1" data-bs-toggle="tooltip"
                                                                 title="Enter the contact's phone number (optional).">
                                                                 <i class="ki-duotone ki-information fs-7">
@@ -224,7 +199,7 @@
                                                         <!--end::Label-->
                                                         <!--begin::Input-->
                                                         <input type="text" class="form-control form-control-solid"
-                                                            name="phone" value="" />
+                                                            name="phone" value="" v-model="form.phone" />
                                                         <!--end::Input-->
                                                     </div>
                                                     <!--end::Input group-->
@@ -240,32 +215,7 @@
                                                     <div class="fv-row mb-7">
                                                         <!--begin::Label-->
                                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                                            <span>City</span>
-                                                            <span class="ms-1" data-bs-toggle="tooltip"
-                                                                title="Enter the contact's city of residence (optional).">
-                                                                <i class="ki-duotone ki-information fs-7">
-                                                                    <span class="path1"></span>
-                                                                    <span class="path2"></span>
-                                                                    <span class="path3"></span>
-                                                                </i>
-                                                            </span>
-                                                        </label>
-                                                        <!--end::Label-->
-                                                        <!--begin::Input-->
-                                                        <input type="text" class="form-control form-control-solid"
-                                                            name="city" value="" />
-                                                        <!--end::Input-->
-                                                    </div>
-                                                    <!--end::Input group-->
-                                                </div>
-                                                <!--end::Col-->
-                                                <!--begin::Col-->
-                                                <div class="col">
-                                                    <!--begin::Input group-->
-                                                    <div class="fv-row mb-7">
-                                                        <!--begin::Label-->
-                                                        <label class="fs-6 fw-semibold form-label mt-3">
-                                                            <span class="required">Country</span>
+                                                            <span class="required">Şehir</span>
                                                         </label>
                                                         <!--end::Label-->
                                                         <div class="w-100">
@@ -273,7 +223,8 @@
                                                             <select id="kt_ecommerce_select2_country"
                                                                 class="form-select form-select-solid" name="country"
                                                                 data-kt-ecommerce-settings-type="select2_flags"
-                                                                data-placeholder="Select a country">
+                                                                data-placeholder="Select a country"
+                                                                v-model="form.state">
                                                                 <option></option>
                                                                 <option value="AF"
                                                                     data-kt-select2-country="assets/media/flags/afghanistan.svg">
@@ -987,8 +938,8 @@
                                                     class="btn btn-light me-3">Cancel</button>
                                                 <!--end::Button-->
                                                 <!--begin::Button-->
-                                                <button type="submit" data-kt-contacts-type="submit"
-                                                    class="btn btn-primary">
+                                                <button type="button" data-kt-contacts-type="submit"
+                                                    class="btn btn-primary" @click="saveUser()">
                                                     <span class="indicator-label">Save</span>
                                                     <span class="indicator-progress">Please wait...
                                                         <span
@@ -1051,14 +1002,29 @@
 import axios from 'axios'
 export default {
     name: 'UserCreate',
-    created() {
-        const parameters = {
-            name: 'Kenan',
-            surname: 'Gökşen',
-            phone: '5322327054',
-            state: 'Sakarya'
-        }
-        axios.post('/api/user/create', parameters, {"Content-Type": "application/json"}).then((response) => console.log(response));
+    data() {
+        return {
+            form: {
+                name: null,
+                surname: null,
+                phone: null,
+                state: null
+            }
+        };
     },
+    created() {
+
+    },
+    methods: {
+        saveUser() {
+            const parameters = {
+                name: this.form.name,
+                surname: this.form.surname,
+                phone: this.form.phone,
+                state: this.form.state
+            }
+            axios.post("/api/user/create", parameters, { "Content-Type": "application/json" }).then((response) => console.log(response)).catch((error) => console.log(error));
+        }
+    }
 }
 </script>

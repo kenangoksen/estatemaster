@@ -1,6 +1,6 @@
 namespace EstateMaster.Server.Models
 {
-    public class AddUserRequest
+    public class AddUserResponse
     {
         public string name { get; set; }
         public string surname { get; set; }

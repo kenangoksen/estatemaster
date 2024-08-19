@@ -16,23 +16,47 @@ namespace EstateMaster.Server.Controllers
         {
             _dbContext = dbContext;
         }
+        
+        [HttpGet]
+        [Route("getAll")]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            try
+            {
+                var users = await _dbContext.Users.ToListAsync();
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                // Hata günlüğüne yaz
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
 
         [HttpPost]
         [Route("create")]
         public async Task<IActionResult> AddUser([FromBody] AddUserRequest addUserRequest)
         {
-            var user = new User()
+            try
             {
-                name = addUserRequest.name,
-                surnname = addUserRequest.surnname,
-                phone = addUserRequest.phone,
-                state = addUserRequest.state
-            };
+                var user = new User()
+                {
+                    name = addUserRequest.name,
+                    surname = addUserRequest.surname,
+                    phone = addUserRequest.phone,
+                    state = addUserRequest.state
+                };
 
-            await _dbContext.Users.AddAsync(user);
-            await _dbContext.SaveChangesAsync();
+                await _dbContext.Users.AddAsync(user);
+                await _dbContext.SaveChangesAsync();
 
-            return Ok(user);
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                // Hata günlüğüne yaz
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
         }
     }
 }

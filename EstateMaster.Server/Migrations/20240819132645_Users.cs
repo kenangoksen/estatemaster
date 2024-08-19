@@ -5,7 +5,7 @@
 namespace EstateMaster.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class EstateMaster : Migration
+    public partial class Users : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,7 +17,7 @@ namespace EstateMaster.Server.Migrations
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    surnname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     state = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },

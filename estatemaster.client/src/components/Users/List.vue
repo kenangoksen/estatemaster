@@ -1895,7 +1895,20 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     name: "UserList",
+    data(){
+        return {
+            userList: []
+        };
+    },
+    created() {
+        axios.get('api/user/getAll', { 'Content-Type': 'application/json' }).then((response) => {
+            this.userList = response.data;
+            console.log(response)
+        })
+    }
 }
 </script>
