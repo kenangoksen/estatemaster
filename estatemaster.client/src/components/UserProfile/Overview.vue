@@ -1,5 +1,4 @@
-<template>
-	<div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
+<template> 
 		<!--begin::Main-->
 		<div class="app-main flex-column flex-row-fluid">
 			<!--begin::Content wrapper-->
@@ -28,7 +27,7 @@
 								</li>
 								<!--end::Item-->
 								<!--begin::Item-->
-								<li class="breadcrumb-item text-muted">User Profilea</li>
+								<li class="breadcrumb-item text-muted">User Profile</li>
 								<!--end::Item-->
 							</ul>
 							<!--end::Breadcrumb-->
@@ -1850,14 +1849,15 @@
 				<!--end::Footer container-->
 			</div>
 			<!--end::Footer-->
-		</div>
-	</div>
-	<!--end:::Main-->
+		</div> 
 
 </template>
 
 <script>
 export default {
 	name: "Overview",
+	created(){
+		
+	}
 }
 </script>
