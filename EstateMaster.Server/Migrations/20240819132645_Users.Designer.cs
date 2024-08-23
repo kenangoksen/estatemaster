@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EstateMaster.Server.Migrations
 {
     [DbContext(typeof(EMDBContext))]
-    [Migration("20240815151419_EstateMaster")]
-    partial class EstateMaster
+    [Migration("20240819132645_Users")]
+    partial class Users
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,7 +44,7 @@ namespace EstateMaster.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("surnname")
+                    b.Property<string>("surname")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
