@@ -318,6 +318,64 @@
 							<!--end:Menu sub-->
 						</div>
 						<!--end:Menu item-->
+						<!--begin:Menu item-->
+						<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+							<!--begin:Menu link-->
+							<span class="menu-link">
+								<span class="menu-icon">
+									<i class="ki-duotone ki-abstract-38 fs-2">
+										<span class="path1"></span>
+										<span class="path2"></span>
+									</i>
+								</span>
+								<span class="menu-title">Portföy</span>
+								<span class="menu-arrow"></span>
+							</span>
+							<!--end:Menu link-->
+							<!--begin:Menu sub-->
+							<div class="menu-sub menu-sub-accordion">
+								<!--begin:Menu item-->
+								<div class="menu-item">
+									<!--begin:Menu link-->
+									<a class="menu-link" href="apps/customers/getting-started.html">
+										<span class="menu-bullet">
+											<span class="bullet bullet-dot"></span>
+										</span>
+										<span class="menu-title">Getting Started</span>
+									</a>
+									<!--end:Menu link-->
+								</div>
+								<!--end:Menu item-->
+								<!--begin:Menu item-->
+								<div class="menu-item">
+									<!--begin:Menu link-->
+									<router-link :to="{ name: 'UserList' }">
+										<a class="menu-link">
+											<span class="menu-bullet">
+												<span class="bullet bullet-dot"></span>
+											</span>
+											<span class="menu-title">Customer Listing</span>
+										</a>
+									</router-link>
+									<!--end:Menu link-->
+								</div>
+								<!--end:Menu item-->
+								<!--begin:Menu item-->
+								<div class="menu-item">
+									<!--begin:Menu link-->
+									<a class="menu-link" href="apps/customers/view.html">
+										<span class="menu-bullet">
+											<span class="bullet bullet-dot"></span>
+										</span>
+										<span class="menu-title">Customer Details</span>
+									</a>
+									<!--end:Menu link-->
+								</div>
+								<!--end:Menu item-->
+							</div>
+							<!--end:Menu sub-->
+						</div>
+						<!--end:Menu item-->
 					</div>
 					<!--end::Menu-->
 				</div>
