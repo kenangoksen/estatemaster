@@ -5,10 +5,12 @@ import VueSweetalert2 from 'vue-sweetalert2'
 import 'sweetalert2/dist/sweetalert2.min.css'
 import axios from 'axios'
 import Pagination from 'v-pagination-3'
+import store from './store/index.js'
 
 const app = createApp(App)
 app.use(router); 
 app.use(VueSweetalert2);
+app.use(store);
 
 app.component('pagination', Pagination);
 

@@ -6,5 +6,6 @@ namespace EstateMaster.Server.Models
         public string surname { get; set; }
         public string phone { get; set; }
         public string state { get; set; }
+        public string userType { get; set; }
     }
 }

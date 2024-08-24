@@ -25,7 +25,8 @@ const routes = [
      {
       path: '/user/list',
       name: 'UserList',
-      component: UserList
+      component: UserList,
+      props: true
      },
      {
         path: '/user/create',
@@ -33,9 +34,10 @@ const routes = [
         component: UserCreate
      },
      {
-        path: '/user/update',
+        path: '/user/update/:id',
         name: 'UserUpdate',
-        component: UserUpdate
+        component: UserUpdate,
+        props: true
      },
 ];
 

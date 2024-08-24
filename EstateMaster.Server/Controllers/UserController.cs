@@ -16,7 +16,7 @@ namespace EstateMaster.Server.Controllers
         {
             _dbContext = dbContext;
         }
-        
+
         [HttpGet]
         [Route("getAll")]
         public async Task<IActionResult> GetAllUsers()
@@ -25,6 +25,26 @@ namespace EstateMaster.Server.Controllers
             {
                 var users = await _dbContext.Users.ToListAsync();
                 return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                // Hata günlüğüne yaz
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("getById/{id}")]
+        public async Task<IActionResult> GetUserById(int id)
+        {
+            try
+            {
+                var user = await _dbContext.Users.FindAsync(id);
+                if (user == null)
+                {
+                    return NotFound();
+                }
+                return Ok(user);
             }
             catch (Exception ex)
             {
@@ -44,10 +64,40 @@ namespace EstateMaster.Server.Controllers
                     name = addUserRequest.name,
                     surname = addUserRequest.surname,
                     phone = addUserRequest.phone,
-                    state = addUserRequest.state
+                    state = addUserRequest.state,
+                    userType = addUserRequest.userType
                 };
 
                 await _dbContext.Users.AddAsync(user);
+                await _dbContext.SaveChangesAsync();
+
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                // Hata günlüğüne yaz
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpPut]
+        [Route("update/{id}")]
+        public async Task<IActionResult> UpdateUser(int id, [FromBody] AddUserRequest updateUserRequest)
+        {
+            try
+            {
+                var user = await _dbContext.Users.FindAsync(id);
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                user.name = updateUserRequest.name;
+                user.surname = updateUserRequest.surname;
+                user.phone = updateUserRequest.phone;
+                user.state = updateUserRequest.state;
+                user.userType = updateUserRequest.userType;
+
                 await _dbContext.SaveChangesAsync();
 
                 return Ok(user);
