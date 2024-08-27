@@ -353,7 +353,10 @@ export default {
                 surname: null,
                 phone: null,
                 state: null,
-                userType: null
+                userType: null,
+                username: null,
+                password: null,
+                session_id: null
             },
             userTypeList: [],
             stateList: []
@@ -391,7 +394,10 @@ export default {
                             surname: this.form.surname,
                             phone: this.form.phone,
                             state: this.form.state,
-                            userType: this.form.userType
+                            userType: this.form.userType,
+                            username: this.form.username,
+                            password: this.form.password,
+                            session_id: this.form.session_id
                         }
                         axios.put(`/api/user/update/${this.id}`, parameters, { "Content-Type": "application/json" }).then((response) => {
                             if (response.status == 200) {

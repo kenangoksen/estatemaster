@@ -1,12 +1,13 @@
 import { createStore } from 'vuex';
+import { jwtDecode } from 'jwt-decode';
+import { toRaw } from 'vue';
 
-export default createStore( {
+export default createStore({
     state: {
-        accessToken: false,
         userTypeList: [
-            { value: 'admin', name: 'Admin'},
-            { value: 'modaretor', name: 'Yönetici'},
-            { value: 'saleperson', name: 'Emlak Danışmanı'}
+            { value: 'admin', name: 'Admin' },
+            { value: 'modaretor', name: 'Yönetici' },
+            { value: 'saleperson', name: 'Emlak Danışmanı' }
         ],
         stateList: [
             { value: 1, name: 'Adana' },
@@ -90,22 +91,31 @@ export default createStore( {
             { value: 79, name: 'Kilis' },
             { value: 80, name: 'Osmaniye' },
             { value: 81, name: 'Düzce' }
-          ]
+        ],
+        user: []
     },
     mutations: {
+        setUser(state, user) {
+            console.log(user);
+            state.user = user;
+        }
     },
     actions: {
-        
+        fetchUser({ commit }) {
+            const token = localStorage.getItem('token');
+            console.log(jwtDecode(token))
+            if (token) {
+                const user = jwtDecode(token);
+                commit('setUser', toRaw(user));
+            }
+        }
     },
     modules: {
-        
+
     },
     getters: {
-        isAuthenticated(state)
-        {
-            return state.accessToken !== false
-        },
         getUserTypeList: state => state.userTypeList,
-        getStateList: state => state.stateList
+        getStateList: state => state.stateList,
+        getUser: state => toRaw(state.user)
     }
 })

@@ -13,6 +13,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<EMDBContext>(dbContextOptions =>
     dbContextOptions.UseSqlServer(builder.Configuration.GetConnectionString("MsSQLConnection")));
 
+builder.Services.AddScoped<IUserService, UserService>();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: "CorsPolicy",

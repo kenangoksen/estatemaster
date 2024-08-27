@@ -1830,7 +1830,7 @@
 										<!--end::Menu item-->
 										<!--begin::Menu item-->
 										<div class="menu-item px-5">
-											<a href="authentication/layouts/corporate/sign-in.html" class="menu-link px-5">Sign Out</a>
+											<a class="menu-link px-5" @click="logout()">Sign Out</a>
 										</div>
 										<!--end::Menu item-->
 									</div>
@@ -1871,9 +1871,10 @@ export default {
        }
     },
     methods: {
-      isLogout(){
-        store.state.accessToken = false;
-        this.$swal("Çıkış Yapıldı", 'Başarılı');
+      logout(){
+        localStorage.removeItem('token');
+        this.$swal('Başarılı', 'Çıkış Yapıldı', 'success');
+		this.$router.push('/login');
       }
     },
 }
