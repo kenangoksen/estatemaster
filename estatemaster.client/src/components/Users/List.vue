@@ -185,13 +185,13 @@ export default {
         };
     },
     created() {
-        axios.get('/api/user/getAll', { 'Content-Type': 'application/json' }).then((response) => {
+        axios.post('/api/user/GetUsers', { 'Content-Type': 'application/json' }).then((response) => {
             this.userList = response.data;
         })
     },
     methods: {
         reload() {
-            axios.get('/api/user/getAll', { 'Content-Type': 'application/json' }).then((response) => {
+            axios.post('/api/user/GetUsers', { 'Content-Type': 'application/json' }).then((response) => {
                 this.userList = response.data;
             })
         }

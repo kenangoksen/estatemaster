@@ -1,8 +1,8 @@
-using EstateMaster.Server.Core.Models;
+using System.Net.Sockets;
+using EstateMaster.Server.Adaptor.Helpers;
 using EstateMaster.Server.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using MySqlConnector;
 
 namespace EstateMaster.Server.Controllers
 {
@@ -10,103 +10,63 @@ namespace EstateMaster.Server.Controllers
     [Route("api/user")]
     public class UserController : ControllerBase
     {
-        private readonly EMDBContext _dbContext;
+        private IAppSettings appSettings { get; set; }
 
-        public UserController(EMDBContext dbContext)
+        public UserController(IAppSettings appSettings)
         {
-            _dbContext = dbContext;
-        }
-
-        [HttpGet]
-        [Route("getAll")]
-        public async Task<IActionResult> GetAllUsers()
-        {
-            try
-            {
-                var users = await _dbContext.Users.ToListAsync();
-                return Ok(users);
-            }
-            catch (Exception ex)
-            {
-                // Hata günlüğüne yaz
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-            }
-        }
-
-        [HttpGet]
-        [Route("getById/{id}")]
-        public async Task<IActionResult> GetUserById(int id)
-        {
-            try
-            {
-                var user = await _dbContext.Users.FindAsync(id);
-                if (user == null)
-                {
-                    return NotFound();
-                }
-                return Ok(user);
-            }
-            catch (Exception ex)
-            {
-                // Hata günlüğüne yaz
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-            }
+            this.appSettings = appSettings;
         }
 
         [HttpPost]
-        [Route("create")]
-        public async Task<IActionResult> AddUser([FromBody] AddUserRequest addUserRequest)
+        [Route("GetUsers")]
+        public List<UsersResponse> GetUserList()
         {
+            List<UsersResponse> data = new List<UsersResponse>();
+            string CommandText = @"CALL sp_get_users;";
+            var connection = new MySqlConnection(appSettings.Database.ConnectionString);
+            connection.Open();
             try
             {
-                var user = new User()
+                using (var command = new MySqlCommand(CommandText, connection))
                 {
-                    name = addUserRequest.name,
-                    surname = addUserRequest.surname,
-                    phone = addUserRequest.phone,
-                    state = addUserRequest.state,
-                    userType = addUserRequest.userType
-                };
 
-                await _dbContext.Users.AddAsync(user);
-                await _dbContext.SaveChangesAsync();
-
-                return Ok(user);
-            }
-            catch (Exception ex)
-            {
-                // Hata günlüğüne yaz
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-            }
-        }
-
-        [HttpPut]
-        [Route("update/{id}")]
-        public async Task<IActionResult> UpdateUser(int id, [FromBody] AddUserRequest updateUserRequest)
-        {
-            try
-            {
-                var user = await _dbContext.Users.FindAsync(id);
-                if (user == null)
-                {
-                    return NotFound();
+                    using (var reader = command.ExecuteReader())
+                        while (reader.Read())
+                        {
+                            data.Add(new UsersResponse()
+                            {
+                                id = Convert.ToInt32(reader["id"].ToString()),
+                                created_at = Convert.ToDateTime(reader["created_at"].ToString()),
+                                updated_at = Convert.ToDateTime(reader["updated_at"].ToString()),
+                                created_by = reader["created_by"].ToString(),
+                                name = reader["name"].ToString(),
+                                surname = reader["surname"].ToString(),
+                                phone = reader["phone"].ToString(),
+                                state = reader["state"].ToString(),
+                                userType = reader["userType"].ToString(),
+                                username = reader["username"].ToString(),
+                                password = reader["password"].ToString(),
+                                login_date = Convert.ToDateTime(reader["login_date"].ToString()),
+                                session_id = reader["session_id"].ToString()
+                            });
+                        }
+                    connection.Close();
+                    connection.Dispose();
                 }
-
-                user.name = updateUserRequest.name;
-                user.surname = updateUserRequest.surname;
-                user.phone = updateUserRequest.phone;
-                user.state = updateUserRequest.state;
-                user.userType = updateUserRequest.userType;
-
-                await _dbContext.SaveChangesAsync();
-
-                return Ok(user);
+            }
+            catch (MySqlException ex)
+            {
+                throw new AppException(connection, ex.ToString());
+            }
+            catch (SocketException ex)
+            {
+                throw new Exception("SocketException : " + ex.Message);
             }
             catch (Exception ex)
             {
-                // Hata günlüğüne yaz
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                throw new Exception("Exception : " + ex.Message);
             }
+            return data;
         }
     }
 }
