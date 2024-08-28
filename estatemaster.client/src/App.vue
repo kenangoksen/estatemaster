@@ -21,7 +21,7 @@ import { onMounted } from 'vue';
 const store = useStore();
 
 onMounted(() => {
-  store.dispatch('fetchUser'); // Kullanıcı bilgilerini fetch et
+   
 });
 </script>
 

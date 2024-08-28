@@ -1,5 +1,8 @@
-import Home from '../views/front/Home.vue';
 import { createRouter, createWebHistory } from 'vue-router';
+import SecureLS from "secure-ls";  
+const ls = new SecureLS({ isCompression: false });
+
+import Home from '../views/front/Home.vue';
 import Overview from '@/components/UserProfile/Overview.vue';
 import UserProfileProjects from '@/components/UserProfile/Projects.vue';
 import UserList from '@/components/Users/List.vue';
@@ -15,9 +18,11 @@ const routes = [
       meta: { requiresAuth: true }
    },
    {
-      path: '/login',
-      name: 'Login',
-      component: Login
+      path: "/Login",
+      name: "Login",
+      component: Login,
+      meta: {category:'Login', requiresAuth: false},
+      props: true
    },
    {
       path: '/user-profile/overview',
@@ -59,15 +64,15 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-   const token = localStorage.getItem('token');
+   var GetAuthStorage =  ls.get('user_' + sessionStorage.getItem('sid'));
    if (to.matched.some(record => record.meta.requiresAuth)) {
-      if (!token) {
+      if (!GetAuthStorage) {
          next('/login');
       } else {
          next();
       }
    } else {
-      if (to.path === '/login' && token) {
+      if (to.path === '/login' && GetAuthStorage) {
          next('/');
       } else {
          next();

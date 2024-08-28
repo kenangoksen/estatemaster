@@ -41,15 +41,15 @@
                                 <!--begin::Input group=-->
                                 <div class="fv-row mb-8">
                                     <!--begin::Email-->
-                                    <input v-model="this.username" type="text" placeholder="Kullanıcı Adı" name="email" autocomplete="off"
-                                        class="form-control bg-transparent" />
+                                    <input v-model="this.username" type="text" placeholder="Kullanıcı Adı" name="email"
+                                        autocomplete="off" class="form-control bg-transparent" />
                                     <!--end::Email-->
                                 </div>
                                 <!--end::Input group=-->
                                 <div class="fv-row mb-3">
                                     <!--begin::Password-->
-                                    <input v-model="this.password" type="password" placeholder="Şifre" name="password" autocomplete="off"
-                                        class="form-control bg-transparent" />
+                                    <input v-model="this.password" type="password" placeholder="Şifre" name="password"
+                                        autocomplete="off" class="form-control bg-transparent" />
                                     <!--end::Password-->
                                 </div>
                                 <!--end::Input group=-->
@@ -65,7 +65,7 @@
                                 <!--begin::Submit button-->
                                 <div class="d-grid mb-10">
                                     <button type="button" id="kt_sign_in_submit" class="btn btn-primary"
-                                        @click="login()">
+                                        @click="submit()">
                                         <!--begin::Indicator label-->
                                         <span class="indicator-label">Giriş Yap</span>
                                         <!--end::Indicator label-->
@@ -183,6 +183,11 @@
     </div>
 </template>
 <script>
+import axios from 'axios' 
+import { mapActions } from "vuex"; 
+import SecureLS from "secure-ls";
+const ls = new SecureLS({ isCompression: true, encodingType: 'aes' });
+
 export default {
     name: 'Login',
     data() {
@@ -192,20 +197,31 @@ export default {
         }
     },
     methods: {
-        login() {
-            axios.post('/api/auth/login', {
+        ...mapActions(["LogIn"]),
+        async submit() {
+            const params = {
                 username: this.username,
                 password: this.password
-            })
-                .then(response => {
-                    localStorage.setItem('token', response.data.token);
-                    this.$router.push('/');
+            };
+            await axios.post('/api/Auth/AuthUser', params, { 'Content-Type': 'application/json' })
+                .then((response) => {
+                    console.log(response)
+                    if (response.data.id != null && (response.data.error == null || response.data.error == 'undefined' || response.data.error == '')) {
+                        ls.set('user_' + response.data.session_id, response.data);
+                        sessionStorage.setItem('sid', response.data.session_id);
+                        window.location.href = "/";
+                    }
+                    else {
+                        sessionStorage.clear();
+                        return;
+                    }
                 })
-                .catch(error => {
-                    console.error(error);
-                    this.$swal("Hata", "Giriş başarısız!", "error");
+                .catch(function (error) {
+                    console.log(error);
+                    this.showError = true;
+                    this.$swal("Login failed.", "Please make sure you entered the correct information and try again..!", 'error');
                 });
-        }
+        },
     }
 }
 </script>
