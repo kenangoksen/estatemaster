@@ -1,6 +1,11 @@
 import { createStore } from 'vuex';
 import { jwtDecode } from 'jwt-decode';
 import { toRaw } from 'vue';
+import auth from "./modules/auth";
+import SecureLS from "secure-ls";
+
+const ls = new SecureLS({ isCompression: true, encodingType: 'aes' });
+
 
 export default createStore({
     state: {
@@ -96,26 +101,25 @@ export default createStore({
     },
     mutations: {
         setUser(state, user) {
-            console.log(user);
             state.user = user;
         }
     },
     actions: {
-        fetchUser({ commit }) {
-            const token = localStorage.getItem('token');
-            console.log(jwtDecode(token))
-            if (token) {
-                const user = jwtDecode(token);
-                commit('setUser', toRaw(user));
-            }
-        }
+
     },
     modules: {
-
+        auth
     },
     getters: {
         getUserTypeList: state => state.userTypeList,
         getStateList: state => state.stateList,
-        getUser: state => toRaw(state.user)
+        getUser: (state) => () => {
+            try {
+                return ls.get('user_' + sessionStorage.getItem('sid'));
+            } catch (error) {
+                console.log(error);
+                return null;
+            }
+        }
     }
 })

@@ -147,14 +147,6 @@
                                                             <!--begin::Label-->
                                                             <label class="fs-6 fw-semibold form-label mt-3">
                                                                 <span class="required">İsim</span>
-                                                                <span class="ms-1" data-bs-toggle="tooltip"
-                                                                    title="Enter the contact's name.">
-                                                                    <i class="ki-duotone ki-information fs-7">
-                                                                        <span class="path1"></span>
-                                                                        <span class="path2"></span>
-                                                                        <span class="path3"></span>
-                                                                    </i>
-                                                                </span>
                                                             </label>
                                                             <!--end::Label-->
                                                             <!--begin::Input-->
@@ -167,20 +159,12 @@
                                                         <div class="fv-row mb-7">
                                                             <!--begin::Label-->
                                                             <label class="fs-6 fw-semibold form-label mt-3">
-                                                                <span>Soyisim</span>
-                                                                <span class="ms-1" data-bs-toggle="tooltip"
-                                                                    title="Enter the contact's company name (optional).">
-                                                                    <i class="ki-duotone ki-information fs-7">
-                                                                        <span class="path1"></span>
-                                                                        <span class="path2"></span>
-                                                                        <span class="path3"></span>
-                                                                    </i>
-                                                                </span>
+                                                                <span class="required">Soyisim</span>
                                                             </label>
                                                             <!--end::Label-->
                                                             <!--begin::Input-->
                                                             <input type="text" class="form-control form-control-solid"
-                                                                name="company_name" value="" v-model="form.surname" />
+                                                                name="surname" value="" v-model="form.surname" />
                                                             <!--end::Input-->
                                                         </div>
                                                         <!--end::Input group-->
@@ -193,21 +177,36 @@
                                                                 <div class="fv-row mb-7">
                                                                     <!--begin::Label-->
                                                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                                                        <span>Telefon</span>
-                                                                        <span class="ms-1" data-bs-toggle="tooltip"
-                                                                            title="Enter the contact's phone number (optional).">
-                                                                            <i class="ki-duotone ki-information fs-7">
-                                                                                <span class="path1"></span>
-                                                                                <span class="path2"></span>
-                                                                                <span class="path3"></span>
-                                                                            </i>
-                                                                        </span>
+                                                                        <span class="required">Telefon</span>
                                                                     </label>
                                                                     <!--end::Label-->
                                                                     <!--begin::Input-->
                                                                     <input type="text"
                                                                         class="form-control form-control-solid"
                                                                         name="phone" value="" v-model="form.phone" />
+                                                                    <!--end::Input-->
+                                                                </div>
+                                                                <!--end::Input group-->
+                                                            </div>
+                                                            <!--end::Col-->
+                                                        </div>
+                                                        <!--end::Row-->
+                                                        <!--begin::Row-->
+                                                        <div
+                                                            class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
+                                                            <!--begin::Col-->
+                                                            <div class="col">
+                                                                <!--begin::Input group-->
+                                                                <div class="fv-row mb-7">
+                                                                    <!--begin::Label-->
+                                                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                                                        <span class="required">E-mail</span>
+                                                                    </label>
+                                                                    <!--end::Label-->
+                                                                    <!--begin::Input-->
+                                                                    <input type="text"
+                                                                        class="form-control form-control-solid"
+                                                                        name="email" value="" v-model="form.email" />
                                                                     <!--end::Input-->
                                                                 </div>
                                                                 <!--end::Input group-->
@@ -235,7 +234,7 @@
                                                                             data-kt-ecommerce-settings-type="select2_flags"
                                                                             data-placeholder="Kullanıcı Tipi Seçiniz.."
                                                                             v-model="form.userType">
-                                                                            <option v-for="user of userTypeList" :value="user.value"> {{ user.name }}</option>
+                                                                            <option v-for="userType of userTypeList" :value="userType.value"> {{ userType.name }}</option>
                                                                         </select>
                                                                         <!--end::Select2-->
                                                                     </div>
@@ -275,24 +274,61 @@
                                                             <!--end::Col-->
                                                         </div>
                                                         <!--end::Row-->
+                                                           <!--begin::Row-->
+                                                           <div
+                                                            class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
+                                                            <!--begin::Col-->
+                                                            <div class="col">
+                                                                <!--begin::Input group-->
+                                                                <div class="fv-row mb-7">
+                                                                    <!--begin::Label-->
+                                                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                                                        <span class="required">Kullanıcı Adı</span>
+                                                                    </label>
+                                                                    <!--end::Label-->
+                                                                    <!--begin::Input-->
+                                                                    <input type="text"
+                                                                        class="form-control form-control-solid"
+                                                                        name="username" value="" v-model="form.username" />
+                                                                    <!--end::Input-->
+                                                                </div>
+                                                                <!--end::Input group-->
+                                                            </div>
+                                                            <!--end::Col-->
+                                                        </div>
+                                                        <!--end::Row-->
+                                                           <!--begin::Row-->
+                                                           <div
+                                                            class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
+                                                            <!--begin::Col-->
+                                                            <div class="col">
+                                                                <!--begin::Input group-->
+                                                                <div class="fv-row mb-7">
+                                                                    <!--begin::Label-->
+                                                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                                                        <span class="required">Şifre</span>
+                                                                    </label>
+                                                                    <!--end::Label-->
+                                                                    <!--begin::Input-->
+                                                                    <input type="text"
+                                                                        class="form-control form-control-solid"
+                                                                        name="password" value="" v-model="form.password" />
+                                                                    <!--end::Input-->
+                                                                </div>
+                                                                <!--end::Input group-->
+                                                            </div>
+                                                            <!--end::Col-->
+                                                        </div>
                                                         <!--begin::Input group-->
                                                         <div class="fv-row mb-7">
                                                             <!--begin::Label-->
                                                             <label class="fs-6 fw-semibold form-label mt-3">
-                                                                <span>Notes</span>
-                                                                <span class="ms-1" data-bs-toggle="tooltip"
-                                                                    title="Enter any additional notes about the contact (optional).">
-                                                                    <i class="ki-duotone ki-information fs-7">
-                                                                        <span class="path1"></span>
-                                                                        <span class="path2"></span>
-                                                                        <span class="path3"></span>
-                                                                    </i>
-                                                                </span>
+                                                                <span>Açıklama</span>
                                                             </label>
                                                             <!--end::Label-->
                                                             <!--begin::Input-->
                                                             <textarea class="form-control form-control-solid"
-                                                                name="notes"></textarea>
+                                                                name="description" v-model="form.description"></textarea>
                                                             <!--end::Input-->
                                                         </div>
                                                         <!--end::Input group-->
@@ -339,6 +375,9 @@
 <script>
 import axios from 'axios'
 import { mapGetters } from 'vuex'
+import SecureLS from "secure-ls";
+const ls = new SecureLS({ isCompression: false });
+
 export default {
     name: 'UserCreate',
     data() {
@@ -348,15 +387,21 @@ export default {
                 surname: null,
                 phone: null,
                 state: null,
-                userType: null
+                userType: null,
+                username: null,
+                password: null,
+                email: null,
+                description: null
             },
             userTypeList: [],
-            stateList: []
+            stateList: [],
+            userData: null
         };
     },
     created() {
         this.userTypeList = this.getUserTypeList;
         this.stateList = this.getStateList;
+        this.userData = this.getUser;
 
     },
     methods: {
@@ -377,15 +422,17 @@ export default {
                             surname: this.form.surname,
                             phone: this.form.phone,
                             state: this.form.state,
-                            userType: this.form.userType
+                            userType: this.form.userType,
+                            created_by: this.user.username,
+                            username: this.form.username,
+                            password: this.form.password,
+                            descrtiption: this.form.descrtiption,
+                            email: this.form.email
                         }
-                        axios.post("/api/user/create", parameters, { "Content-Type": "application/json" }).then((response) => {
+                        axios.post("/api/user/CreateUser", parameters, { "Content-Type": "application/json" }).then((response) => {
                             if (response.status == 200) {
                                 this.$swal("Başarılı", "Kullanıcı Oluşturuldu", 'success');
-                                this.form.name = null;
-                                this.form.surname = null;
-                                this.form.phone = null;
-                                this.form.state = null;
+                                this.form = null
                             } else {
                                 this.$swal("Hata", "Kayıt oluşturulamadı", "error");
 
@@ -397,7 +444,11 @@ export default {
     },
     computed: {
         ...mapGetters(['getUserTypeList']),
-        ...mapGetters(['getStateList'])
+        ...mapGetters(['getStateList']),
+        ...mapGetters(['getUser']),
+		user() {
+			return this.getUser();
+		},
     }
 }
 </script>

@@ -147,14 +147,6 @@
                                                             <!--begin::Label-->
                                                             <label class="fs-6 fw-semibold form-label mt-3">
                                                                 <span class="required">İsim</span>
-                                                                <span class="ms-1" data-bs-toggle="tooltip"
-                                                                    title="Enter the contact's name.">
-                                                                    <i class="ki-duotone ki-information fs-7">
-                                                                        <span class="path1"></span>
-                                                                        <span class="path2"></span>
-                                                                        <span class="path3"></span>
-                                                                    </i>
-                                                                </span>
                                                             </label>
                                                             <!--end::Label-->
                                                             <!--begin::Input-->
@@ -167,20 +159,12 @@
                                                         <div class="fv-row mb-7">
                                                             <!--begin::Label-->
                                                             <label class="fs-6 fw-semibold form-label mt-3">
-                                                                <span>Soyisim</span>
-                                                                <span class="ms-1" data-bs-toggle="tooltip"
-                                                                    title="Enter the contact's company name (optional).">
-                                                                    <i class="ki-duotone ki-information fs-7">
-                                                                        <span class="path1"></span>
-                                                                        <span class="path2"></span>
-                                                                        <span class="path3"></span>
-                                                                    </i>
-                                                                </span>
+                                                                <span class="required">Soyisim</span>
                                                             </label>
                                                             <!--end::Label-->
                                                             <!--begin::Input-->
                                                             <input type="text" class="form-control form-control-solid"
-                                                                name="company_name" value="" v-model="form.surname" />
+                                                                name="surname" value="" v-model="form.surname" />
                                                             <!--end::Input-->
                                                         </div>
                                                         <!--end::Input group-->
@@ -193,21 +177,36 @@
                                                                 <div class="fv-row mb-7">
                                                                     <!--begin::Label-->
                                                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                                                        <span>Telefon</span>
-                                                                        <span class="ms-1" data-bs-toggle="tooltip"
-                                                                            title="Enter the contact's phone number (optional).">
-                                                                            <i class="ki-duotone ki-information fs-7">
-                                                                                <span class="path1"></span>
-                                                                                <span class="path2"></span>
-                                                                                <span class="path3"></span>
-                                                                            </i>
-                                                                        </span>
+                                                                        <span class="required">Telefon</span>
                                                                     </label>
                                                                     <!--end::Label-->
                                                                     <!--begin::Input-->
                                                                     <input type="text"
                                                                         class="form-control form-control-solid"
                                                                         name="phone" value="" v-model="form.phone" />
+                                                                    <!--end::Input-->
+                                                                </div>
+                                                                <!--end::Input group-->
+                                                            </div>
+                                                            <!--end::Col-->
+                                                        </div>
+                                                        <!--end::Row-->
+                                                        <!--begin::Row-->
+                                                        <div
+                                                            class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
+                                                            <!--begin::Col-->
+                                                            <div class="col">
+                                                                <!--begin::Input group-->
+                                                                <div class="fv-row mb-7">
+                                                                    <!--begin::Label-->
+                                                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                                                        <span class="required">E-mail</span>
+                                                                    </label>
+                                                                    <!--end::Label-->
+                                                                    <!--begin::Input-->
+                                                                    <input type="text"
+                                                                        class="form-control form-control-solid"
+                                                                        name="email" value="" v-model="form.email" />
                                                                     <!--end::Input-->
                                                                 </div>
                                                                 <!--end::Input group-->
@@ -283,20 +282,12 @@
                                                         <div class="fv-row mb-7">
                                                             <!--begin::Label-->
                                                             <label class="fs-6 fw-semibold form-label mt-3">
-                                                                <span>Notes</span>
-                                                                <span class="ms-1" data-bs-toggle="tooltip"
-                                                                    title="Enter any additional notes about the contact (optional).">
-                                                                    <i class="ki-duotone ki-information fs-7">
-                                                                        <span class="path1"></span>
-                                                                        <span class="path2"></span>
-                                                                        <span class="path3"></span>
-                                                                    </i>
-                                                                </span>
+                                                                <span>Açıklama</span>
                                                             </label>
                                                             <!--end::Label-->
                                                             <!--begin::Input-->
                                                             <textarea class="form-control form-control-solid"
-                                                                name="notes"></textarea>
+                                                                name="notes" v-model="form.description"></textarea>
                                                             <!--end::Input-->
                                                         </div>
                                                         <!--end::Input group-->
@@ -343,6 +334,8 @@
 <script>
 import axios from 'axios'
 import { mapGetters } from 'vuex'
+import SecureLS from "secure-ls";
+const ls = new SecureLS({ isCompression: false });
 export default {
     props: ['id'],
     name: 'UserUpdate',
@@ -356,14 +349,26 @@ export default {
                 userType: null,
                 username: null,
                 password: null,
-                session_id: null
+                created_at: null,
+                updated_at: null,
+                created_by: null,
+                login_date: null,
+                email: null,
+                description: null
+
             },
             userTypeList: [],
-            stateList: []
+            stateList: [],
+
         };
     },
     created() {
-        axios.get(`/api/user/getById/${this.id}`, { headers: { "Content-Type": "application/json" } })
+
+        const params = {
+            id: this.id
+
+        }
+        axios.post('/api/user/getById', params, { headers: { "Content-Type": "application/json" } })
             .then(response => {
                 this.form = response.data;
             })
@@ -390,6 +395,7 @@ export default {
                 .then((result) => {
                     if (result.isConfirmed) {
                         const parameters = {
+                            id: this.id,
                             name: this.form.name,
                             surname: this.form.surname,
                             phone: this.form.phone,
@@ -397,11 +403,16 @@ export default {
                             userType: this.form.userType,
                             username: this.form.username,
                             password: this.form.password,
-                            session_id: this.form.session_id
+                            created_at: this.form.created_at,
+                            created_by: this.user.username,
+                            login_date: this.form.login_date,
+                            email: this.form.email,
+                            description: this.form.description
                         }
-                        axios.put(`/api/user/update/${this.id}`, parameters, { "Content-Type": "application/json" }).then((response) => {
+                        axios.post(`/api/user/UpdateUser`, parameters, { "Content-Type": "application/json" }).then((response) => {
                             if (response.status == 200) {
                                 this.$swal("Başarılı", "Kullanıcı güncellendi", 'success');
+                                this.$router.push('/user/list');
                             } else {
                                 this.$swal("Hata", "Kullanıcı güncellenirken hata oluştu!", "error");
 
@@ -413,7 +424,11 @@ export default {
     },
     computed: {
         ...mapGetters(['getUserTypeList']),
-        ...mapGetters(['getStateList'])
+        ...mapGetters(['getStateList']),
+        ...mapGetters(['getUser']),
+        user() {
+			return this.getUser();
+		},
     }
 }
 </script>

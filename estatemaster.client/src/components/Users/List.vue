@@ -79,7 +79,7 @@
                                                 <!--begin::Filter-->
                                                 <button type="button" class="btn btn-light-primary me-3"
                                                     data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end"
-                                                    @click="reload();">
+                                                    @click="getListUsers();">
                                                     <i class="ki-duotone ki-filter fs-2">
                                                         <span class="path1"></span>
                                                         <span class="path2"></span>
@@ -93,23 +93,19 @@
                                             id="kt_table_users">
                                             <thead>
                                                 <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
-                                                    <th class="w-10px pe-2">
-                                                        Id
-                                                    </th>
                                                     <th class="min-w-125px">Kullanıcı</th>
                                                     <th class="min-w-125px">Telefon</th>
+                                                    <th class="min-w-125px">Email</th>
                                                     <th class="min-w-125px">Son Giriş</th>
                                                     <th class="min-w-125px">Yaşadığı il</th>
-                                                    <th class="min-w-125px">İki Faktörlü Doğrulama</th>
+                                                    <th class="min-w-125px">Kullanıcı Tipi</th>
                                                     <th class="min-w-125px">Oluşuturulma Tarihi</th>
-                                                    <th class="text-end min-w-100px">Ayarlar</th>
+                                                    <th class="min-w-125px">Açıklama</th>
+                                                    <th class="min-w-125px">İşlemler</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="text-gray-600 fw-semibold">
                                                 <tr v-for="item of userList" v-bind:key="item">
-                                                    <td>
-                                                       {{ item.id }}
-                                                    </td>
                                                     <td class="d-flex align-items-center">
                                                         <div
                                                             class="symbol symbol-circle symbol-50px overflow-hidden me-3">
@@ -125,12 +121,10 @@
                                                                 class="text-gray-800 text-hover-primary mb-1">{{
                                                                     item.name }}
                                                                 {{ item.surname }}</a>
-                                                            <span>
-                                                                {{ item.phone }}
-                                                            </span>
                                                         </div>
                                                     </td>
                                                     <td> {{ item.phone }}</td>
+                                                    <td> {{ item.email }}</td>
                                                     <td>
                                                         <div class="badge badge-light fw-bold">3 days ago</div>
                                                     </td>
@@ -138,19 +132,28 @@
                                                         <div class="badge badge-light fw-bold">{{ item.state }}</div>
                                                     </td>
                                                     <td>
-                                                        <div v-if="item.userType == 'admin'" class="badge badge-success fw-bold">Admin</div>
-                                                        <div v-if="item.userType == 'modaretor'" class="badge badge-warning fw-bold">Yönetici</div>
-                                                        <div v-if="item.userType == 'saleperson'" class="badge badge-dark fw-bold">Emlak danışanı</div>
+                                                        <div v-if="item.userType == 'admin'"
+                                                            class="badge badge-success fw-bold">Admin</div>
+                                                        <div v-if="item.userType == 'modaretor'"
+                                                            class="badge badge-warning fw-bold">Yönetici</div>
+                                                        <div v-if="item.userType == 'saleperson'"
+                                                            class="badge badge-dark fw-bold">Emlak danışanı</div>
                                                     </td>
-                                                    <td>24 Jun 2024, 8:43 pm</td>
+                                                    <td>{{ item.created_at }}</td>
+                                                    <td>{{ item.description }}</td>
                                                     <td class="text-end">
-                                                        <router-link :to="{ name: 'UserUpdate', params: { id: item.id } }">
-                                                            <a href="#"
-                                                                class="btn btn-warning btn-active-light-primary btn-flex btn-center btn-sm"
-                                                                data-kt-menu-trigger="click"
-                                                                data-kt-menu-placement="bottom-end">Düzenle
-                                                            </a>
-                                                        </router-link>
+                                                        <div class="d-flex align-center-items-center gap-2 gap-lg-3">
+                                                            <router-link
+                                                                :to="{ name: 'UserUpdate', params: { id: item.id } }">
+                                                                <a href="#"
+                                                                    class="btn btn-warning btn-active-light-primary btn-flex btn-center btn-sm"
+                                                                    data-kt-menu-trigger="click"
+                                                                    data-kt-menu-placement="bottom-end">Düzenle
+                                                                </a>
+                                                            </router-link>
+                                                            <button class="btn btn-danger btn-flex btn-center btn-sm"
+                                                                @click="deleteUser(item.id)">Sil</button>
+                                                        </div>
                                                     </td>
                                                 </tr>
 
@@ -190,9 +193,20 @@ export default {
         })
     },
     methods: {
-        reload() {
+        getListUsers() {
             axios.post('/api/user/GetUsers', { 'Content-Type': 'application/json' }).then((response) => {
                 this.userList = response.data;
+            })
+        },
+        deleteUser(id) {
+            const params = {
+                id: id
+            }
+            axios.post('/api/user/DeleteUser', params, { 'Content-Type': 'application/json' }).then((response) => {
+                if (response.data.error == null || response.data.error == 'undefined' || response.data.error == '') {
+                    this.getListUsers();
+                    this.$swal('Başarılı', 'Kullanıcı silme işlemi başarılı', 'success')
+                }
             })
         }
     }

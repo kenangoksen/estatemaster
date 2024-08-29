@@ -1,6 +1,6 @@
 namespace EstateMaster.Server.Models
 {
-    public class UsersResponse
+    public class LoginSessionResponse
     {
         public string id { get; set; }
         public DateTime created_at { get; set; }
@@ -14,8 +14,7 @@ namespace EstateMaster.Server.Models
         public string username { get; set; }
         public string password { get; set; }
         public DateTime login_date { get; set; }
-        public string description { get; set; }
-        public string email { get; set; }
+        public string session_id { get; set; }
       
     }
 }
