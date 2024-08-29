@@ -6,20 +6,34 @@ import 'sweetalert2/dist/sweetalert2.min.css'
 import axios from 'axios'
 import Pagination from 'v-pagination-3'
 import store from './store/index.js'
+import SecureLS from "secure-ls";
+import mitt from 'mitt';
 
-const app = createApp(App)
-app.use(router); 
+const emitter = mitt();
+const app = createApp(App);
+const ls = new SecureLS({ isCompression: true, encodingType: 'aes' });
+
+app.use(router);
 app.use(VueSweetalert2);
 app.use(store);
 
 app.component('pagination', Pagination);
 
 app.mount('#app');
-
-// Axios isteklerinde pageLoader'ı kullanmak için app.mount'tan sonra erişim sağlayın
+app.config.globalProperties.emitter = emitter;
 app.config.globalProperties.$pageLoader = app._instance.proxy.$refs.pageLoader;
 
-// Router geçişlerinde pageLoader'ı kullanmak için beforeEach ve afterEach ekleyin
+app.config.globalProperties.$getUser = function () {
+  var data = {};
+  try {
+    data = ls.get('user_' + sessionStorage.getItem('sid'));
+  }
+  catch (Err) {
+    console.error(Err);
+  }
+  return data;
+};
+
 router.beforeEach((to, from, next) => {
   app.config.globalProperties.$pageLoader.show();
   next();

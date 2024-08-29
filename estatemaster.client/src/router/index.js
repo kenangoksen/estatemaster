@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import SecureLS from "secure-ls";  
-const ls = new SecureLS({ isCompression: false });
+const ls = new SecureLS({ isCompression: true, encodingType: 'aes'  });
 
 import Home from '../views/front/Home.vue';
 import Overview from '@/components/UserProfile/Overview.vue';
@@ -21,7 +21,7 @@ const routes = [
       path: "/Login",
       name: "Login",
       component: Login,
-      meta: {category:'Login', requiresAuth: false},
+      meta: {requiresAuth: false},
       props: true
    },
    {

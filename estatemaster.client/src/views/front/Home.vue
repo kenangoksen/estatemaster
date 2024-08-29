@@ -3143,7 +3143,6 @@ export default {
 		}
 	},
 	created() {
-		this.user = this.getUser;
 	},
 	methods: {
 		loginSuccess() {
@@ -3159,7 +3158,7 @@ export default {
 		}
 	},
 	computed: {
-		...mapGetters(['getUser'])
+	
 	}
 }
 </script>
