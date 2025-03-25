@@ -1,18 +1,30 @@
 <template>
-  <Navbar></Navbar>
-  <SideBar></SideBar>
-  <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
-    <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
-      <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
-      </div>
-    </div>
+  <div v-if="$route.matched.some(({ name }) => (name === 'Login' || name === 'Logout' || name === 'HelpPage' || name === 'ScreenLock'
+    || name === 'ResetPassword' || name === 'ForgotPassword')) == false">
+    <Navbar></Navbar>
+    <SideBar></SideBar>
+    <PageLoader ref="pageLoader" />
   </div>
-  <router-view />
+
+  <router-view :key="$route.fullPath"/>
 </template>
 
-<script setup>
+<script>
 import Navbar from './components/parts/Navbar.vue';
 import SideBar from './components/parts/SideBar.vue';
+import PageLoader from './components/Helpers/PageLoader.vue';
+import { useStore } from 'vuex';
+import { onMounted } from 'vue';
+// import Login from './components/Login.vue';
+
+export default {
+  name: "App",
+  components: {
+    Navbar,
+    SideBar,
+    PageLoader
+  }
+}
 </script>
 
 <style scoped></style>

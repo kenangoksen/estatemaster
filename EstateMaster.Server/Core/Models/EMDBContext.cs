@@ -7,6 +7,6 @@ namespace EstateMaster
     {
         public EMDBContext(DbContextOptions<EMDBContext> options) : base(options) { }
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<users> users { get; set; }
     }
 }

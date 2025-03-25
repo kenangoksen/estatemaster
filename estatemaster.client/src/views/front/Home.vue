@@ -3134,7 +3134,31 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
 	name: "Home",
+	data() {
+		return {
+			user: null
+		}
+	},
+	created() {
+	},
+	methods: {
+		loginSuccess() {
+			// window.location.href= "/";
+			// return;
+		}
+	},
+	mounted() {
+		if (!localStorage.getItem('homePageRefreshed')) {
+			// Sayfayı yenile
+			localStorage.setItem('homePageRefreshed', 'true');
+			location.reload();
+		}
+	},
+	computed: {
+	
+	}
 }
 </script>
