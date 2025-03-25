@@ -426,7 +426,7 @@ export default {
                             created_by: this.user.username,
                             username: this.form.username,
                             password: this.form.password,
-                            descrtiption: this.form.descrtiption,
+                            description: this.form.description,
                             email: this.form.email
                         }
                         axios.post("/api/user/CreateUser", parameters, { "Content-Type": "application/json" }).then((response) => {

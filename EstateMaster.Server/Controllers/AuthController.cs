@@ -1,6 +1,7 @@
 using System.Net.Sockets;
 using EstateMaster.Server.Adaptor.Helpers;
 using EstateMaster.Server.Core.Models;
+using EstateMaster.Server.Helper;
 using EstateMaster.Server.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -38,8 +39,8 @@ public class AuthController : ControllerBase
                         user = new LoginSessionResponse()
                         {
                             id = reader["id"].ToString(),
-                            created_at = Convert.ToDateTime(reader["created_at"].ToString()),
-                            updated_at = Convert.ToDateTime(reader["updated_at"].ToString()),
+                            created_at = ConvertHelper.ToDateTime(reader["created_at"].ToString()),
+                            updated_at = ConvertHelper.ToDateTime(reader["updated_at"].ToString()),
                             created_by = reader["created_by"].ToString(),
                             name = reader["name"].ToString(),
                             surname = reader["surname"].ToString(),
@@ -48,7 +49,7 @@ public class AuthController : ControllerBase
                             userType = reader["userType"].ToString(),
                             username = reader["username"].ToString(),
                             password = reader["password"].ToString(),
-                            login_date = Convert.ToDateTime(reader["login_date"].ToString()),
+                            login_date = ConvertHelper.ToDateTime(reader["login_date"].ToString()),
                             session_id = reader["session_id"].ToString()
                         };
                     }

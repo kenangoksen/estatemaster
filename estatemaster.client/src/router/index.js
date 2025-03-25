@@ -9,6 +9,9 @@ import UserList from '@/components/Users/List.vue';
 import UserCreate from '@/components/Users/Create.vue';
 import UserUpdate from '@/components/Users/Update.vue';
 import Login from '@/components/Login.vue';
+import PropertiesList from '@/components/Properties/List.vue';
+import PropertiesCreate from '@/components/Properties/Create.vue';
+import PropertiesUpdate from '@/components/Properties/Update.vue';
 
 const routes = [
    {
@@ -53,6 +56,27 @@ const routes = [
       path: '/user/update/:id',
       name: 'UserUpdate',
       component: UserUpdate,
+      meta: { requiresAuth: true },
+      props: true
+   },
+   {
+      path: '/properties/list',
+      name: 'PropertiesList',
+      component: PropertiesList,
+      meta: { requiresAuth: true },
+      props: true
+   },
+   {
+      path: '/properties/create',
+      name: 'PropertiesCreate',
+      component: PropertiesCreate,
+      meta: { requiresAuth: true },
+      props: true
+   },
+   {
+      path: '/properties/update/:id',
+      name: 'PropertiesUpdate',
+      component: PropertiesUpdate,
       meta: { requiresAuth: true },
       props: true
    },

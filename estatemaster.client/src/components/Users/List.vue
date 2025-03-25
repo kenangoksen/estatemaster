@@ -160,6 +160,37 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    <div class="card-toolbar">
+                                        <!--begin::Toolbar-->
+                                        <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+                                            <!--begin::Filter-->
+                                            <button type="button" class="btn btn-light-primary me-3"
+                                                data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end"
+                                                @click="showForm = true">
+                                                <i class="ki-duotone ki-filter fs-2">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>Ödeme Yap
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div v-if="showForm">
+                                        <form @submit.prevent="submitPayment">
+                                            <label for="amount">Miktar:</label>
+                                            <input type="text" id="amount" v-model="amount" required />
+
+                                            <label for="cardNumber">Kart Numarası:</label>
+                                            <input type="text" id="cardNumber" v-model="cardNumber" required />
+
+                                            <label for="expiryDate">Son Kullanma Tarihi (MM/YY):</label>
+                                            <input type="text" id="expiryDate" v-model="expiryDate" required />
+
+                                            <label for="cvc">CVC:</label>
+                                            <input type="text" id="cvc" v-model="cvc" required />
+
+                                            <button type="submit">Ödeme Yap</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -184,7 +215,12 @@ export default {
     name: "UserList",
     data() {
         return {
-            userList: []
+            userList: [],
+            showForm: false,
+            cardNumber: '',
+            expiryDate: '',
+            cvc: '',
+            amount: ''
         };
     },
     created() {
@@ -208,7 +244,38 @@ export default {
                     this.$swal('Başarılı', 'Kullanıcı silme işlemi başarılı', 'success')
                 }
             })
+        },
+        async submitPayment() {
+            const paymentData = {
+                amount: this.amount, // Ödeme miktarı
+                currency: 'USD',
+                description: 'Payment for Order #12345',
+                cardNumber: this.cardNumber,
+                expiryDate: this.expiryDate,
+                cvc: this.cvc,
+                return_url: 'https://localhost:5173/user/list'
+            };
+
+            try {
+                const response = await axios.post('https://pay.crypto.com/api/payments', paymentData, {
+                    headers: {
+                        Authorization: 'Bearer sk_test_xwHUe2zAiZNpTjS3awx4CySd',
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                console.log(response.data)
+                this.response = response.data;
+
+                // payment_url'e yönlendirme
+                window.location.href = response.data.payment_url;
+                this.showModal = false;
+            } catch (error) {
+                console.error(error);
+                alert('Ödeme başarısız!');
+            }
         }
+
     }
 }
 </script>
