@@ -1,5 +1,6 @@
 using System.Net.Sockets;
 using EstateMaster.Server.Adaptor.Helpers;
+using EstateMaster.Server.Helper;
 using EstateMaster.Server.Models;
 using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
@@ -87,7 +88,7 @@ namespace EstateMaster.Server.Controllers
                         while (reader.Read())
                         {
                             data.id = reader["id"].ToString();
-                            data.created_at = Convert.ToDateTime(reader["created_at"].ToString());
+                            data.created_at = ConvertHelper.ToDateTime(reader["created_at"].ToString());
                             data.updated_at = Convert.ToDateTime(reader["updated_at"].ToString());
                             data.created_by = reader["created_by"].ToString();
                             data.name = reader["name"].ToString();

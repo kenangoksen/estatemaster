@@ -10,11 +10,13 @@ const ls = new SecureLS({ isCompression: true, encodingType: 'aes' });
 export default createStore({
     state: {
         userTypeList: [
+            { value: null, name: "Kullanıcı Tipini Seçiniz"},
             { value: 'admin', name: 'Admin' },
             { value: 'modaretor', name: 'Yönetici' },
             { value: 'saleperson', name: 'Emlak Danışmanı' }
         ],
         stateList: [
+            { value: null, name: "Şehir Seçiniz"},
             { value: 1, name: 'Adana' },
             { value: 2, name: 'Adıyaman' },
             { value: 3, name: 'Afyonkarahisar' },
@@ -97,7 +99,35 @@ export default createStore({
             { value: 80, name: 'Osmaniye' },
             { value: 81, name: 'Düzce' }
         ],
-        user: []
+        user: [],
+        estateTypeList: [
+            { value: null, name: "Emlak Türünü Seçiniz"},
+            { value: 'residential_propery', name: 'Konut'},
+            { value: 'commercial_property', name: 'İşyeri'},
+            { value: 'land', name: 'Arsa'},
+            { value: 'building', name: 'Bina'},
+            { value: 'timeshare', name: 'Devre Mülk'},
+            { value: 'tourist_facility', name: 'Turistik Tesis'}
+        ],
+        estateStatusTypeList: [
+            { value: null, name: "Emlak Durumunu Seçiniz"},
+            { value: 'sale', name: 'Satılık'},
+            { value: 'rent', name: 'Kiralık'}
+        ],
+        residentialPropertyList: [
+            { value: null, name: "Konut Tipini Seçiniz"},
+            { value: 'apartment', name: 'Daire'},
+            { value: 'residence', name: 'Rezidans'},
+            { value: 'detached_house', name: 'Müstakil Ev'},
+            { value: 'villa', name: 'Villa'},
+            { value: 'farmhouse', name: 'Çiftlik Evi'},
+            { value: 'mansion', name: 'Köşk & Konak'},
+            { value: 'waterside_mansion', name: 'Yalı'},
+            { value: 'waterside_apartment', name: 'Yalı Dairesi'},
+            { value: 'summer_house', name: 'Yazlık'},
+            { value: 'cooperative_house', name: 'Kooperatif'},
+        ]
+
     },
     mutations: {
         setUser(state, user) {
@@ -112,7 +142,10 @@ export default createStore({
     },
     getters: {
         getUserTypeList: state => state.userTypeList,
+        getEstateTypeList: state => state.estateTypeList,
+        getEstateStatusTypeList: state => state.estateStatusTypeList,
         getStateList: state => state.stateList,
+        getResidentialPropertyList: state => state.residentialPropertyList,
         getUser: (state) => () => {
             try {
                 return ls.get('user_' + sessionStorage.getItem('sid'));

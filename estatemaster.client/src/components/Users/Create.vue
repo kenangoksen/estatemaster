@@ -234,7 +234,9 @@
                                                                             data-kt-ecommerce-settings-type="select2_flags"
                                                                             data-placeholder="Kullanıcı Tipi Seçiniz.."
                                                                             v-model="form.userType">
-                                                                            <option v-for="userType of userTypeList" :value="userType.value"> {{ userType.name }}</option>
+                                                                            <option v-for="userType of userTypeList"
+                                                                                :value="userType.value"> {{
+                                                                                    userType.name }}</option>
                                                                         </select>
                                                                         <!--end::Select2-->
                                                                     </div>
@@ -264,7 +266,9 @@
                                                                             data-kt-ecommerce-settings-type="select2_flags"
                                                                             data-placeholder="Şehir Seçiniz.."
                                                                             v-model="form.state">
-                                                                            <option v-for="state of stateList" :value="state.name"> {{ state.name }}</option>
+                                                                            <option v-for="state of stateList"
+                                                                                :value="state.name"> {{ state.name }}
+                                                                            </option>
                                                                         </select>
                                                                         <!--end::Select2-->
                                                                     </div>
@@ -274,8 +278,8 @@
                                                             <!--end::Col-->
                                                         </div>
                                                         <!--end::Row-->
-                                                           <!--begin::Row-->
-                                                           <div
+                                                        <!--begin::Row-->
+                                                        <div
                                                             class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
                                                             <!--begin::Col-->
                                                             <div class="col">
@@ -289,7 +293,8 @@
                                                                     <!--begin::Input-->
                                                                     <input type="text"
                                                                         class="form-control form-control-solid"
-                                                                        name="username" value="" v-model="form.username" />
+                                                                        name="username" value=""
+                                                                        v-model="form.username" />
                                                                     <!--end::Input-->
                                                                 </div>
                                                                 <!--end::Input group-->
@@ -297,8 +302,8 @@
                                                             <!--end::Col-->
                                                         </div>
                                                         <!--end::Row-->
-                                                           <!--begin::Row-->
-                                                           <div
+                                                        <!--begin::Row-->
+                                                        <div
                                                             class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
                                                             <!--begin::Col-->
                                                             <div class="col">
@@ -312,7 +317,8 @@
                                                                     <!--begin::Input-->
                                                                     <input type="text"
                                                                         class="form-control form-control-solid"
-                                                                        name="password" value="" v-model="form.password" />
+                                                                        name="password" value=""
+                                                                        v-model="form.password" />
                                                                     <!--end::Input-->
                                                                 </div>
                                                                 <!--end::Input group-->
@@ -328,7 +334,8 @@
                                                             <!--end::Label-->
                                                             <!--begin::Input-->
                                                             <textarea class="form-control form-control-solid"
-                                                                name="description" v-model="form.description"></textarea>
+                                                                name="description"
+                                                                v-model="form.description"></textarea>
                                                             <!--end::Input-->
                                                         </div>
                                                         <!--end::Input group-->
@@ -426,16 +433,27 @@ export default {
                             created_by: this.user.username,
                             username: this.form.username,
                             password: this.form.password,
-                            descrtiption: this.form.descrtiption,
+                            description: this.form.description,
                             email: this.form.email
                         }
                         axios.post("/api/user/CreateUser", parameters, { "Content-Type": "application/json" }).then((response) => {
-                            if (response.status == 200) {
+                            if (response.data === "USERNAME_EXISTS") {
+                                this.$swal("Hata", "Bu kullanıcı adı zaten mevcut!", "error");
+                            } else if (response.data != null && response.data.length == 36) {
                                 this.$swal("Başarılı", "Kullanıcı Oluşturuldu", 'success');
-                                this.form = null
+                                this.form = {
+                                    name: null,
+                                    surname: null,
+                                    phone: null,
+                                    state: null,
+                                    userType: null,
+                                    username: null,
+                                    password: null,
+                                    email: null,
+                                    description: null
+                                };
                             } else {
                                 this.$swal("Hata", "Kayıt oluşturulamadı", "error");
-
                             }
                         });
                     }
@@ -446,9 +464,9 @@ export default {
         ...mapGetters(['getUserTypeList']),
         ...mapGetters(['getStateList']),
         ...mapGetters(['getUser']),
-		user() {
-			return this.getUser();
-		},
+        user() {
+            return this.getUser();
+        },
     }
 }
 </script>
