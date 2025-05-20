@@ -4,7 +4,7 @@
             <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
                 <!--begin::Main-->
                 <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
-                    <div class="d-flex flex-cloumn flex-cloumn-fluid">
+                    <div class="d-flex flex-column flex-column-fluid">
                         <div class="app-content flex-column-fluid">
                             <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
                                 <!--begin::Toolbar container-->
@@ -40,15 +40,16 @@
                                 <!--end::Toolbar container-->
                             </div>
                             <div class="app-container container-xxl">
-                                <div class="d-flex flex-cloumn flex-lg-row">
+                                <div class="d-flex flex-column flex-lg-row">
                                     <div class="flex-lg-row-fluid mb-10 mb-lg-0 me-lg-7 me-xl-10">
                                         <!--begin::Card-->
-                                        <div class="card">
+                                        <div class="card shadow-sm border-0">
                                             <!--begin::Card body-->
                                             <div class="card-body p-12">
-                                                <select class="form-select" aria-label="Select example"
-                                                    data-placeholder="Emlak Türünü Seçiniz" data-allow-clear="true"
-                                                    v-model="form.estateType" @change="activateForm">
+                                                <select class="form-select form-select-lg rounded-pill border-primary"
+                                                    aria-label="Select example" data-placeholder="Emlak Türünü Seçiniz"
+                                                    data-allow-clear="true" v-model="form.estateType"
+                                                    @change="activateForm">
                                                     <option v-for="item of estateTypeList" :value="item"
                                                         :key="item.value"> {{ item.name }}</option>
                                                 </select>
@@ -105,14 +106,17 @@
                                     <!--begin::Content-->
                                     <div class="flex-lg-row-fluid mb-10 mb-lg-0 me-lg-7 me-xl-10">
                                         <!--begin::Card-->
-                                        <div class="card">
+                                        <div class="card shadow-sm border-0">
                                             <!--begin::Card body-->
                                             <div class="card-body p-12">
                                                 <!--begin::Form-->
                                                 <form action="" id="kt_invoice_form">
                                                     <!--begin::Wrapper-->
                                                     <!--begin::Separator-->
-                                                    <div class="separator separator-content border-dark my-15"><span class="w-350px fw-bold h1">{{ this.form.estateType.name }} Bilgileri</span></div>
+                                                    <div class="separator separator-content border-dark my-15">
+                                                        <span class="w-350px fw-bold h1 text-primary">
+                                                            {{ this.form.estateType.name }} Bilgileri</span>
+                                                    </div>
                                                     <!--end::Separator-->
                                                     <!--begin::Wrapper-->
                                                     <div class="mb-0">
@@ -121,15 +125,17 @@
                                                             <label for="exampleFormControlInput1"
                                                                 class="required form-label">Başlık
                                                             </label>
-                                                            <input type="titile" v-model="this.propertyInfo.title"class="form-control form-control-solid"
+                                                            <input type="titile" v-model="this.propertyInfo.title"
+                                                                class="form-control form-control-solid rounded-pill border-primary"
                                                                 placeholder="Başlık" />
                                                         </div>
                                                         <div class="mb-0 mb-10">
                                                             <label class="form-label fs-6 fw-bold text-gray-700">İlan
                                                                 Açıklaması</label>
-                                                            <textarea name="notes" v-model="this.propertyInfo.description"
-                                                                class="form-control form-control-solid" rows="3"
-                                                                placeholder="İlan Açıklaması"></textarea>
+                                                            <textarea name="notes"
+                                                                v-model="this.propertyInfo.description"
+                                                                class="form-control form-control-solid rounded border-primary"
+                                                                rows="3" placeholder="İlan Açıklaması"></textarea>
                                                         </div>
                                                         <div class="row gx-10 mb-5">
                                                             <!--begin::Col-->
@@ -139,187 +145,43 @@
                                                                     <label for="exampleFormControlInput1"
                                                                         class="required form-label">Fiyat
                                                                     </label>
-                                                                    <input type="price" v-model="this.propertyInfo.price"
-                                                                        class="form-control form-control-solid"
+                                                                    <input type="number"
+                                                                        v-model="this.propertyInfo.price"
+                                                                        class="form-control form-control-solid rounded-pill border-primary"
                                                                         placeholder="Fiyat" />
-                                                                </div>
-                                                                <div class="mb-10">
-                                                                    <label for="exampleFormControlInput1"
-                                                                        class="required form-label">m² (Brüt)
-                                                                    </label>
-                                                                    <input type="province" v-model="this.propertyInfo.squareMetersGross"
-                                                                        class="form-control form-control-solid"
-                                                                        placeholder="m² (Brüt)" />
                                                                 </div>
                                                                 <div class="mb-10">
                                                                     <label for="exampleFormControlInput1"
                                                                         class="required form-label">m² (Net)
 
                                                                     </label>
-                                                                    <input type="district" v-model="this.propertyInfo.squareMetersNet"
-                                                                        class="form-control form-control-solid"
+                                                                    <input type="number"
+                                                                        v-model="this.propertyInfo.squareMetersNet"
+                                                                        class="form-control form-control-solid rounded-pill border-primary"
                                                                         placeholder="m² (Net)" />
                                                                 </div>
-                                                            </div>
-                                                            <!--end::Col-->
-                                                            <!--begin::Col-->
-                                                            <div class="col-lg-6">
                                                                 <div class="mb-10">
                                                                     <label for="exampleFormControlInput1"
-                                                                        class="required form-label">Oda Sayısı
+                                                                        class="required form-label">Emlak Durumu
+
                                                                     </label>
-                                                                    <input type="address" v-model="this.propertyInfo.roomNumber"
-                                                                        class="form-control form-control-solid"
-                                                                        placeholder="Oda Sayısı" />
-                                                                </div>
-                                                                <div class="mb-10">
-                                                                    <label for="exampleFormControlInput1"
-                                                                        class="required form-label">Bina Yaşı
-                                                                    </label>
-                                                                    <input type="email" v-model="this.propertyInfo.buildingAge"
-                                                                        class="form-control form-control-solid"
-                                                                        placeholder="Bina Yaşı" />
-                                                                </div>
-                                                                <div class="mb-10">
-                                                                    <label for="exampleFormControlInput1"
-                                                                        class="required form-label">Bulunduğu Kat
-                                                                    </label>
-                                                                    <input type="email" v-model="this.propertyInfo.locatedFloor"
-                                                                        class="form-control form-control-solid"
-                                                                        placeholder="Bulunduğu Kat" />
-                                                                </div>
-                                                            </div>
-                                                            <!--end::Col-->
-                                                            <!--begin::Col-->
-                                                            <div class="col-lg-6">
-                                                                <div class="mb-10">
-                                                                    <label for="exampleFormControlInput1"
-                                                                        class="required form-label">Kat Sayısı
-                                                                    </label>
-                                                                    <input type="email" v-model="this.propertyInfo.floorNumber"
-                                                                        class="form-control form-control-solid"
-                                                                        placeholder="Kat Sayısı" />
-                                                                </div>
-                                                                <div class="mb-10">
-                                                                    <label for="exampleFormControlInput1"
-                                                                        class="required form-label">Isıtma
-                                                                    </label>
-                                                                    <input type="address" v-model="this.propertyInfo.heating"
-                                                                        class="form-control form-control-solid"
-                                                                        placeholder="Isıtma" />
-                                                                </div>
-                                                                <div class="mb-10">
-                                                                    <label for="exampleFormControlInput1"
-                                                                        class="required form-label">Banyo Sayısı
-                                                                    </label>
-                                                                    <input type="email" v-model="this.propertyInfo.bathroomNumber"
-                                                                        class="form-control form-control-solid"
-                                                                        placeholder="Banyo Sayısı" />
-                                                                </div>
-                                                                <div class="mb-10">
-                                                                    <label for="exampleFormControlInput1"
-                                                                        class="required form-label">Mutfak
-                                                                    </label>
-                                                                    <input type="email" v-model="this.propertyInfo.kitchen"
-                                                                        class="form-control form-control-solid"
-                                                                        placeholder="Mutfak" />
-                                                                </div>
-                                                                <div class="mb-10">
-                                                                    <label for="exampleFormControlInput1"
-                                                                        class="required form-label">Balkon
-                                                                    </label>
-                                                                    <input type="email" v-model="this.propertyInfo.balcony"
-                                                                        class="form-control form-control-solid"
-                                                                        placeholder="Balkon" />
-                                                                </div>
-                                                            </div>
-                                                            <!--end::Col-->
-                                                            <!--begin::Col-->
-                                                            <div class="col-lg-6">
-                                                                <div class="mb-10">
-                                                                    <label for="exampleFormControlInput1"
-                                                                        class="required form-label">Asansör
-                                                                    </label>
-                                                                    <input type="address" v-model="this.propertyInfo.lift"
-                                                                        class="form-control form-control-solid"
-                                                                        placeholder="Asansör" />
-                                                                </div>
-                                                                <div class="mb-10">
-                                                                    <label for="exampleFormControlInput1"
-                                                                        class="required form-label">Otopark
-                                                                    </label>
-                                                                    <input type="email" v-model="this.propertyInfo.parking"
-                                                                        class="form-control form-control-solid"
-                                                                        placeholder="Otopark" />
-                                                                </div>
-                                                                <div class="mb-10">
-                                                                    <label for="exampleFormControlInput1"
-                                                                        class="required form-label">Eşyalı
-                                                                    </label>
-                                                                    <input type="email" v-model="this.propertyInfo.furnished"
-                                                                        class="form-control form-control-solid"
-                                                                        placeholder="Eşyalı" />
-                                                                </div>
-                                                                <div class="mb-10">
-                                                                    <label for="exampleFormControlInput1"
-                                                                        class="required form-label">Kullanım Durumu
-                                                                    </label>
-                                                                    <input type="email" v-model="this.propertyInfo.usageStatus"
-                                                                        class="form-control form-control-solid"
-                                                                        placeholder="Kullanım Durumu" />
-                                                                </div>
-                                                                <div class="mb-10">
-                                                                    <label for="exampleFormControlInput1"
-                                                                        class="required form-label">Aidat(TL)
-                                                                    </label>
-                                                                    <input type="address" v-model="this.propertyInfo.dues"
-                                                                        class="form-control form-control-solid"
-                                                                        placeholder="Aidat(TL)" />
-                                                                </div>
-                                                            </div>
-                                                            <!--end::Col-->
-                                                            <!--begin::Col-->
-                                                            <div class="col-lg-6">
-                                                                <div class="mb-10">
-                                                                    <label for="exampleFormControlInput1"
-                                                                        class="required form-label">Krediye Uygun
-                                                                    </label>
-                                                                    <input type="email" v-model="this.propertyInfo.creditEligibility"
-                                                                        class="form-control form-control-solid"
-                                                                        placeholder="Krediye Uygun" />
-                                                                </div>
-                                                                <div class="mb-10">
-                                                                    <label for="exampleFormControlInput1"
-                                                                        class="required form-label">Tapu Durumu
-                                                                    </label>
-                                                                    <input type="email" v-model="this.propertyInfo.titleDeedStatus"
-                                                                        class="form-control form-control-solid"
-                                                                        placeholder="Tapu Durumu" />
-                                                                </div>
-                                                            </div>
-                                                            <!--end::Col-->
-                                                            <!--begin::Col-->
-                                                            <div class="col-lg-6">
-                                                                <div class="mb-10">
-                                                                    <label for="exampleFormControlInput1"
-                                                                        class="required form-label">Taşınmaz Durumu
-                                                                    </label>
-                                                                    <input type="email"
-                                                                        class="form-control form-control-solid"
-                                                                        placeholder="Taşınmaz Durumu" />
-                                                                </div>
-                                                                <div class="mb-10">
-                                                                    <label for="exampleFormControlInput1"
-                                                                        class="required form-label">Kimden
-                                                                    </label>
-                                                                    <input type="address" v-model="this.propertyInfo.isSaleWho"
-                                                                        class="form-control form-control-solid"
-                                                                        placeholder="Kimden" />
+                                                                    <select
+                                                                        class="form-select form-select-lg rounded-pill border-primary"
+                                                                        aria-label="Select example"
+                                                                        data-placeholder="Mülk Durumunu Seçiniz"
+                                                                        data-allow-clear="true"
+                                                                        v-model="propertyInfo.estataeStatusType">
+                                                                        <option v-for="item of estateStatusTypeList"
+                                                                            :value="item" :key="item.value"> {{
+                                                                                item.name }}</option>
+                                                                    </select>
                                                                 </div>
                                                             </div>
                                                             <!--end::Col-->
                                                             <!--begin::Separator-->
-                                                            <div class="separator separator-content border-dark my-15"><span class="w-250px fw-bold h1">Adres Bilgileri</span></div>
+                                                            <div class="separator separator-content border-dark my-15">
+                                                                <span class="w-250px fw-bold h1">Adres Bilgileri</span>
+                                                            </div>
                                                             <!--end::Separator-->
                                                             <!--begin::Col-->
                                                             <!-- <h1
@@ -330,8 +192,9 @@
                                                                     <label for="exampleFormControlInput1"
                                                                         class="required form-label">İl
                                                                     </label>
-                                                                    <input type="email" v-model="this.propertyInfo.province"
-                                                                        class="form-control form-control-solid"
+                                                                    <input type="email"
+                                                                        v-model="this.propertyInfo.province"
+                                                                        class="form-control form-control-solid rounded-pill border-primary"
                                                                         placeholder="İl" />
                                                                 </div>
                                                             </div>
@@ -340,8 +203,9 @@
                                                                     <label for="exampleFormControlInput1"
                                                                         class="required form-label">İlçe
                                                                     </label>
-                                                                    <input type="email" v-model="this.propertyInfo.district"
-                                                                        class="form-control form-control-solid"
+                                                                    <input type="email"
+                                                                        v-model="this.propertyInfo.district"
+                                                                        class="form-control form-control-solid rounded-pill border-primary"
                                                                         placeholder="İlçe" />
                                                                 </div>
                                                             </div>
@@ -350,8 +214,9 @@
                                                                     <label for="exampleFormControlInput1"
                                                                         class="required form-label">Mahalle
                                                                     </label>
-                                                                    <input type="email" v-model="this.propertyInfo.quarter"
-                                                                        class="form-control form-control-solid"
+                                                                    <input type="email"
+                                                                        v-model="this.propertyInfo.neighborhood"
+                                                                        class="form-control form-control-solid rounded-pill border-primary"
                                                                         placeholder="Mahalle" />
                                                                 </div>
 
@@ -413,201 +278,154 @@
                                                 </form>
                                                 <!--end::Form-->
                                             </div>
+                                            <div class="separator mb-6"></div>
+                                            <!--end::Separator-->
+                                            <!--begin::Action buttons-->
+                                            <div class="d-flex justify-content-end">
+                                                <!--begin::Button-->
+                                                <button type="button" data-kt-contacts-type="submit"
+                                                    class="btn btn-success" @click="saveProperty()">
+                                                    <span class="indicator-label">Kaydet</span>
+                                                    <span class="indicator-progress">Lütfen bekleyin...
+                                                        <span
+                                                            class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                                </button>
+                                                <!--end::Button-->
+                                            </div>
                                             <!--end::Card body-->
                                         </div>
                                         <!--end::Card-->
                                     </div>
-                                    <!--end::Content--> 
+                                    <!--end::Content-->
                                     <!--begin::Sidebar-->
-										<div class="flex-column flex-lg-row-auto w-100 w-xl-350px mb-10">
-											<!--begin::Card-->
-											<div class="card mb-5 mb-xl-8">
-												<!--begin::Card body-->
-												<div class="card-body pt-15">
-													<!--begin::Summary-->
-													<div class="d-flex flex-center flex-column mb-5">
-														<!--begin::Avatar-->
-														<div class="symbol symbol-100px symbol-square mb-7">
-															<img src="/assets/media/avatars/konutPP.jpg" alt="image" />
-														</div>
-														<!--end::Avatar-->
-														<!--begin::Title-->
-														<a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bold mb-1"> 
-                                                            <span v-if="this.propertyInfo.title !== null && this.propertyInfo.title !== ''"> {{ this.propertyInfo.title }} </span>
-                                                            <span v-if="this.propertyInfo.title == null || this.propertyInfo.title == ''">Başlık</span>
-                                                        </a>                                                       
-														<!--end::Title-->
-                                                        <!--begin::Description-->
-														<div class="fs-5 fw-semibold text-muted mb-6">{{ this.propertyInfo.description }}</div>
-														<!--end::Description--> 
-														<!--begin::Info-->
-														<div class="d-flex flex-wrap flex-center">
-															<!--begin::Stats-->
-															<div class="border border-gray-300 border-dashed rounded py-3 px-3 mb-3">
-																<div class="fs-4 fw-bold text-gray-700">
-																	<span class="w-75px">6,900</span>
-																	<i class="ki-duotone ki-arrow-up fs-3 text-success">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																	</i>
-																</div>
-																<div class="fw-semibold text-muted">Earnings</div>
-															</div>
-															<!--end::Stats-->
-															<!--begin::Stats-->
-															<div class="border border-gray-300 border-dashed rounded py-3 px-3 mx-4 mb-3">
-																<div class="fs-4 fw-bold text-gray-700">
-																	<span class="w-50px">130</span>
-																	<i class="ki-duotone ki-arrow-down fs-3 text-danger">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																	</i>
-																</div>
-																<div class="fw-semibold text-muted">Tasks</div>
-															</div>
-															<!--end::Stats-->
-															<!--begin::Stats-->
-															<div class="border border-gray-300 border-dashed rounded py-3 px-3 mb-3">
-																<div class="fs-4 fw-bold text-gray-700">
-																	<span class="w-50px">500</span>
-																	<i class="ki-duotone ki-arrow-up fs-3 text-success">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																	</i>
-																</div>
-																<div class="fw-semibold text-muted">Hours</div>
-															</div>
-															<!--end::Stats-->
-														</div>
-														<!--end::Info-->
-													</div>
-													<!--end::Summary-->
-													<!--begin::Details toggle-->
-													<div class="d-flex flex-stack fs-4 py-3">
-														<div class="fw-bold rotate collapsible collapsed" data-bs-toggle="collapse" href="#kt_customer_view_details" role="button" aria-expanded="false" aria-controls="kt_customer_view_details">Detaylar 
-														<span class="ms-2 rotate-180">
-															<i class="ki-duotone ki-down fs-3"></i>
-														</span></div>
-														<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Edit customer details">
-															<a href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_update_customer">Edit</a>
-														</span>
-													</div>
-													<!--end::Details toggle-->
-													<div class="separator separator-dashed my-3"></div>
-													<!--begin::Details content-->
-													<div id="kt_customer_view_details" class="collapse">
-														<div class="py-5 fs-6">
-															<!--begin::Details item-->
-															<div class="fw-bold mt-5">Fiyat</div>
-															<div v-if="this.propertyInfo.price !== null && this.propertyInfo.price !== ''" class="text-gray-600"> {{ this.propertyInfo.price }}</div>
-															<div v-if="this.propertyInfo.price == null || this.propertyInfo.price == ''" class="text-gray-600"> Bilinmiyor</div>
-															<!--end::Details item-->
-                                                            <div class="separator my-5"></div>
-															<!--begin::Details item-->
-															<div class="fw-bold mt-5">m² (Brüt) </div>
-															<div v-if="this.propertyInfo.squareMetersGross !== null && this.propertyInfo.squareMetersGross !== ''" class="text-gray-600"> {{ this.propertyInfo.squareMetersGross }}</div>
-															<div v-if="this.propertyInfo.squareMetersGross == null || this.propertyInfo.squareMetersGross == ''" class="text-gray-600"> Bilinmiyor</div>
-															<!--end::Details item-->
-                                                            <div class="separator my-5"></div>
-															<!--begin::Details item-->
-															<div class="fw-bold mt-5">m² (Net) </div>
-															<div v-if="this.propertyInfo.squareMetersNet !== null && this.propertyInfo.squareMetersNet !== ''" class="text-gray-600"> {{ this.propertyInfo.squareMetersNet }}</div>
-															<div v-if="this.propertyInfo.squareMetersNet == null || this.propertyInfo.squareMetersNet == ''" class="text-gray-600"> Bilinmiyor</div>
-															<!--end::Details item-->
-                                                            <div class="separator my-5"></div>
-															<!--begin::Details item-->
-															<div class="fw-bold mt-5">Oda Sayısı </div>
-															<div v-if="this.propertyInfo.roomNumber !== null && this.propertyInfo.roomNumber !== ''" class="text-gray-600"> {{ this.propertyInfo.roomNumber }}</div>
-															<div v-if="this.propertyInfo.roomNumber == null || this.propertyInfo.roomNumber == ''" class="text-gray-600"> Bilinmiyor</div>
-															<!--end::Details item-->
-                                                            <div class="separator my-5"></div>
-															<!--begin::Details item-->
-															<div class="fw-bold mt-5">Bina Yaşı</div>
-															<div v-if="this.propertyInfo.buildingAge !== null && this.propertyInfo.buildingAge !== ''" class="text-gray-600"> {{ this.propertyInfo.buildingAge }}</div>
-															<div v-if="this.propertyInfo.buildingAge == null || this.propertyInfo.buildingAge == ''" class="text-gray-600"> Bilinmiyor</div>
-															<!--end::Details item-->
-                                                            <div class="separator my-5"></div>
-															<!--begin::Details item-->
-															<div class="fw-bold mt-5">Kat Sayısı </div>
-															<div v-if="this.propertyInfo.floorNumber !== null && this.propertyInfo.floorNumber !== ''" class="text-gray-600"> {{ this.propertyInfo.floorNumber }}</div>
-															<div v-if="this.propertyInfo.floorNumber == null || this.propertyInfo.floorNumber == ''" class="text-gray-600"> Bilinmiyor</div>
-															<!--end::Details item-->
-                                                            <div class="separator my-5"></div>
-															<!--begin::Details item-->
-															<div class="fw-bold mt-5">Bulunduğu Kat</div>
-															<div v-if="this.propertyInfo.locatedFloor !== null && this.propertyInfo.locatedFloor !== ''" class="text-gray-600"> {{ this.propertyInfo.locatedFloor }}</div>
-															<div v-if="this.propertyInfo.locatedFloor == null || this.propertyInfo.locatedFloor == ''" class="text-gray-600"> Bilinmiyor</div>
-															<!--end::Details item-->
-                                                            <div class="separator my-5"></div>
-															<!--begin::Details item-->
-															<div class="fw-bold mt-5">Isıtma</div>
-															<div v-if="this.propertyInfo.heating !== null && this.propertyInfo.heating !== ''" class="text-gray-600"> {{ this.propertyInfo.heating }}</div>
-															<div v-if="this.propertyInfo.heating == null || this.propertyInfo.heating == ''" class="text-gray-600"> Bilinmiyor</div>
-															<!--end::Details item-->
-                                                            <div class="separator my-5"></div>
-															<!--begin::Details item-->
-															<div class="fw-bold mt-5">Banyo Sayısı</div>
-															<div v-if="this.propertyInfo.bathroomNumber !== null && this.propertyInfo.bathroomNumber !== ''" class="text-gray-600"> {{ this.propertyInfo.bathroomNumber }}</div>
-															<div v-if="this.propertyInfo.bathroomNumber == null || this.propertyInfo.bathroomNumber == ''" class="text-gray-600"> Bilinmiyor</div>
-															<!--end::Details item-->
-                                                            <div class="separator my-5"></div>
-															<!--begin::Details item-->
-															<div class="fw-bold mt-5">Mutfak</div>
-															<div v-if="this.propertyInfo.kitchen !== null && this.propertyInfo.kitchen !== ''" class="text-gray-600"> {{ this.propertyInfo.kitchen }}</div>
-															<div v-if="this.propertyInfo.kitchen == null || this.propertyInfo.kitchen == ''" class="text-gray-600"> Bilinmiyor</div>
-															<!--end::Details item-->
-                                                            <div class="separator my-5"></div>
-															<!--begin::Details item-->
-															<div class="fw-bold mt-5">Balkon</div>
-															<div v-if="this.propertyInfo.balcony !== null && this.propertyInfo.balcony !== ''" class="text-gray-600"> {{ this.propertyInfo.balcony }}</div>
-															<div v-if="this.propertyInfo.balcony == null || this.propertyInfo.balcony == ''" class="text-gray-600"> Bilinmiyor</div>
-															<!--end::Details item-->
-                                                            <div class="separator my-5"></div>
-															<!--begin::Details item-->
-															<div class="fw-bold mt-5">Asansör</div>
-															<div v-if="this.propertyInfo.lift !== null && this.propertyInfo.lift !== ''" class="text-gray-600"> {{ this.propertyInfo.lift }}</div>
-															<div v-if="this.propertyInfo.lift == null || this.propertyInfo.lift == ''" class="text-gray-600"> Bilinmiyor</div>
-															<!--end::Details item-->
-                                                            <div class="separator my-5"></div>
-															<!--begin::Details item-->
-															<div class="fw-bold mt-5">Otopark</div>
-															<div v-if="this.propertyInfo.parking !== null && this.propertyInfo.parking !== ''" class="text-gray-600"> {{ this.propertyInfo.parking }}</div>
-															<div v-if="this.propertyInfo.parking == null || this.propertyInfo.parking == ''" class="text-gray-600"> Bilinmiyor</div>
-															<!--end::Details item-->
-                                                            <div class="separator my-5"></div>
-															<!--begin::Details item-->
-															<div class="fw-bold mt-5">Eşyalı</div>
-															<div v-if="this.propertyInfo.furnished !== null && this.propertyInfo.furnished !== ''" class="text-gray-600"> {{ this.propertyInfo.furnished }}</div>
-															<div v-if="this.propertyInfo.furnished == null || this.propertyInfo.furnished == ''" class="text-gray-600"> Bilinmiyor</div>
-															<!--end::Details item-->
-                                                            <div class="separator my-5"></div>
-															<!--begin::Details item-->
-															<div class="fw-bold mt-5">Kullanım Durumu</div>
-															<div v-if="this.propertyInfo.usageStatus !== null && this.propertyInfo.usageStatus !== ''" class="text-gray-600"> {{ this.propertyInfo.usageStatus }}</div>
-															<div v-if="this.propertyInfo.usageStatus == null || this.propertyInfo.usageStatus == ''" class="text-gray-600"> Bilinmiyor</div>
-															<!--end::Details item-->
-                                                            <div class="separator my-5"></div>
-															<!--begin::Details item-->
-															<div class="fw-bold mt-5">Aidat(TL)</div>
-															<div v-if="this.propertyInfo.dues !== null && this.propertyInfo.dues !== ''" class="text-gray-600"> {{ this.propertyInfo.dues }}</div>
-															<div v-if="this.propertyInfo.dues == null || this.propertyInfo.dues == ''" class="text-gray-600"> Bilinmiyor</div>
-															<!--end::Details item-->
-                                                            <div class="separator my-5"></div>
-															<!--begin::Details item-->
-															<div class="fw-bold mt-5">Taşınmaz Durumu</div>
-															<div v-if="this.propertyInfo.dues !== null && this.propertyInfo.dues !== ''" class="text-gray-600"> {{ this.propertyInfo.dues }}</div>
-															<div v-if="this.propertyInfo.dues == null || this.propertyInfo.dues == ''" class="text-gray-600"> Bilinmiyor</div>
-															<!--end::Details item-->
-															 
-														</div>
-													</div>
-													<!--end::Details content-->
-												</div>
-												<!--end::Card body-->
-											</div>
-											<!--end::Card-->
-										</div>
-										<!--end::Sidebar-->
+                                    <div class="flex-column flex-lg-row-auto w-100 w-xl-350px mb-10">
+                                        <!--begin::Card-->
+                                        <div class="card mb-5 mb-xl-8">
+                                            <!--begin::Card body-->
+                                            <div class="card-body pt-15">
+                                                <!--begin::Summary-->
+                                                <div class="d-flex flex-center flex-column mb-5">
+                                                    <!--begin::Avatar-->
+                                                    <div class="symbol symbol-100px symbol-square mb-7">
+                                                        <img src="/assets/media/avatars/konutPP.jpg" alt="image" />
+                                                    </div>
+                                                    <!--end::Avatar-->
+                                                    <!--begin::Title-->
+                                                    <a href="#"
+                                                        class="fs-3 text-gray-800 text-hover-primary fw-bold mb-1">
+                                                        <span
+                                                            v-if="this.propertyInfo.title !== null && this.propertyInfo.title !== ''">
+                                                            {{ this.propertyInfo.title }} </span>
+                                                        <span
+                                                            v-if="this.propertyInfo.title == null || this.propertyInfo.title == ''">Başlık</span>
+                                                    </a>
+                                                    <!--end::Title-->
+                                                    <!--begin::Description-->
+                                                    <div class="fs-5 fw-semibold text-muted mb-6">{{
+                                                        this.propertyInfo.description }}</div>
+                                                    <!--end::Description-->
+                                                    <!--begin::Info-->
+                                                    <div class="d-flex flex-wrap flex-center">
+                                                        <!--begin::Stats-->
+                                                        <div
+                                                            class="border border-gray-300 border-dashed rounded py-3 px-3 mb-3">
+                                                            <div class="fs-4 fw-bold text-gray-700">
+                                                                <span class="w-75px">6,900</span>
+                                                                <i class="ki-duotone ki-arrow-up fs-3 text-success">
+                                                                    <span class="path1"></span>
+                                                                    <span class="path2"></span>
+                                                                </i>
+                                                            </div>
+                                                            <div class="fw-semibold text-muted">Earnings</div>
+                                                        </div>
+                                                        <!--end::Stats-->
+                                                        <!--begin::Stats-->
+                                                        <div
+                                                            class="border border-gray-300 border-dashed rounded py-3 px-3 mx-4 mb-3">
+                                                            <div class="fs-4 fw-bold text-gray-700">
+                                                                <span class="w-50px">130</span>
+                                                                <i class="ki-duotone ki-arrow-down fs-3 text-danger">
+                                                                    <span class="path1"></span>
+                                                                    <span class="path2"></span>
+                                                                </i>
+                                                            </div>
+                                                            <div class="fw-semibold text-muted">Tasks</div>
+                                                        </div>
+                                                        <!--end::Stats-->
+                                                        <!--begin::Stats-->
+                                                        <div
+                                                            class="border border-gray-300 border-dashed rounded py-3 px-3 mb-3">
+                                                            <div class="fs-4 fw-bold text-gray-700">
+                                                                <span class="w-50px">500</span>
+                                                                <i class="ki-duotone ki-arrow-up fs-3 text-success">
+                                                                    <span class="path1"></span>
+                                                                    <span class="path2"></span>
+                                                                </i>
+                                                            </div>
+                                                            <div class="fw-semibold text-muted">Hours</div>
+                                                        </div>
+                                                        <!--end::Stats-->
+                                                    </div>
+                                                    <!--end::Info-->
+                                                </div>
+                                                <!--end::Summary-->
+                                                <!--begin::Details toggle-->
+                                                <div class="d-flex flex-stack fs-4 py-3">
+                                                    <div class="fw-bold rotate collapsible collapsed"
+                                                        data-bs-toggle="collapse" href="#kt_customer_view_details"
+                                                        role="button" aria-expanded="false"
+                                                        aria-controls="kt_customer_view_details">Detaylar
+                                                        <span class="ms-2 rotate-180">
+                                                            <i class="ki-duotone ki-down fs-3"></i>
+                                                        </span>
+                                                    </div>
+                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover"
+                                                        title="Edit customer details">
+                                                        <a href="#" class="btn btn-sm btn-light-primary"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#kt_modal_update_customer">Edit</a>
+                                                    </span>
+                                                </div>
+                                                <!--end::Details toggle-->
+                                                <div class="separator separator-dashed my-3"></div>
+                                                <!--begin::Details content-->
+                                                <div id="kt_customer_view_details" class="collapse">
+                                                    <div class="py-5 fs-6">
+                                                        <!--begin::Details item-->
+                                                        <div class="fw-bold mt-5">Fiyat</div>
+                                                        <div v-if="this.propertyInfo.price !== null && this.propertyInfo.price !== ''"
+                                                            class="text-gray-600"> {{ this.propertyInfo.price }}</div>
+                                                        <div v-if="this.propertyInfo.price == null || this.propertyInfo.price == ''"
+                                                            class="text-gray-600"> Bilinmiyor</div>
+                                                        <!--end::Details item-->
+                                                        <div class="separator my-5"></div>
+                                                        <!--begin::Details item-->
+                                                        <div class="fw-bold mt-5">m² (Brüt) </div>
+                                                        <div v-if="this.propertyInfo.squareMetersGross !== null && this.propertyInfo.squareMetersGross !== ''"
+                                                            class="text-gray-600"> {{
+                                                                this.propertyInfo.squareMetersGross }}</div>
+                                                        <div v-if="this.propertyInfo.squareMetersGross == null || this.propertyInfo.squareMetersGross == ''"
+                                                            class="text-gray-600"> Bilinmiyor</div>
+                                                        <!--end::Details item-->
+                                                        <div class="separator my-5"></div>
+                                                        <!--begin::Details item-->
+                                                        <div class="fw-bold mt-5">m² (Net) </div>
+                                                        <div v-if="this.propertyInfo.squareMetersNet !== null && this.propertyInfo.squareMetersNet !== ''"
+                                                            class="text-gray-600"> {{ this.propertyInfo.squareMetersNet
+                                                            }}</div>
+                                                        <div v-if="this.propertyInfo.squareMetersNet == null || this.propertyInfo.squareMetersNet == ''"
+                                                            class="text-gray-600"> Bilinmiyor</div>
+                                                        <!--end::Details item-->
+
+                                                    </div>
+                                                </div>
+                                                <!--end::Details content-->
+                                            </div>
+                                            <!--end::Card body-->
+                                        </div>
+                                        <!--end::Card-->
+                                    </div>
+                                    <!--end::Sidebar-->
                                 </div>
                                 <!--end::Layout-->
                             </div>
@@ -623,68 +441,43 @@
     <!--end:::Main-->
 </template>
 <script>
+import axios from 'axios'
 import { mapGetters } from 'vuex'
+import SecureLS from "secure-ls";
+const ls = new SecureLS({ isCompression: false });
 export default {
     name: 'PropertiesCreate',
     data() {
         return {
             form: {
                 estateType: { value: null, name: "Emlak Türünü Seçiniz" },
+
             },
             propertyInfo: {
-                housingType: null,
-                userId: null,
                 title: null,
                 description: null,
                 price: null,
-                postedDate: null,
                 squareMetersNet: null,
-                squareMetersGross: null,
-                roomNumber: null,
-                status: null,
                 province: null,
                 district: null,
-                buildingAge: null,
-                locatedFloor: null,
-                floorNumber: null,
-                heating: null,
-                bathroomNumber: null,
-                balcony: null,
-                lift: null,
-                parking: null,
-                furnished: null,
-                usageStatus: null,
-                insadeSite: null,
-                siteName: null,
-                dues: null,
-                deposit: null,
-                adress: null,
-                sahibindenId: null,
-                squareMetersPrice: null,
-                islandNo: null,
-                parcelNo: null,
-                sheetNumber: null,
-                kaks: null,
-                gabari: null,
-                inReturnFloor: null,
-                creditEligibility: null,
-                titleDeedStatus: null,
-                swap: null,
-                zoningStatus: null,
-                buildinStatus: null,
-                kitcthen: null,
-                querater: null,
+                neighborhood: null,
+                estataeStatusType: { value: null, name: "Mülk Durumu Seçiniz" },
             },
             estateTypeList: [],
             estateStatusTypeList: [],
             residentialPropertyList: [],
             formIsActive: false,
+            userData: null,
         }
     },
     created() {
         this.estateTypeList = this.getEstateTypeList;
         this.estateStatusTypeList = this.getEstateStatusTypeList;
         this.residentialPropertyList = this.getResidentialPropertyList;
+        if (this.estateStatusTypeList.length > 0) {
+            this.propertyInfo.estataeStatusType = this.estateStatusTypeList[0];
+        }
+        this.userData = this.getUser;
     },
     methods: {
         activateForm() {
@@ -692,12 +485,84 @@ export default {
                 this.formIsActive = false;
             } else
                 this.formIsActive = true;
-        }
+        },
+        validateForm() {
+            const requiredFields = [
+                { field: this.propertyInfo.title, name: 'Başlık' },
+                { field: this.propertyInfo.description, name: 'Açıklama' },
+                { field: this.propertyInfo.price, name: 'Fiyat' },
+                { field: this.propertyInfo.squareMetersNet, name: 'm² (Net)' },
+                { field: this.propertyInfo.province, name: 'İl' },
+                { field: this.propertyInfo.district, name: 'İlçe' },
+                { field: this.propertyInfo.neighborhood, name: 'Mahalle' },
+                { field: this.propertyInfo.estataeStatusType.value, name: 'Mülk Durumu' },
+            ];
+
+            for (const field of requiredFields) {
+                if (!field.field || field.field === '' || field.field === null) {
+                    this.$swal('Hata', `${field.name} alanı boş bırakılamaz.`, 'error');
+                    return false;
+                }
+            }
+
+            return true;
+        },
+        saveProperty() {
+            if (!this.validateForm()) {
+                return;
+            }
+
+            this.$swal
+                .fire({
+                    title: "Bu mülkü kaydetmek istediğinize emin misiniz?",
+                    confirmButtonColor: "#04b440",
+                    showDenyButton: false,
+                    showCancelButton: true,
+                    confirmButtonText: "Onayla",
+                    icon: 'info'
+                })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        const parameters = {
+                            created_by: this.user.username,
+                            property_type: this.form.estateType.value, //Emlak Türü
+                            user_id: this.user.id,
+                            title: this.propertyInfo.title,
+                            description: this.propertyInfo.description,
+                            price: this.propertyInfo.price,
+                            square_meters_net: this.propertyInfo.squareMetersNet,
+                            province: this.propertyInfo.province,
+                            district: this.propertyInfo.district,
+                            neighborhood: this.propertyInfo.neighborhood,
+                            estatae_status_type: this.propertyInfo.estataeStatusType.value,
+                        };
+                        // API isteği
+                        axios.post("/api/property/SaveProperty", parameters, { "Content-Type": "application/json" })
+                            .then((response) => {
+                                if (response.data != null && response.data.length == 36) {
+                                    this.$swal("Başarılı", this.form.estateType.name + " başarıyla kaydedildi!", 'success');
+                                    this.propertyInfo = {}; // Formu sıfırla
+                                } else {
+                                    this.$swal("Hata", this.form.estateType.name + " kaydedilemedi", "error");
+                                }
+                            })
+                            .catch((error) => {
+                                console.error('Hata:', error);
+                                this.$swal("Hata", "Bir hata oluştu. Lütfen tekrar deneyin.", "error");
+                            });
+                    }
+                });
+        },
+
     },
     computed: {
         ...mapGetters(['getEstateTypeList']),
         ...mapGetters(['getEstateStatusTypeList']),
         ...mapGetters(['getResidentialPropertyList']),
+        ...mapGetters(['getUser']),
+        user() {
+            return this.getUser();
+        },
     }
 }
 </script>

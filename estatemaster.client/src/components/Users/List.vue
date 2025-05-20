@@ -160,37 +160,6 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="card-toolbar">
-                                        <!--begin::Toolbar-->
-                                        <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                                            <!--begin::Filter-->
-                                            <button type="button" class="btn btn-light-primary me-3"
-                                                data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end"
-                                                @click="showForm = true">
-                                                <i class="ki-duotone ki-filter fs-2">
-                                                    <span class="path1"></span>
-                                                    <span class="path2"></span>
-                                                </i>Ödeme Yap
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div v-if="showForm">
-                                        <form @submit.prevent="submitPayment">
-                                            <label for="amount">Miktar:</label>
-                                            <input type="text" id="amount" v-model="amount" required />
-
-                                            <label for="cardNumber">Kart Numarası:</label>
-                                            <input type="text" id="cardNumber" v-model="cardNumber" required />
-
-                                            <label for="expiryDate">Son Kullanma Tarihi (MM/YY):</label>
-                                            <input type="text" id="expiryDate" v-model="expiryDate" required />
-
-                                            <label for="cvc">CVC:</label>
-                                            <input type="text" id="cvc" v-model="cvc" required />
-
-                                            <button type="submit">Ödeme Yap</button>
-                                        </form>
-                                    </div>
                                 </div>
                             </div>
                         </div>
