@@ -275,22 +275,22 @@
                                                         <!--end::Item template-->
                                                     </div>
                                                     <!--end::Wrapper-->
-                                               
-                                            <div class="separator mb-6"></div>
-                                            <!--end::Separator-->
-                                            <!--begin::Action buttons-->
-                                            <div class="d-flex justify-content-end">
-                                                <!--begin::Button-->
-                                                <button type="button" data-kt-contacts-type="submit"
-                                                    class="btn btn-success" @click="saveProperty()">
-                                                    <span class="indicator-label">Kaydet</span>
-                                                    <span class="indicator-progress">Lütfen bekleyin...
-                                                        <span
-                                                            class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                                </button>
-                                                <!--end::Button-->
-                                            </div>
-                                             </form>
+
+                                                    <div class="separator mb-6"></div>
+                                                    <!--end::Separator-->
+                                                    <!--begin::Action buttons-->
+                                                    <div class="d-flex justify-content-end">
+                                                        <!--begin::Button-->
+                                                        <button type="button" data-kt-contacts-type="submit"
+                                                            class="btn btn-success" @click="saveProperty()">
+                                                            <span class="indicator-label">Kaydet</span>
+                                                            <span class="indicator-progress">Lütfen bekleyin...
+                                                                <span
+                                                                    class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                                        </button>
+                                                        <!--end::Button-->
+                                                    </div>
+                                                </form>
                                                 <!--end::Form-->
                                             </div>
                                             <!--end::Card body-->
