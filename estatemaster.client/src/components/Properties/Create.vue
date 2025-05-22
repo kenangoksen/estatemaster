@@ -170,7 +170,7 @@
                                                                         aria-label="Select example"
                                                                         data-placeholder="Mülk Durumunu Seçiniz"
                                                                         data-allow-clear="true"
-                                                                        v-model="propertyInfo.estataeStatusType">
+                                                                        v-model="propertyInfo.estateStatusType">
                                                                         <option v-for="item of estateStatusTypeList"
                                                                             :value="item" :key="item.value"> {{
                                                                                 item.name }}</option>
@@ -275,9 +275,7 @@
                                                         <!--end::Item template-->
                                                     </div>
                                                     <!--end::Wrapper-->
-                                                </form>
-                                                <!--end::Form-->
-                                            </div>
+                                               
                                             <div class="separator mb-6"></div>
                                             <!--end::Separator-->
                                             <!--begin::Action buttons-->
@@ -291,6 +289,9 @@
                                                             class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                                 </button>
                                                 <!--end::Button-->
+                                            </div>
+                                             </form>
+                                                <!--end::Form-->
                                             </div>
                                             <!--end::Card body-->
                                         </div>
@@ -461,7 +462,7 @@ export default {
                 province: null,
                 district: null,
                 neighborhood: null,
-                estataeStatusType: { value: null, name: "Mülk Durumu Seçiniz" },
+                estateStatusType: { value: null, name: "Mülk Durumu Seçiniz" },
             },
             estateTypeList: [],
             estateStatusTypeList: [],
@@ -475,7 +476,7 @@ export default {
         this.estateStatusTypeList = this.getEstateStatusTypeList;
         this.residentialPropertyList = this.getResidentialPropertyList;
         if (this.estateStatusTypeList.length > 0) {
-            this.propertyInfo.estataeStatusType = this.estateStatusTypeList[0];
+            this.propertyInfo.estateStatusType = this.estateStatusTypeList[0];
         }
         this.userData = this.getUser;
     },
@@ -495,7 +496,7 @@ export default {
                 { field: this.propertyInfo.province, name: 'İl' },
                 { field: this.propertyInfo.district, name: 'İlçe' },
                 { field: this.propertyInfo.neighborhood, name: 'Mahalle' },
-                { field: this.propertyInfo.estataeStatusType.value, name: 'Mülk Durumu' },
+                { field: this.propertyInfo.estateStatusType.value, name: 'Mülk Durumu' },
             ];
 
             for (const field of requiredFields) {
@@ -534,7 +535,7 @@ export default {
                             province: this.propertyInfo.province,
                             district: this.propertyInfo.district,
                             neighborhood: this.propertyInfo.neighborhood,
-                            estatae_status_type: this.propertyInfo.estataeStatusType.value,
+                            estate_status_type: this.propertyInfo.estateStatusType.value,
                         };
                         // API isteği
                         axios.post("/api/property/SaveProperty", parameters, { "Content-Type": "application/json" })

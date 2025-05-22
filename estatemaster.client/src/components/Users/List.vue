@@ -186,10 +186,6 @@ export default {
         return {
             userList: [],
             showForm: false,
-            cardNumber: '',
-            expiryDate: '',
-            cvc: '',
-            amount: ''
         };
     },
     created() {
