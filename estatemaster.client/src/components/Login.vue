@@ -19,6 +19,9 @@
                     <!--begin::Aside-->
                 </div>
                 <!--begin::Aside-->
+                <div class="foxy-welcome-box text-center">
+                    <img src="/assets/media/foxy/welcome_fox.png" alt="Hoşgeldiniz Tilkisi" class="foxy-img" />
+                </div>
                 <!--begin::Body-->
                 <div
                     class="d-flex flex-column-fluid flex-lg-row-auto justify-content-center justify-content-lg-end p-12 p-lg-20">
@@ -183,8 +186,8 @@
     </div>
 </template>
 <script>
-import axios from 'axios' 
-import { mapActions } from "vuex"; 
+import axios from 'axios'
+import { mapActions } from "vuex";
 import SecureLS from "secure-ls";
 const ls = new SecureLS({ isCompression: true, encodingType: 'aes' });
 
@@ -232,5 +235,18 @@ export default {
     background-image: url('assets/media/auth/bg4.jpg');
     height: 100vh;
     background-size: cover;
+}
+.foxy-welcome-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: -271px;
+}
+.foxy-img {
+    width: 720px;
+    max-width: 100%;
+    margin-bottom: 16px;
+    filter: drop-shadow(0 4px 16px rgba(0,0,0,0.08));
 }
 </style>

@@ -47,8 +47,8 @@
                                                     <!--begin::Table head-->
                                                     <thead>
                                                         <tr class="fw-bold text-muted bg-light">
-                                                            <th class="ps-4">-</th>
-                                                            <th class="ps-4 min-w-325px rounded-start">Başlık</th>
+                                                            <th class="min-w-125px">-</th>
+                                                            <th class="min-w-125px">Başlık</th>
                                                             <th class="min-w-125px">Açıklama</th>
                                                             <th class="min-w-125px">Fiyat</th>
                                                             <th class="min-w-125px">Metrekare</th>

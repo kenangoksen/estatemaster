@@ -10,6 +10,8 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^44.3.0",
+    "@ckeditor/ckeditor5-vue": "^7.3.0",
     "axios": "^1.7.4",
     "bootstrap": "^5.3.3",
     "jwt-decode": "^4.0.0",
@@ -17,6 +19,7 @@
     "secure-ls": "^2.0.0",
     "select2": "^4.1.0-rc.0",
     "sweetalert2": "^11.12.4",
+    "v-money3": "^3.24.1",
     "v-pagination-3": "^0.1.7",
     "vue": "^3.4.29",
     "vue-router": "^4.4.0",
