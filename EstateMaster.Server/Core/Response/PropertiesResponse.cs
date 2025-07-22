@@ -1,12 +1,11 @@
-using System;
-
 namespace EstateMaster.Server.Models
 {
-    public class SavePropertyRequest
+    public class PropertiesResponse
     {
-        public DateTime created_at { get; set; }
-        public DateTime updated_at { get; set; }
-        public string created_by { get; set; } // Kaydı oluşturan kullanıcı
+        public string id { get; set; }
+        public DateTime? created_at { get; set; }
+        public DateTime? updated_at { get; set; }
+        public string created_by { get; set; }
         public string property_type { get; set; } // Emlak türü
         public string user_id { get; set; } // Kullanıcı ID
         public string title { get; set; } // Mülk başlığı
@@ -15,7 +14,8 @@ namespace EstateMaster.Server.Models
         public string province { get; set; } // İl
         public string district { get; set; } // İlçe
         public string neighborhood { get; set; } // İlçe
-        public double square_meters_net { get; set; } // Bina yaşı
+        public double square_meters_net { get; set; } // Metrekare
         public string estate_status_type { get; set; }  // Emlak durumu - Kiralık-Satılık
+
     }
 }

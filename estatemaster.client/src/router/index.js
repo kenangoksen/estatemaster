@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import SecureLS from "secure-ls";  
-const ls = new SecureLS({ isCompression: true, encodingType: 'aes'  });
+import SecureLS from "secure-ls";
+const ls = new SecureLS({ isCompression: true, encodingType: 'aes' });
 
 import Home from '../views/front/Home.vue';
 import Overview from '@/components/UserProfile/Overview.vue';
@@ -24,7 +24,7 @@ const routes = [
       path: "/Login",
       name: "Login",
       component: Login,
-      meta: {requiresAuth: false},
+      meta: { requiresAuth: false },
       props: true
    },
    {
@@ -79,7 +79,7 @@ const routes = [
       component: PropertiesUpdate,
       meta: { requiresAuth: true },
       props: true
-   },
+   }
 ];
 
 const router = createRouter({
@@ -88,7 +88,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-   var GetAuthStorage =  ls.get('user_' + sessionStorage.getItem('sid'));
+   var GetAuthStorage = ls.get('user_' + sessionStorage.getItem('sid'));
    if (to.matched.some(record => record.meta.requiresAuth)) {
       if (!GetAuthStorage) {
          next('/login');
@@ -107,6 +107,28 @@ router.afterEach((to, from) => {
    if (from.name === 'Home') {
       localStorage.removeItem('homePageRefreshed');
    }
-})
+});
+router.beforeEach((to, from, next) => {
+   // Kullanıcı oturum bilgisini SecureLS ile al
+   const sessionId = sessionStorage.getItem('sid');
+   const user = ls.get('user_' + sessionId);
+
+   // Giriş gerektiren bir sayfa mı?
+   if (to.matched.some(record => record.meta.requiresAuth)) {
+      // Kullanıcı login değilse login sayfasına yönlendir
+      if (!user) {
+         next('/login');
+      } else {
+         next();
+      }
+   } else {
+      // Login olmuş kullanıcı login sayfasına gitmek isterse ana sayfaya yönlendir
+      if (to.path === '/login' && user) {
+         next('/');
+      } else {
+         next();
+      }
+   }
+});
 
 export default router;

@@ -8,20 +8,38 @@ import Pagination from 'v-pagination-3'
 import store from './store/index.js'
 import SecureLS from "secure-ls";
 import mitt from 'mitt';
+import VMoney from 'v-money3'
 
 const emitter = mitt();
 const app = createApp(App);
 const ls = new SecureLS({ isCompression: true, encodingType: 'aes' });
+const formatDate = (dateStr) => {
+  if (!dateStr) return '';
+  const date = new Date(dateStr);
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
+};
+const formatTL = (value) => {
+  if (value === null || value === undefined || value === '') return '';
+  return Number(value).toLocaleString('tr-TR', { style: 'currency', currency: 'TRY' });
+};
+
+
 
 app.use(router);
 app.use(VueSweetalert2);
 app.use(store);
+app.use(VMoney);
 
 app.component('pagination', Pagination);
 
 app.mount('#app');
+app.config.globalProperties.$formatDate = formatDate;
 app.config.globalProperties.emitter = emitter;
 app.config.globalProperties.$pageLoader = app._instance.proxy.$refs.pageLoader;
+app.config.globalProperties.$formatTL = formatTL;
 
 app.config.globalProperties.$getUser = function () {
   var data = {};
