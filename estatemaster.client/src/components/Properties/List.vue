@@ -122,7 +122,7 @@
                                                             </td>
                                                             <td>
                                                                 <span class="badge badge-light-primary fs-7 fw-bold">
-                                                                    {{ item.province }}/{{ item.district }}
+                                                                    {{ item.province }}/{{ item.district }} 
                                                                 </span>
                                                             </td>
                                                         </tr>
