@@ -226,51 +226,57 @@
                                                         <!--end::Row-->
                                                         <!--begin::Item template-->
                                                         <table class="table d-none" data-kt-element="item-template">
-                                                            <tr class="border-bottom border-bottom-dashed"
-                                                                data-kt-element="item">
-                                                                <td class="pe-7">
-                                                                    <input type="text"
-                                                                        class="form-control form-control-solid mb-2"
-                                                                        name="name[]" placeholder="Item name" />
-                                                                    <input type="text"
-                                                                        class="form-control form-control-solid"
-                                                                        name="description[]"
-                                                                        placeholder="Description" />
-                                                                </td>
-                                                                <td class="ps-0">
-                                                                    <input class="form-control form-control-solid"
-                                                                        type="number" min="1" name="quantity[]"
-                                                                        placeholder="1" data-kt-element="quantity" />
-                                                                </td>
-                                                                <td>
-                                                                    <input type="text"
-                                                                        class="form-control form-control-solid text-end"
-                                                                        name="price[]" placeholder="0.00"
-                                                                        data-kt-element="price" />
-                                                                </td>
-                                                                <td class="pt-8 text-end">$
-                                                                    <span data-kt-element="total">0.00</span>
-                                                                </td>
-                                                                <td class="pt-5 text-end">
-                                                                    <button type="button"
-                                                                        class="btn btn-sm btn-icon btn-active-color-primary"
-                                                                        data-kt-element="remove-item">
-                                                                        <i class="ki-duotone ki-trash fs-3">
-                                                                            <span class="path1"></span>
-                                                                            <span class="path2"></span>
-                                                                            <span class="path3"></span>
-                                                                            <span class="path4"></span>
-                                                                            <span class="path5"></span>
-                                                                        </i>
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
+                                                            <tbody>
+                                                                <tr class="border-bottom border-bottom-dashed"
+                                                                    data-kt-element="item">
+                                                                    <td class="pe-7">
+                                                                        <input type="text"
+                                                                            class="form-control form-control-solid mb-2"
+                                                                            name="name[]" placeholder="Item name" />
+                                                                        <input type="text"
+                                                                            class="form-control form-control-solid"
+                                                                            name="description[]"
+                                                                            placeholder="Description" />
+                                                                    </td>
+                                                                    <td class="ps-0">
+                                                                        <input class="form-control form-control-solid"
+                                                                            type="number" min="1" name="quantity[]"
+                                                                            placeholder="1"
+                                                                            data-kt-element="quantity" />
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="text"
+                                                                            class="form-control form-control-solid text-end"
+                                                                            name="price[]" placeholder="0.00"
+                                                                            data-kt-element="price" />
+                                                                    </td>
+                                                                    <td class="pt-8 text-end">$
+                                                                        <span data-kt-element="total">0.00</span>
+                                                                    </td>
+                                                                    <td class="pt-5 text-end">
+                                                                        <button type="button"
+                                                                            class="btn btn-sm btn-icon btn-active-color-primary"
+                                                                            data-kt-element="remove-item">
+                                                                            <i class="ki-duotone ki-trash fs-3">
+                                                                                <span class="path1"></span>
+                                                                                <span class="path2"></span>
+                                                                                <span class="path3"></span>
+                                                                                <span class="path4"></span>
+                                                                                <span class="path5"></span>
+                                                                            </i>
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
                                                         </table>
                                                         <table class="table d-none" data-kt-element="empty-template">
-                                                            <tr data-kt-element="empty">
-                                                                <th colspan="5" class="text-muted text-center py-10">No
-                                                                    items</th>
-                                                            </tr>
+                                                            <tbody>
+                                                                <tr data-kt-element="empty">
+                                                                    <th colspan="5"
+                                                                        class="text-muted text-center py-10">No
+                                                                        items</th>
+                                                                </tr>
+                                                            </tbody>
                                                         </table>
                                                         <!--end::Item template-->
                                                     </div>

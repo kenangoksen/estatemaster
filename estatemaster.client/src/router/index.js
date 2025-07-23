@@ -12,6 +12,7 @@ import Login from '@/components/Login.vue';
 import PropertiesList from '@/components/Properties/List.vue';
 import PropertiesCreate from '@/components/Properties/Create.vue';
 import PropertiesUpdate from '@/components/Properties/Update.vue';
+import CustomerList from '@/components/Customers/List.vue';
 
 const routes = [
    {
@@ -77,6 +78,13 @@ const routes = [
       path: '/properties/update/:id',
       name: 'PropertiesUpdate',
       component: PropertiesUpdate,
+      meta: { requiresAuth: true },
+      props: true
+   },
+   {
+      path: '/customer/list',
+      name: 'CustomerList',
+      component: CustomerList,
       meta: { requiresAuth: true },
       props: true
    }

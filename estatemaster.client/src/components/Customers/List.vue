@@ -12,11 +12,11 @@
                                         <!--begin::Header-->
                                         <div class="card-header border-0 pt-5">
                                             <h3 class="card-title align-items-start flex-column">
-                                                <span class="card-label fw-bold fs-3 mb-1">Portföy</span>
+                                                <span class="card-label fw-bold fs-3 mb-1">Müşteriler</span>
                                             </h3>
                                             <div class="card-toolbar">
                                                 <button class="btn btn-sm btn-light-primary" @click="showModal = true">
-                                                    <i class="ki-duotone ki-plus fs-2"></i> Mülk Ekle
+                                                    <i class="ki-duotone ki-plus fs-2"></i> Müşteri Ekle
                                                 </button>
                                             </div>
                                         </div>
@@ -47,83 +47,47 @@
                                                     <!--begin::Table head-->
                                                     <thead>
                                                         <tr class="fw-bold text-muted bg-light">
-                                                            <th class="min-w-125px">-</th>
-                                                            <th class="min-w-125px">Başlık</th>
-                                                            <th class="min-w-125px">Açıklama</th>
-                                                            <th class="min-w-125px">Fiyat</th>
-                                                            <th class="min-w-125px">Metrekare</th>
-                                                            <th class="min-w-150px">Emlak Türü</th>
-                                                            <th class="min-w-150px">Emlak Durumu</th>
-                                                            <th class="min-w-150px">Kayıt Tarihi</th>
-                                                            <th class="min-w-150px">İl/İlçe</th>
+                                                            <th class="min-w-125px">İsim</th>
+                                                            <th class="min-w-125px">Soyisim</th>
+                                                            <th class="min-w-125px">Mail</th>
+                                                            <th class="min-w-125px">Telefon</th>
+                                                            <th class="min-w-125px">Müşteri Tipi</th>
+                                                            <th class="min-w-150px">Oluşturulma Tarihi</th>
                                                             <th class="min-w-150px text-end rounded-end"></th>
                                                         </tr>
                                                     </thead>
                                                     <!--end::Table head-->
                                                     <!--begin::Table body-->
                                                     <tbody class="text-gray-600 fw-semibold">
-                                                        <tr v-for="item in properties" :key="item.id">
-                                                            <td>
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="symbol symbol-50px me-5">
-                                                                        <img src="/assets/media/stock/600x400/img-26.jpg"
-                                                                            alt="" />
-                                                                    </div>
-                                                                </div>
-                                                            </td>
+                                                        <tr v-for="item in customers" :key="item.id">
                                                             <td>
                                                                 <a href="#"
                                                                     class="text-gray-900 fw-bold text-hover-primary mb-1 fs-6">{{
-                                                                        item.title }}</a>
+                                                                        item.firstName }}</a>
                                                             </td>
                                                             <td>
                                                                 <span class="text-gray-900 fw-bold d-block mb-1 fs-6">{{
-                                                                    item.description }}</span>
+                                                                    item.lastName }}</span>
                                                             </td>
                                                             <td>
                                                                 <span class="text-gray-900 fw-bold d-block mb-1 fs-6">
-                                                                    {{ Number(item.price).toLocaleString('tr-TR') }} ₺
+                                                                    {{ item.email }} 
                                                                 </span>
                                                             </td>
                                                             <td>
                                                                 <span class="text-gray-900 fw-bold d-block mb-1 fs-6">{{
-                                                                    item.square_meters_net }}m²</span>
+                                                                    item.phone }}</span>
                                                             </td>
                                                             <td>
-                                                                <span class="badge fs-7 fw-bold" :class="{
-                                                                    'badge-primary': item.property_type === 'residential_propery',
-                                                                    'badge-info': item.property_type === 'commercial_property',
-                                                                    'badge-warning': item.property_type === 'land',
-                                                                    'badge-dark': item.property_type === 'building',
-                                                                    'badge-success': item.property_type === 'timeshare',
-                                                                    'badge-danger': item.property_type === 'tourist_facility'
-                                                                }">
+                                                                <span class="badge fs-7 fw-bold">
                                                                     {{
-                                                                        getEstateTypeList.find(type => type.value ===
-                                                                            item.property_type)?.name || item.property_type
-                                                                    }}
-                                                                </span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="badge fs-7 fw-bold" :class="{
-                                                                    'badge-success': item.estate_status_type === 'sale',
-                                                                    'badge-warning': item.estate_status_type === 'rent'
-                                                                }">
-                                                                    {{
-                                                                        getEstateStatusTypeList.find(type => type.value ===
-                                                                            item.estate_status_type)?.name ||
-                                                                        item.estate_status_type
+                                                                       item.customerType =='seller' ? 'Satıcı' : 'Alıcı'
                                                                     }}
                                                                 </span>
                                                             </td>
                                                             <td>
                                                                 <span class="text-gray-900 fw-bold d-block mb-1 fs-6">{{
-                                                                    $formatDate(item.created_at) }}</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="badge badge-light-primary fs-7 fw-bold">
-                                                                    {{ item.province }}/{{ item.district }} 
-                                                                </span>
+                                                                    $formatDate(item.createdAt) }}</span>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -145,33 +109,39 @@
         </div>
     </div>
 </template>
+
 <script>
-import axios from 'axios';
-import PropertiesCreate from './Create.vue'
-import { mapGetters } from 'vuex';
+import axios from "axios";
 
 export default {
-    name: 'PropertiesList',
-    components: {
-        PropertiesCreate,
-    },
+    name: "CustomerList",
     data() {
         return {
-            showModal: false,
-            properties: [],
-            loading: false,
-            error: null,
+            customers: []
         };
     },
-    created() {
-        axios.post('/api/property/GetProperties',).then((response) => {
-            this.properties = response.data;
-            console.log("Properties loaded:", this.properties);
-        })
+    mounted() {
+        this.loadCustomers();
     },
-    computed: {
-        ...mapGetters(['getEstateTypeList']),
-        ...mapGetters(['getEstateStatusTypeList']),
-    },
-}
+    methods: {
+        async loadCustomers() {
+            try {
+                const res = await axios.get("/api/customer/GetCustomers");
+                this.customers = res.data;
+                console.log("Müşteriler yüklendi:", this.customers[0].firstname);
+                console.log("Müşteri sayısı:", res.data);
+            } catch (err) {
+                console.error("Müşteri yüklenemedi:", err);
+            }
+        },
+        async toggleCustomer(id) {
+            try {
+                await axios.post("/api/customer/ToggleCustomerState", { id });
+                this.loadCustomers(); // listeyi yenile
+            } catch (err) {
+                console.error("Durum değiştirilemedi:", err);
+            }
+        }
+    }
+};
 </script>

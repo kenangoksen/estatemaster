@@ -92,12 +92,12 @@
 								<!--begin:Menu item-->
 								<div class="menu-item">
 									<!--begin:Menu link-->
-									<router-link :to="{ name: 'Overview' }">
+									<router-link :to="{ name: 'CustomerList' }">
 										<a class="menu-link">
 											<span class="menu-bullet">
 												<span class="bullet bullet-dot"></span>
 											</span>
-											<span class="menu-title">Genel Bakış</span>
+											<span class="menu-title">Müşterileri Listele</span>
 										</a>
 									</router-link>
 									<!--end:Menu link-->
