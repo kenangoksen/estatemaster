@@ -9,6 +9,7 @@ import store from './store/index.js'
 import SecureLS from "secure-ls";
 import mitt from 'mitt';
 import VMoney from 'v-money3'
+import  VueTheMask from 'vue-the-mask';
 
 const emitter = mitt();
 const app = createApp(App);
@@ -28,6 +29,7 @@ const formatTL = (value) => {
 
 
 
+app.use(VueTheMask);
 app.use(router);
 app.use(VueSweetalert2);
 app.use(store);

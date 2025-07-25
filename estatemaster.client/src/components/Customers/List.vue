@@ -61,9 +61,12 @@
                                                     <tbody class="text-gray-600 fw-semibold">
                                                         <tr v-for="item in customers" :key="item.id">
                                                             <td>
-                                                                <a href="#"
-                                                                    class="text-gray-900 fw-bold text-hover-primary mb-1 fs-6">{{
-                                                                        item.firstName }}</a>
+                                                                <router-link
+                                                                    :to="{ name: 'CustomerUpadate', params: { id: item.id } }">
+                                                                    <span
+                                                                        class="text-gray-900 fw-bold d-block mb-1 fs-6">{{
+                                                                            item.firstName }}</span>
+                                                                </router-link>
                                                             </td>
                                                             <td>
                                                                 <span class="text-gray-900 fw-bold d-block mb-1 fs-6">{{
@@ -71,7 +74,7 @@
                                                             </td>
                                                             <td>
                                                                 <span class="text-gray-900 fw-bold d-block mb-1 fs-6">
-                                                                    {{ item.email }} 
+                                                                    {{ item.email }}
                                                                 </span>
                                                             </td>
                                                             <td>
@@ -81,7 +84,7 @@
                                                             <td>
                                                                 <span class="badge fs-7 fw-bold">
                                                                     {{
-                                                                       item.customerType =='seller' ? 'Satıcı' : 'Alıcı'
+                                                                        item.customerType == 'seller' ? 'Satıcı' : 'Alıcı'
                                                                     }}
                                                                 </span>
                                                             </td>

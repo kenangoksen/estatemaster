@@ -209,38 +209,7 @@ export default {
                     this.$swal('Başarılı', 'Kullanıcı silme işlemi başarılı', 'success')
                 }
             })
-        },
-        async submitPayment() {
-            const paymentData = {
-                amount: this.amount, // Ödeme miktarı
-                currency: 'USD',
-                description: 'Payment for Order #12345',
-                cardNumber: this.cardNumber,
-                expiryDate: this.expiryDate,
-                cvc: this.cvc,
-                return_url: 'https://localhost:5173/user/list'
-            };
-
-            try {
-                const response = await axios.post('https://pay.crypto.com/api/payments', paymentData, {
-                    headers: {
-                        Authorization: 'Bearer sk_test_xwHUe2zAiZNpTjS3awx4CySd',
-                        'Content-Type': 'application/json'
-                    }
-                });
-
-                console.log(response.data)
-                this.response = response.data;
-
-                // payment_url'e yönlendirme
-                window.location.href = response.data.payment_url;
-                this.showModal = false;
-            } catch (error) {
-                console.error(error);
-                alert('Ödeme başarısız!');
-            }
         }
-
     }
 }
 </script>

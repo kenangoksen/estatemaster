@@ -100,6 +100,14 @@
 											<span class="menu-title">Müşterileri Listele</span>
 										</a>
 									</router-link>
+									<router-link :to="{ name: 'CustomerCreate' }">
+										<a class="menu-link">
+											<span class="menu-bullet">
+												<span class="bullet bullet-dot"></span>
+											</span>
+											<span class="menu-title">Müşteri Kayıt</span>
+										</a>
+									</router-link>
 									<!--end:Menu link-->
 								</div>
 								<!--end:Menu item-->
