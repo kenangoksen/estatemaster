@@ -15,6 +15,7 @@ namespace EstateMaster.Server.Models
         public string password { get; set; }
         public DateTime? login_date { get; set; }
         public string session_id { get; set; }
+        public string company_id { get; set; }
       
     }
 }

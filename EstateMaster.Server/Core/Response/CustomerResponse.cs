@@ -35,5 +35,8 @@ namespace EstateMaster.Server.Models
 
     public DateTime? last_interaction { get; set; }
     public string notes { get; set; }
+    public string updated_by { get; set; }
+    public string company_id { get; set; }
+    public string session_id { get; set; }
   }
 }

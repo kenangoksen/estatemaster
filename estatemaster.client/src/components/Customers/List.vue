@@ -131,8 +131,6 @@ export default {
             try {
                 const res = await axios.get("/api/customer/GetCustomers");
                 this.customers = res.data;
-                console.log("Müşteriler yüklendi:", this.customers[0].firstname);
-                console.log("Müşteri sayısı:", res.data);
             } catch (err) {
                 console.error("Müşteri yüklenemedi:", err);
             }

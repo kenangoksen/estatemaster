@@ -215,7 +215,7 @@ export default {
                         window.location.href = "/";
                     }
                     else {
-                        this.$swal("Giriş Başarısız", "LÜtfen Girdiğiniz Bilgileri Kontrol Ediniz..!", 'error');
+                        this.$swal("Giriş Başarısız", "Lütfen Girdiğiniz Bilgileri Kontrol Ediniz..!", 'error');
                         sessionStorage.clear();
                         return;
                     }
@@ -223,7 +223,7 @@ export default {
                 .catch(function (error) {
                     console.log(error);
                     this.showError = true;
-                    this.$swal("Giriş Başarısız", "LÜtfen Girdiğiniz Bilgileri Kontrol Ediniz..!", 'error');
+                    this.$swal("Giriş Başarısız", "Lütfen Girdiğiniz Bilgileri Kontrol Ediniz..!", 'error');
                 });
         },
     }

@@ -50,7 +50,8 @@ public class AuthController : ControllerBase
                             username = reader["username"].ToString(),
                             password = reader["password"].ToString(),
                             login_date = ConvertHelper.ToDateTime(reader["login_date"].ToString()),
-                            session_id = reader["session_id"].ToString()
+                            session_id = reader["session_id"].ToString(),
+                            company_id = reader["company_id"].ToString()
                         };
                     }
                 connection.Close();

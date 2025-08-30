@@ -189,6 +189,14 @@ export default {
             ]
         };
     },
+    created() {
+        // Eğer kullanıcı bilgileri SecureLS'de saklanıyorsa, burada alabilirsiniz
+        const user = ls.get("user");
+        console.log("Kullanıcı Bilgisi:", this.user);
+        if (user) {
+            this.form.createdBy = user.username; // Kullanıcı adını form'a ekle
+        }
+    },
     methods: {
         saveCustomer() {
             this.$swal
@@ -223,7 +231,9 @@ export default {
                             Source: this.form.source,
                             LastInteraction: this.form.lastInteraction,
                             Notes: this.form.notes,
-                            created_by: this.user.username
+                            created_by: this.user.username,
+                            session_id: this.user.session_id,
+                            company_id: this.user.company_id
                         };
 
                         axios
