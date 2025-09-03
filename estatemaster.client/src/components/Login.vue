@@ -82,8 +82,9 @@
                                 <!--end::Submit button-->
                                 <!--begin::Sign up-->
                                 <div class="text-gray-500 text-center fw-semibold fs-6">Henüz Kayıt Olmadın mı?
-                                    <a href="authentication/layouts/creative/sign-up.html" class="link-primary">Kayıt
-                                        Ol</a>
+                                    <router-link :to="{ name: 'CompanyCreate' }">
+                                        <span class="link-primary"> Kayıt Ol</span>
+                                    </router-link>
                                 </div>
                                 <!--end::Sign up-->
                             </form>
@@ -236,6 +237,7 @@ export default {
     height: 100vh;
     background-size: cover;
 }
+
 .foxy-welcome-box {
     display: flex;
     flex-direction: column;
@@ -243,10 +245,11 @@ export default {
     justify-content: center;
     margin-right: -271px;
 }
+
 .foxy-img {
     width: 720px;
     max-width: 100%;
     margin-bottom: 16px;
-    filter: drop-shadow(0 4px 16px rgba(0,0,0,0.08));
+    filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.08));
 }
 </style>
