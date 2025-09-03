@@ -291,7 +291,6 @@ export default {
                 })
                 .then((result) => {
                     if (result.isConfirmed) {
-
                         this.form.updated_by = this.user.username;
                         axios.post("/api/customer/UpdateCustomer", this.form)
                             .then((res) => {

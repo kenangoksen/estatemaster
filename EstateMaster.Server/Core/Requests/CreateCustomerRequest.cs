@@ -5,6 +5,8 @@ namespace EstateMaster.Server.Models
  /// </summary>
     public class CreateCustomerRequest
     {
+        public string session_id { get; set; }
+        public string company_id { get; set; }
         public string CustomerType { get; set; }
         public string AssignedUserId { get; set; }
         public string FirstName { get; set; }

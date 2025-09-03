@@ -15,6 +15,7 @@ import PropertiesUpdate from '@/components/Properties/Update.vue';
 import CustomerList from '@/components/Customers/List.vue';
 import CustomerCreate from '@/components/Customers/Create.vue';
 import CustomerUpadate from '@/components/Customers/Update.vue';
+import CompanyCreate from '@/components/Companies/Create.vue';
 
 const routes = [
    {
@@ -102,6 +103,13 @@ const routes = [
       name: 'CustomerUpadate',
       component: CustomerUpadate,
       meta: { requiresAuth: true },
+      props: true
+   },
+   {
+      path: '/company/create',
+      name: 'CompanyCreate',
+      component: CompanyCreate,
+      meta: { requiresAuth: false },
       props: true
    }
 ];

@@ -21,20 +21,25 @@ public class AuthController : ControllerBase
 
     [HttpPost]
     [Route("AuthUser")]
-    public LoginSessionResponse AuthUser([FromBody] LoginRequest request)
+    public async Task<LoginSessionResponse> AuthUser([FromBody] LoginRequest request)
     {
         LoginSessionResponse user = new LoginSessionResponse();
-        string CommandText = @"CALL sp_get_auth_user(@$username, @$password);";
+        string CommandText = "sp_get_auth_user"; // Sadece SP adı yeterli
         var connection = new MySqlConnection(appSettings.Database.ConnectionString);
-        connection.Open();
+        await connection.OpenAsync();
         try
         {
             using (var command = new MySqlCommand(CommandText, connection))
             {
-                command.Parameters.AddWithValue("@$username", request.username);
-                command.Parameters.AddWithValue("@$password", request.password);
-                using (MySqlDataReader reader = command.ExecuteReader())
-                    while (reader.Read())
+                command.CommandType = System.Data.CommandType.StoredProcedure; // SP'yi ismine göre çağırıyoruz
+
+                // Parametreleri isme göre ekliyoruz
+                command.Parameters.AddWithValue("@p_username", request.username);
+                command.Parameters.AddWithValue("@p_password", request.password); // Düz metin şifreyi gönderiyoruz
+
+                using (MySqlDataReader reader = await command.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
                     {
                         user = new LoginSessionResponse()
                         {
@@ -48,13 +53,13 @@ public class AuthController : ControllerBase
                             state = reader["state"].ToString(),
                             userType = reader["userType"].ToString(),
                             username = reader["username"].ToString(),
-                            password = reader["password"].ToString(),
+                            password = reader["password"].ToString(), // Buradaki şifre hash'lenmiş gelecek
                             login_date = ConvertHelper.ToDateTime(reader["login_date"].ToString()),
-                            session_id = reader["session_id"].ToString()
+                            session_id = reader["session_id"].ToString(),
+                            company_id = reader["company_id"].ToString()
                         };
                     }
-                connection.Close();
-                connection.Dispose();
+                }
             }
         }
         catch (MySqlException ex)
@@ -69,6 +74,15 @@ public class AuthController : ControllerBase
         {
             throw new Exception("Exception : " + ex.Message);
         }
+        finally
+        {
+            if (connection.State == System.Data.ConnectionState.Open)
+            {
+                connection.Close();
+            }
+            connection.Dispose();
+        }
+
         return user;
     }
 }

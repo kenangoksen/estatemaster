@@ -28,9 +28,9 @@ public class CustomerController : ControllerBase
     [Route("CreateCustomer")]
     public string CreateCustomer([FromBody] CreateCustomerRequest request)
     {
-        string result = string.Empty;
+        string result = "";
         string CommandText = @"CALL sp_create_customer(
-        @$created_by, @$customer_type, @$assigned_user_id, @$first_name, @$last_name,
+        @$session_id, @$company_id, @$created_by, @$customer_type, @$assigned_user_id, @$first_name, @$last_name,
         @$email, @$phone, @$birth_date, @$gender, @$budget_min, @$budget_max,
         @$preferred_province, @$preferred_district, @$preferred_neighborhood,
         @$preferred_square_meters, @$preferred_room_count, @$amenities,
@@ -42,6 +42,8 @@ public class CustomerController : ControllerBase
         {
             using (var command = new MySqlCommand(CommandText, connection))
             {            // Giriş Parametreleri
+                command.Parameters.AddWithValue("@$session_id", request.session_id);
+                command.Parameters.AddWithValue("@$company_id", request.company_id);
                 command.Parameters.AddWithValue("@$created_by", request.created_by ?? "");
                 command.Parameters.AddWithValue("@$customer_type", request.CustomerType ?? "");
                 command.Parameters.AddWithValue("@$assigned_user_id", request.AssignedUserId ?? "");
@@ -66,11 +68,19 @@ public class CustomerController : ControllerBase
 
                 using (var reader = command.ExecuteReader())
                 {
-                    while (reader.Read())
+                    do
                     {
-                        result = reader["oresult"]?.ToString() ?? string.Empty;
-                    }
+                        while (reader.Read())
+                        {
+                            if (reader.HasRows && reader.GetSchemaTable().Rows[0]["ColumnName"].ToString() == "oresult")
+                            {
+                                result = reader["oresult"]?.ToString() ?? "";
+                                break;
+                            }
+                        }
+                    } while (reader.NextResult());
                 }
+
 
                 if (command.Connection != null)
                 {
@@ -107,7 +117,7 @@ public class CustomerController : ControllerBase
     public CustomerResponse GetCustomer([FromBody] GetCustomerById request)
     {
         CustomerResponse data = new CustomerResponse();
-        string CommandText = @"CALL sp_get_customer_by_id(@$id);";
+        string CommandText = @"CALL sp_get_customer_by_id(@$session_id, @$id, @$company_id);";
         var connection = new MySqlConnection(appSettings.Database.ConnectionString);
         connection.Open();
         try
@@ -146,6 +156,10 @@ public class CustomerController : ControllerBase
                         ? ConvertHelper.ToDateTime(reader["last_interaction"].ToString())
                         : (DateTime?)null;
                         data.notes = reader["notes"].ToString();
+                        data.updated_by = reader["updated_by"].ToString();
+                        data.company_id = reader["company_id"].ToString();
+                        data.session_id = reader["session_id"].ToString();
+
                     }
                 connection.Close();
                 connection.Dispose();
