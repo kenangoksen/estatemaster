@@ -2,6 +2,7 @@ namespace EstateMaster.Server.Models
 {
     public class LoginSessionResponse
     {
+
         public string id { get; set; }
         public DateTime? created_at { get; set; }
         public DateTime? updated_at { get; set; }
@@ -16,6 +17,8 @@ namespace EstateMaster.Server.Models
         public DateTime? login_date { get; set; }
         public string session_id { get; set; }
         public string company_id { get; set; }
+        public bool IsAuthenticated { get; set; }
+        public string Error { get; set; }
       
     }
 }
