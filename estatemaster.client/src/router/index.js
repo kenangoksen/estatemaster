@@ -16,6 +16,7 @@ import CustomerList from '@/components/Customers/List.vue';
 import CustomerCreate from '@/components/Customers/Create.vue';
 import CustomerUpadate from '@/components/Customers/Update.vue';
 import CompanyCreate from '@/components/Companies/Create.vue';
+import SelfRegistration from '@/components/Users/SelfRegistration.vue';
 
 const routes = [
    {
@@ -109,6 +110,13 @@ const routes = [
       path: '/company/create',
       name: 'CompanyCreate',
       component: CompanyCreate,
+      meta: { requiresAuth: false },
+      props: true
+   },
+   {
+      path: '/user/register',
+      name: 'SelfRegistration',
+      component: SelfRegistration,
       meta: { requiresAuth: false },
       props: true
    }

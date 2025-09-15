@@ -1,6 +1,5 @@
 <template>
-  <div v-if="$route.matched.some(({ name }) => (name === 'Login' || name === 'Logout' || name === 'HelpPage' || name === 'ScreenLock'
-    || name === 'ResetPassword' || name === 'ForgotPassword')) == false">
+  <div v-if="shouldShowMainLayout">
     <Navbar></Navbar>
     <SideBar></SideBar>
     <PageLoader ref="pageLoader" />
@@ -13,9 +12,8 @@
 import Navbar from './components/parts/Navbar.vue';
 import SideBar from './components/parts/SideBar.vue';
 import PageLoader from './components/Helpers/PageLoader.vue';
-import { useStore } from 'vuex';
-import { onMounted } from 'vue';
-// import Login from './components/Login.vue';
+// import { useStore } from 'vuex'; // Eğer kullanmıyorsanız kaldırın
+// import { onMounted } from 'vue'; // Eğer kullanmıyorsanız kaldırın
 
 export default {
   name: "App",
@@ -23,8 +21,27 @@ export default {
     Navbar,
     SideBar,
     PageLoader
+  },
+  computed: {
+    shouldShowMainLayout() {
+      // Ana layout'u göstermemesi gereken rotaların listesi
+      const noMainLayoutRoutes = [
+        'Login',
+        'Logout',
+        'HelpPage',
+        'ScreenLock',
+        'ResetPassword',
+        'ForgotPassword',
+        'SelfRegistration', // BURASI EKLENDİ
+        'CompanyCreate'     // BURASI EKLENDİ
+      ];
+      // Mevcut rotanın adının bu listede olup olmadığını kontrol et
+      return !noMainLayoutRoutes.includes(this.$route.name);
+    }
   }
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+/* Scoped stilleriniz */
+</style>

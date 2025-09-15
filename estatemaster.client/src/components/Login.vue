@@ -81,10 +81,21 @@
                                 </div>
                                 <!--end::Submit button-->
                                 <!--begin::Sign up-->
-                                <div class="text-gray-500 text-center fw-semibold fs-6">Henüz Kayıt Olmadın mı?
-                                    <router-link :to="{ name: 'CompanyCreate' }">
-                                        <span class="link-primary"> Kayıt Ol</span>
-                                    </router-link>
+                                <div class="d-flex flex-stack px-lg-10">
+                                    <div class="d-flex fw-semibold text-primary fs-base gap-5">
+                                        <div class="text-gray-500 text-center fw-semibold fs-6">
+                                            <router-link :to="{ name: 'SelfRegistration' }">
+                                                <span class="link-primary"> Kullanıcı Kaydı Oluştur</span>
+                                            </router-link>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex fw-semibold text-primary fs-base gap-5">
+                                        <div class="text-gray-500 text-center fw-semibold fs-6">
+                                            <router-link :to="{ name: 'CompanyCreate' }">
+                                                <span class="link-primary">Şirket Hesabı Oluştur</span>
+                                            </router-link>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!--end::Sign up-->
                             </form>
@@ -93,80 +104,7 @@
                         <!--end::Wrapper-->
                         <!--begin::Footer-->
                         <div class="d-flex flex-stack px-lg-10">
-                            <!--begin::Languages-->
-                            <div class="me-0">
-                                <!--begin::Toggle-->
-                                <button
-                                    class="btn btn-flex btn-link btn-color-gray-700 btn-active-color-primary rotate fs-base"
-                                    data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start"
-                                    data-kt-menu-offset="0px, 0px">
-                                    <img data-kt-element="current-lang-flag" class="w-20px h-20px rounded me-3"
-                                        src="/assets/media/flags/united-states.svg" alt="" />
-                                    <span data-kt-element="current-lang-name" class="me-1">English</span>
-                                    <i class="ki-duotone ki-down fs-5 text-muted rotate-180 m-0"></i>
-                                </button>
-                                <!--end::Toggle-->
-                                <!--begin::Menu-->
-                                <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-semibold w-200px py-4 fs-7"
-                                    data-kt-menu="true" id="kt_auth_lang_menu">
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-3">
-                                        <a href="#" class="menu-link d-flex px-5" data-kt-lang="English">
-                                            <span class="symbol symbol-20px me-4">
-                                                <img data-kt-element="lang-flag" class="rounded-1"
-                                                    src="/assets/media/flags/united-states.svg" alt="" />
-                                            </span>
-                                            <span data-kt-element="lang-name">English</span>
-                                        </a>
-                                    </div>
-                                    <!--end::Menu item-->
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-3">
-                                        <a href="#" class="menu-link d-flex px-5" data-kt-lang="Spanish">
-                                            <span class="symbol symbol-20px me-4">
-                                                <img data-kt-element="lang-flag" class="rounded-1"
-                                                    src="/assets/media/flags/spain.svg" alt="" />
-                                            </span>
-                                            <span data-kt-element="lang-name">Spanish</span>
-                                        </a>
-                                    </div>
-                                    <!--end::Menu item-->
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-3">
-                                        <a href="#" class="menu-link d-flex px-5" data-kt-lang="German">
-                                            <span class="symbol symbol-20px me-4">
-                                                <img data-kt-element="lang-flag" class="rounded-1"
-                                                    src="/assets/media/flags/germany.svg" alt="" />
-                                            </span>
-                                            <span data-kt-element="lang-name">German</span>
-                                        </a>
-                                    </div>
-                                    <!--end::Menu item-->
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-3">
-                                        <a href="#" class="menu-link d-flex px-5" data-kt-lang="Japanese">
-                                            <span class="symbol symbol-20px me-4">
-                                                <img data-kt-element="lang-flag" class="rounded-1"
-                                                    src="/assets/media/flags/japan.svg" alt="" />
-                                            </span>
-                                            <span data-kt-element="lang-name">Japanese</span>
-                                        </a>
-                                    </div>
-                                    <!--end::Menu item-->
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-3">
-                                        <a href="#" class="menu-link d-flex px-5" data-kt-lang="French">
-                                            <span class="symbol symbol-20px me-4">
-                                                <img data-kt-element="lang-flag" class="rounded-1"
-                                                    src="/assets/media/flags/france.svg" alt="" />
-                                            </span>
-                                            <span data-kt-element="lang-name">French</span>
-                                        </a>
-                                    </div>
-                                    <!--end::Menu item-->
-                                </div>
-                                <!--end::Menu-->
-                            </div>
+
                             <!--end::Languages-->
                             <!--begin::Links-->
                             <div class="d-flex fw-semibold text-primary fs-base gap-5">
@@ -210,21 +148,31 @@ export default {
             await axios.post('/api/Auth/AuthUser', params, { 'Content-Type': 'application/json' })
                 .then((response) => {
                     console.log(response)
-                    if (response.data.id != null && (response.data.error == null || response.data.error == 'undefined' || response.data.error == '')) {
+                    // API'den dönen yanıtın yapısını kontrol et
+                    if (response.data.id != null && (response.data.error == null || response.data.error === '')) {
                         ls.set('user_' + response.data.session_id, response.data);
                         sessionStorage.setItem('sid', response.data.session_id);
                         window.location.href = "/";
                     }
+                    else if (response.data.error) {
+                        // Backend'den gelen spesifik hata mesajını göster
+                        this.$swal("Giriş Başarısız", response.data.error, 'error');
+                        sessionStorage.clear();
+                        return;
+                    }
                     else {
-                        this.$swal("Giriş Başarısız", "Lütfen Girdiğiniz Bilgileri Kontrol Ediniz..!", 'error');
+                        this.$swal("Giriş Başarısız", "Bilinmeyen bir hata oluştu. Lütfen tekrar deneyiniz.", 'error');
                         sessionStorage.clear();
                         return;
                     }
                 })
-                .catch(function (error) {
+                .catch(error => {
                     console.log(error);
-                    this.showError = true;
-                    this.$swal("Giriş Başarısız", "Lütfen Girdiğiniz Bilgileri Kontrol Ediniz..!", 'error');
+                    let errorMessage = "Kullanıcı adı veya şifre hatalı.";
+                    if (error.response && error.response.data && error.response.data.error) {
+                        errorMessage = error.response.data.error;
+                    }
+                    this.$swal("Giriş Başarısız", errorMessage, 'error');
                 });
         },
     }
