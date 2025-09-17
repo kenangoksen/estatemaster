@@ -10,6 +10,7 @@ namespace EstateMaster.Server.Models
         public string name { get; set; }
         public string surname { get; set; }
         public string phone { get; set; }
+        public string email { get; set; }
         public string state { get; set; }
         public string userType { get; set; }
         public string username { get; set; }
@@ -17,8 +18,6 @@ namespace EstateMaster.Server.Models
         public DateTime? login_date { get; set; }
         public string session_id { get; set; }
         public string company_id { get; set; }
-        public bool IsAuthenticated { get; set; }
-        public string Error { get; set; }
       
     }
 }

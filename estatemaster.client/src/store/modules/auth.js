@@ -1,52 +1,6 @@
-// import axios from "axios"; 
-// import SecureLS from "secure-ls";  
-// const ls = new SecureLS({ isCompression: false });
-
-// const state = {};
-
-// const getters = { 
-// };
-
-// const actions = {   
-//   async LogIn({commit}, user) {   
-//     const params = {
-//       username: user.get("username"),
-//       password: user.get("password")
-//     };
-//     await axios.post('/api/Auth/AuthUser', params, {'Content-Type': 'application/json'})
-//     .then((response) => {     
-//         if(response.data.id != null){
-//           ls.set('user_' + response.data.session_id, response.data);
-//           window.location.href= "/";
-//         }
-//         else{ 
-//           commit("removeUser");
-//           this.$swal("Login failed.", "User not found..!", 'error');
-//           sessionStorage.clear();
-//           return;
-//         }
-//     })
-//     .catch(function (error) { 
-//         console.log(error);
-//     }); 
-//   }
-// };
-
-// const mutations = {  
-//   removeUser() { 
-//     sessionStorage.clear();
-//   }
-// };   
-// export default {
-//   state,
-//   getters,
-//   actions,
-//   mutations
-// };
-
 import axios from "axios";
 import SecureLS from "secure-ls";
-const ls = new SecureLS({ isCompression: false });
+const ls = new SecureLS({ isCompression: true, encodingType: 'aes' }); // isCompression: true'yu eski hale getirdim
 
 const state = {
   user: null,
@@ -57,7 +11,18 @@ const state = {
 const getters = {
   getUser: state => state.user,
   getSessionID: state => state.sessionID,
-  isAuthenticated: state => state.isAuthenticated
+  isAuthenticated: state => state.isAuthenticated,
+  // Eklenen getter: Kullanıcının rolüne kolay erişim
+  getCurrentUserType: (state) => state.user ? state.user.userType : null,
+  // Eklenen getter: Belirli bir role sahip mi
+  hasRole: (state, getters) => (roles) => {
+    if (!getters.getCurrentUserType) return false;
+    const userRole = getters.getCurrentUserType;
+    if (Array.isArray(roles)) {
+      return roles.includes(userRole);
+    }
+    return userRole === roles;
+  }
 };
 
 const mutations = {
@@ -66,6 +31,7 @@ const mutations = {
     state.sessionID = payload.session_id;
     state.isAuthenticated = true;
 
+    // SecureLS'e kaydederken doğrudan LoginSessionResponse objesini kaydediyoruz
     ls.set('user_' + payload.session_id, payload);
     sessionStorage.setItem('sid', payload.session_id);
   },
@@ -80,24 +46,45 @@ const mutations = {
 };
 
 const actions = {
-  async LogIn({ commit }, user) {
+  async LogIn({ commit }, loginPayload) {
+    // console.log("Vuex LogIn action çalıştı."); 
     const params = {
-      username: user.get("username"),
-      password: user.get("password")
+      username: loginPayload.get("username"),
+      password: loginPayload.get("password")
     };
     try {
       const response = await axios.post('/api/Auth/AuthUser', params);
-      if (response.data?.id) {
-        commit("SET_USER", response.data);
-        return { success: true };
+      // console.log("API'den gelen response.data:", response.data); 
+
+      // BURADA DÜZELTME: response.data.data (küçük 'd' ile) olarak değiştirildi
+      if (response.data && response.data.isSuccess && response.data.data && response.data.data.id) {
+        commit("SET_USER", response.data.data); // BURAYI DA KÜÇÜK 'd' İLE DÜZELTTİK
+        // console.log("Kullanıcı başarıyla SET_USER ile kaydedildi.");
+        return {
+          success: true,
+          message: response.data.message || "Giriş Başarılı",
+          code: response.data.Code
+        };
       } else {
+        // console.log("API yanıtında başarı durumu yok veya data eksik.");
         commit("CLEAR_USER");
-        return { success: false, message: "User not found." };
+        return {
+          success: false,
+          message: response.data?.message || "Kullanıcı adı veya şifre hatalı.",
+          code: response.data?.Code
+        };
       }
     } catch (error) {
-      console.log("Login error:", error);
+      // console.error("Vuex LogIn action error (catch bloğu):", error);
       commit("CLEAR_USER");
-      return { success: false, message: "Server error." };
+      if (error.response && error.response.data) {
+        return {
+          success: false,
+          message: error.response.data.message || "Bilinmeyen bir sunucu hatası oluştu.",
+          code: error.response.data.code
+        };
+      }
+      return { success: false, message: "Bilinmeyen bir sunucu hatası oluştu." };
     }
   },
 
@@ -106,6 +93,7 @@ const actions = {
     window.location.href = "/login";
   }
 };
+
 
 export default {
   namespaced: true,
