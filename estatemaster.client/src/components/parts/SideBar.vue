@@ -83,7 +83,7 @@
 										<span class="path3"></span>
 									</i>
 								</span>
-								<span class="menu-title">Müşteri ve Potansiyel Müşteri Yönetimi</span>
+								<span class="menu-title">Kullanıcı Profili</span>
 								<span class="menu-arrow"></span>
 							</span>
 							<!--end:Menu link-->
@@ -92,20 +92,12 @@
 								<!--begin:Menu item-->
 								<div class="menu-item">
 									<!--begin:Menu link-->
-									<router-link :to="{ name: 'CustomerList' }">
+									<router-link :to="{ name: 'Overview' }">
 										<a class="menu-link">
 											<span class="menu-bullet">
 												<span class="bullet bullet-dot"></span>
 											</span>
-											<span class="menu-title">Müşterileri Listele</span>
-										</a>
-									</router-link>
-									<router-link :to="{ name: 'CustomerCreate' }">
-										<a class="menu-link">
-											<span class="menu-bullet">
-												<span class="bullet bullet-dot"></span>
-											</span>
-											<span class="menu-title">Müşteri Kayıt</span>
+											<span class="menu-title">Genel Bakış</span>
 										</a>
 									</router-link>
 									<!--end:Menu link-->

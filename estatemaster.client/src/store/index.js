@@ -144,7 +144,6 @@ export default createStore({
         getUserTypeList: state => state.userTypeList,
         getEstateTypeList: state => state.estateTypeList,
         getEstateStatusTypeList: state => state.estateStatusTypeList,
-        getStateList: state => state.stateList,
         getResidentialPropertyList: state => state.residentialPropertyList,
         getUser: (state) => () => {
             try {
