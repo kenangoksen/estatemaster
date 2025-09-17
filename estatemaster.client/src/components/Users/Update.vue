@@ -1,330 +1,136 @@
 <template>
     <div>
         <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
-            <!--begin::Page-->
             <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
                 <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
-                    <!--begin::Main-->
                     <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
-                        <!--begin::Content wrapper-->
                         <div class="d-flex flex-column flex-column-fluid">
-                            <!--begin::Toolbar-->
                             <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
-                                <!--begin::Toolbar container-->
                                 <div id="kt_app_toolbar_container"
                                     class="app-container container-xxl d-flex flex-stack">
-                                    <!--begin::Page title-->
                                     <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
-                                        <!--begin::Title-->
                                         <h1
                                             class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">
-                                            Kullanıcı Oluştur</h1>
-                                        <!--end::Title-->
-                                        <!--begin::Breadcrumb-->
+                                            Kullanıcı Güncelle</h1>
                                         <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
-                                            <!--begin::Item-->
                                             <li class="breadcrumb-item text-muted">
-                                                <a href="index.html" class="text-muted text-hover-primary">Anasayfa</a>
+                                                <a href="#" class="text-muted text-hover-primary">Anasayfa</a>
                                             </li>
-                                            <!--end::Item-->
-                                            <!--begin::Item-->
                                             <li class="breadcrumb-item">
                                                 <span class="bullet bg-gray-500 w-5px h-2px"></span>
                                             </li>
-                                            <!--end::Item-->
-                                            <!--begin::Item-->
-                                            <li class="breadcrumb-item text-muted">Kullanıcı Oluştur</li>
-                                            <!--end::Item-->
+                                            <li class="breadcrumb-item text-muted">Kullanıcı Yönetimi</li>
+                                            <li class="breadcrumb-item">
+                                                <span class="bullet bg-gray-500 w-5px h-2px"></span>
+                                            </li>
+                                            <li class="breadcrumb-item text-muted">Kullanıcı Güncelle</li>
                                         </ul>
-                                        <!--end::Breadcrumb-->
                                     </div>
-                                    <!--end::Page title-->
                                 </div>
-                                <!--end::Toolbar container-->
                             </div>
-                            <!--end::Toolbar-->
-                            <!--begin::Content-->
+
                             <div id="kt_app_content" class="app-content flex-column-fluid">
-                                <!--begin::Content container-->
                                 <div id="kt_app_content_container" class="app-container container-xxl">
-                                    <!--begin::Contacts App- Add New Contact-->
-                                    <div class="row g-7">
-                                        <!--begin::Content-->
-                                        <div class="col-xl-12">
-                                            <!--begin::Contacts-->
-                                            <div class="card card-flush h-lg-100" id="kt_contacts_main">
-                                                <!--begin::Card header-->
-                                                <div class="card-header pt-7" id="kt_chat_contacts_header">
-                                                    <!--begin::Card title-->
-                                                    <div class="card-title">
-                                                        <i class="ki-duotone ki-badge fs-1 me-2">
-                                                            <span class="path1"></span>
-                                                            <span class="path2"></span>
-                                                            <span class="path3"></span>
-                                                            <span class="path4"></span>
-                                                            <span class="path5"></span>
-                                                        </i>
-                                                        <h2>Kullanıcı Oluştur</h2>
-                                                    </div>
-                                                    <!--end::Card title-->
+                                    <div class="card p-5">
+                                        <div class="card-body">
+                                            <div v-if="isLoading" class="text-center py-5">
+                                                <div class="spinner-border text-primary" role="status">
+                                                    <span class="visually-hidden">Yükleniyor...</span>
                                                 </div>
-                                                <!--end::Card header-->
-                                                <!--begin::Card body-->
-                                                <div class="card-body pt-5">
-                                                    <!--begin::Form-->
-                                                    <form id="kt_ecommerce_settings_general_form" class="form"
-                                                        action="#">
-                                                        <!--begin::Input group-->
-                                                        <div class="mb-7">
-                                                            <!--begin::Label-->
-                                                            <label class="fs-6 fw-semibold mb-3">
-                                                                <span>Profil Fotoğrafı Ekle</span>
-                                                                <span class="ms-1" data-bs-toggle="tooltip"
-                                                                    title="Allowed file types: png, jpg, jpeg.">
-                                                                    <i class="ki-duotone ki-information fs-7">
-                                                                        <span class="path1"></span>
-                                                                        <span class="path2"></span>
-                                                                        <span class="path3"></span>
-                                                                    </i>
-                                                                </span>
-                                                            </label>
-                                                            <!--end::Label-->
-                                                            <!--begin::Image input wrapper-->
-                                                            <div class="mt-1">
-                                                                <!--begin::Image input-->
-                                                                <div class="image-input image-input-outline image-input-placeholder image-input-empty image-input-empty"
-                                                                    data-kt-image-input="true">
-                                                                    <!--begin::Preview existing avatar-->
-                                                                    <div class="image-input-wrapper w-100px h-100px"
-                                                                        style="background-image: url('')"></div>
-                                                                    <!--end::Preview existing avatar-->
-                                                                    <!--begin::Edit-->
-                                                                    <label
-                                                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                                        data-kt-image-input-action="change"
-                                                                        data-bs-toggle="tooltip" title="Change avatar">
-                                                                        <i class="ki-duotone ki-pencil fs-7">
-                                                                            <span class="path1"></span>
-                                                                            <span class="path2"></span>
-                                                                        </i>
-                                                                        <!--begin::Inputs-->
-                                                                        <input type="file" name="avatar"
-                                                                            accept=".png, .jpg, .jpeg" />
-                                                                        <input type="hidden" name="avatar_remove" />
-                                                                        <!--end::Inputs-->
-                                                                    </label>
-                                                                    <!--end::Edit-->
-                                                                    <!--begin::Cancel-->
-                                                                    <span
-                                                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                                        data-kt-image-input-action="cancel"
-                                                                        data-bs-toggle="tooltip" title="Cancel avatar">
-                                                                        <i class="ki-duotone ki-cross fs-2">
-                                                                            <span class="path1"></span>
-                                                                            <span class="path2"></span>
-                                                                        </i>
-                                                                    </span>
-                                                                    <!--end::Cancel-->
-                                                                    <!--begin::Remove-->
-                                                                    <span
-                                                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                                        data-kt-image-input-action="remove"
-                                                                        data-bs-toggle="tooltip" title="Remove avatar">
-                                                                        <i class="ki-duotone ki-cross fs-2">
-                                                                            <span class="path1"></span>
-                                                                            <span class="path2"></span>
-                                                                        </i>
-                                                                    </span>
-                                                                    <!--end::Remove-->
-                                                                </div>
-                                                                <!--end::Image input-->
-                                                            </div>
-                                                            <!--end::Image input wrapper-->
-                                                        </div>
-                                                        <!--end::Input group-->
-                                                        <!--begin::Input group-->
-                                                        <div class="fv-row mb-7">
-                                                            <!--begin::Label-->
-                                                            <label class="fs-6 fw-semibold form-label mt-3">
-                                                                <span class="required">İsim</span>
-                                                            </label>
-                                                            <!--end::Label-->
-                                                            <!--begin::Input-->
-                                                            <input type="text" class="form-control form-control-solid"
-                                                                name="name" value="" v-model="form.name" />
-                                                            <!--end::Input-->
-                                                        </div>
-                                                        <!--end::Input group-->
-                                                        <!--begin::Input group-->
-                                                        <div class="fv-row mb-7">
-                                                            <!--begin::Label-->
-                                                            <label class="fs-6 fw-semibold form-label mt-3">
-                                                                <span class="required">Soyisim</span>
-                                                            </label>
-                                                            <!--end::Label-->
-                                                            <!--begin::Input-->
-                                                            <input type="text" class="form-control form-control-solid"
-                                                                name="surname" value="" v-model="form.surname" />
-                                                            <!--end::Input-->
-                                                        </div>
-                                                        <!--end::Input group-->
-                                                        <!--begin::Row-->
-                                                        <div
-                                                            class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                                                            <!--begin::Col-->
-                                                            <div class="col">
-                                                                <!--begin::Input group-->
-                                                                <div class="fv-row mb-7">
-                                                                    <!--begin::Label-->
-                                                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                                                        <span class="required">Telefon</span>
-                                                                    </label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input-->
-                                                                    <input type="text"
-                                                                        class="form-control form-control-solid"
-                                                                        name="phone" value="" v-model="form.phone" />
-                                                                    <!--end::Input-->
-                                                                </div>
-                                                                <!--end::Input group-->
-                                                            </div>
-                                                            <!--end::Col-->
-                                                        </div>
-                                                        <!--end::Row-->
-                                                        <!--begin::Row-->
-                                                        <div
-                                                            class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                                                            <!--begin::Col-->
-                                                            <div class="col">
-                                                                <!--begin::Input group-->
-                                                                <div class="fv-row mb-7">
-                                                                    <!--begin::Label-->
-                                                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                                                        <span class="required">E-mail</span>
-                                                                    </label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input-->
-                                                                    <input type="text"
-                                                                        class="form-control form-control-solid"
-                                                                        name="email" value="" v-model="form.email" />
-                                                                    <!--end::Input-->
-                                                                </div>
-                                                                <!--end::Input group-->
-                                                            </div>
-                                                            <!--end::Col-->
-                                                        </div>
-                                                        <!--end::Row-->
-                                                        <!--begin::Row-->
-                                                        <div
-                                                            class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                                                            <!--begin::Col-->
-                                                            <div class="col">
-                                                                <!--begin::Input group-->
-                                                                <div class="fv-row mb-7">
-                                                                    <!--begin::Label-->
-                                                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                                                        <span class="required">Kullanıcı Tipi</span>
-                                                                    </label>
-                                                                    <!--end::Label-->
-                                                                    <div class="w-100">
-                                                                        <!--begin::Select2-->
-                                                                        <select id="kt_ecommerce_select2_country"
-                                                                            class="form-select form-select-solid"
-                                                                            name="userType"
-                                                                            data-kt-ecommerce-settings-type="select2_flags"
-                                                                            data-placeholder="Kullanıcı Tipi Seçiniz.."
-                                                                            v-model="form.userType">
-                                                                            <option v-for="user of userTypeList"
-                                                                                :value="user.value"> {{ user.name }}
-                                                                            </option>
-                                                                        </select>
-                                                                        <!--end::Select2-->
-                                                                    </div>
-                                                                </div>
-                                                                <!--end::Input group-->
-                                                            </div>
-                                                            <!--end::Col-->
-                                                        </div>
-                                                        <!--end::Row-->
-                                                        <!--begin::Row-->
-                                                        <div
-                                                            class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                                                            <!--begin::Col-->
-                                                            <div class="col">
-                                                                <!--begin::Input group-->
-                                                                <div class="fv-row mb-7">
-                                                                    <!--begin::Label-->
-                                                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                                                        <span class="required">Şehir</span>
-                                                                    </label>
-                                                                    <!--end::Label-->
-                                                                    <div class="w-100">
-                                                                        <!--begin::Select2-->
-                                                                        <select id="kt_ecommerce_select2_country"
-                                                                            class="form-select form-select-solid"
-                                                                            name="state"
-                                                                            data-kt-ecommerce-settings-type="select2_flags"
-                                                                            data-placeholder="Şehir Seçiniz.."
-                                                                            v-model="form.state">
-                                                                            <option v-for="state of stateList"
-                                                                                :value="state.name"> {{ state.name }}
-                                                                            </option>
-                                                                        </select>
-                                                                        <!--end::Select2-->
-                                                                    </div>
-                                                                </div>
-                                                                <!--end::Input group-->
-                                                            </div>
-                                                            <!--end::Col-->
-                                                        </div>
-                                                        <!--end::Row-->
-                                                        <!--begin::Input group-->
-                                                        <div class="fv-row mb-7">
-                                                            <!--begin::Label-->
-                                                            <label class="fs-6 fw-semibold form-label mt-3">
-                                                                <span>Açıklama</span>
-                                                            </label>
-                                                            <!--end::Label-->
-                                                            <!--begin::Input-->
-                                                            <textarea class="form-control form-control-solid"
-                                                                name="notes" v-model="form.description"></textarea>
-                                                            <!--end::Input-->
-                                                        </div>
-                                                        <!--end::Input group-->
-                                                        <!--begin::Separator-->
-                                                        <div class="separator mb-6"></div>
-                                                        <!--end::Separator-->
-                                                        <!--begin::Action buttons-->
-                                                        <div class="d-flex justify-content-end">
-                                                            <!--begin::Button-->
-                                                            <button type="button" data-kt-contacts-type="submit"
-                                                                class="btn btn-success" @click="updateUser()">
-                                                                <span class="indicator-label">Kaydet</span>
-                                                                <span class="indicator-progress">Lütfen bekleyin...
-                                                                    <span
-                                                                        class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                                            </button>
-                                                            <!--end::Button-->
-                                                        </div>
-                                                        <!--end::Action buttons-->
-                                                    </form>
-                                                    <!--end::Form-->
-                                                </div>
-                                                <!--end::Card body-->
+                                                <p class="mt-2 text-muted">Kullanıcı bilgileri yükleniyor...</p>
                                             </div>
-                                            <!--end::Contacts-->
+                                            <form v-else @submit.prevent="updateUser()">
+                                                <div class="row mb-5">
+                                                    <div class="col-md-6 mb-3">
+                                                        <label for="name" class="form-label">Adı <span
+                                                                class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control" id="name"
+                                                            v-model="userToUpdate.name" required>
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <label for="surname" class="form-label">Soyadı <span
+                                                                class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control" id="surname"
+                                                            v-model="userToUpdate.surname" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-5">
+                                                    <div class="col-md-6 mb-3">
+                                                        <label for="username" class="form-label">Kullanıcı Adı</label>
+                                                        <input type="text" class="form-control" id="username"
+                                                            v-model="userToUpdate.username" disabled
+                                                            title="Kullanıcı adı değiştirilemez.">
+                                                        <small class="form-text text-muted">Kullanıcı adları
+                                                            benzersizdir ve değiştirilemez.</small>
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <label for="email" class="form-label">E-posta <span
+                                                                class="text-danger">*</span></label>
+                                                        <input type="email" class="form-control" id="email"
+                                                            v-model="userToUpdate.email" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-5">
+                                                    <div class="col-md-6 mb-3">
+                                                        <label for="phone" class="form-label">Telefon</label>
+                                                        <input type="text" class="form-control" id="phone"
+                                                            v-model="userToUpdate.phone">
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <label for="state" class="form-label">Durum <span
+                                                                class="text-danger">*</span></label>
+                                                        <select class="form-select" id="state"
+                                                            v-model="userToUpdate.state" required>
+                                                            <option value="Aktif">Aktif</option>
+                                                            <option value="Pasif">Pasif</option>
+                                                            <option value="Askıda">Askıda</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-5">
+                                                    <div class="col-md-12 mb-3">
+                                                        <label for="userType" class="form-label">Kullanıcı Tipi <span
+                                                                class="text-danger">*</span></label>
+                                                        <select class="form-select" id="userType"
+                                                            v-model="userToUpdate.userType" required
+                                                            :disabled="userToUpdate.userType === 'SUPER_ADMIN'">
+                                                            <option value="USER">Standart Kullanıcı</option>
+                                                            <option value="MANAGER">Yönetici</option>
+                                                            <option value="ADMIN">Admin</option>
+                                                            <option value="SUPER_ADMIN">Süper Admin</option>
+                                                        </select>
+                                                        <small v-if="userToUpdate.userType === 'SUPER_ADMIN'"
+                                                            class="form-text text-danger">SUPER_ADMIN kullanıcı tipi
+                                                            değiştirilemez.</small>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-5">
+                                                    <label for="description" class="form-label">Açıklama</label>
+                                                    <textarea class="form-control" id="description"
+                                                        v-model="userToUpdate.description" rows="3"></textarea>
+                                                </div>
+
+                                                <div class="d-flex justify-content-end">
+                                                    <button type="button" class="btn btn-secondary me-3"
+                                                        @click="$router.go(-1)">İptal</button>
+                                                    <button type="submit" class="btn btn-primary" :disabled="isSaving">
+                                                        <span v-if="isSaving"
+                                                            class="spinner-border spinner-border-sm me-2" role="status"
+                                                            aria-hidden="true"></span>
+                                                        Güncelle
+                                                    </button>
+                                                </div>
+                                            </form>
                                         </div>
-                                        <!--end::Content-->
                                     </div>
-                                    <!--end::Contacts App- Add New Contact-->
                                 </div>
-                                <!--end::Content container-->
                             </div>
-                            <!--end::Content-->
                         </div>
-                        <!--end::Content wrapper-->
                     </div>
-                    <!--end:::Main-->
                 </div>
             </div>
         </div>
@@ -332,103 +138,125 @@
 </template>
 
 <script>
-import axios from 'axios'
-import { mapGetters } from 'vuex'
-import SecureLS from "secure-ls";
-const ls = new SecureLS({ isCompression: false });
+import axios from 'axios';
+
 export default {
-    props: ['id'],
-    name: 'UserUpdate',
+    name: "UserUpdate",
+    props: ['id'], // Vue Router'dan gelen 'id' parametresini prop olarak al
     data() {
         return {
-            form: {
-                name: null,
-                surname: null,
-                phone: null,
-                state: null,
-                userType: null,
-                username: null,
-                password: null,
-                created_at: null,
-                updated_at: null,
-                created_by: null,
-                login_date: null,
-                email: null,
-                description: null
-
+            userToUpdate: {
+                id: null,
+                name: '',
+                surname: '',
+                phone: '',
+                state: '',
+                userType: '',
+                username: '', // Username disable edilecek ama veriyi tutmak için burada
+                email: '',
+                description: ''
             },
-            userTypeList: [],
-            stateList: [],
-
+            originalUserType: '',
+            isLoading: false,
+            isSaving: false,
+            sid: null,
         };
     },
-    created() {
+    async created() {
+        const userData = this.$getUser();
 
-        const params = {
-            id: this.id
-
+        if (userData && userData.session_id) {
+            this.sid = userData.session_id;
+            if (this.id) {
+                await this.fetchUserById(this.id);
+            } else {
+                this.$swal("Hata", "Güncellenecek kullanıcı ID'si bulunamadı.", "error");
+                this.$router.push('/user/list');
+            }
+        } else {
+            this.$swal("Hata", "Oturum bilgisi bulunamadı. Lütfen giriş yapınız.", "error");
+            this.$router.push('/login');
         }
-        axios.post('/api/user/getById', params, { headers: { "Content-Type": "application/json" } })
-            .then(response => {
-                this.form = response.data;
-            })
-            .catch(error => {
-                console.error(error);
-            });
-
-
-        this.userTypeList = this.getUserTypeList;
-        this.stateList = this.getStateList;
-
     },
     methods: {
-        updateUser() {
-            this.$swal
-                .fire({
-                    title: "Kullanıcıyı güncellemek istediğinize emin misiniz?",
-                    confirmButtonColor: "#04b440",
-                    showDenyButton: false,
-                    showCancelButton: true,
-                    confirmButtonText: "Onay",
-                    icon: 'info'
-                })
-                .then((result) => {
-                    if (result.isConfirmed) {
-                        const parameters = {
-                            id: this.id,
-                            name: this.form.name,
-                            surname: this.form.surname,
-                            phone: this.form.phone,
-                            state: this.form.state,
-                            userType: this.form.userType,
-                            username: this.form.username,
-                            password: this.form.password,
-                            created_at: this.form.created_at,
-                            created_by: this.user.username,
-                            login_date: this.form.login_date,
-                            email: this.form.email,
-                            description: this.form.description
-                        }
-                        axios.post(`/api/user/UpdateUser`, parameters, { "Content-Type": "application/json" }).then((response) => {
-                            if (response.status == 200) {
-                                this.$swal("Başarılı", "Kullanıcı güncellendi", 'success');
-                                this.$router.push('/user/list');
-                            } else {
-                                this.$swal("Hata", "Kullanıcı güncellenirken hata oluştu!", "error");
+        async fetchUserById(userId) {
+            this.isLoading = true;
+            try {
+                const headers = { 'sid': this.sid };
+                const payload = { id: userId }; // ID'yi body'de göndereceğiz
 
-                            }
-                        });
+                const response = await axios.post(`/api/user/GetUserById`, payload, { headers });
+
+                if (typeof response.data === 'string' && response.data.startsWith('Hata:')) {
+                    this.$swal("Hata", response.data, "error");
+                    this.$router.push('/user/list');
+                } else {
+                    const user = response.data
+                    if (user && user.id) {
+                        this.userToUpdate = { ...user };
+                        this.originalUserType = user.userType;
+                    } else {
+                        this.$swal("Hata", "Kullanıcı bulunamadı.", "error");
+                        this.$router.push('/user/list');
                     }
-                });
+                }
+            } catch (error) {
+                let errorMessage = "Kullanıcı bilgileri getirilemedi.";
+                if (error.response && error.response.data && typeof error.response.data === 'string') {
+                    errorMessage = error.response.data;
+                } else if (error.message) {
+                    errorMessage = error.message;
+                }
+                this.$swal("Hata", errorMessage, "error");
+                this.$router.push('/user/list');
+            } finally {
+                this.isLoading = false;
+            }
+        },
+        async updateUser() {
+            this.isSaving = true;
+            try {
+                if (this.originalUserType === 'SUPER_ADMIN' && this.userToUpdate.userType !== 'SUPER_ADMIN') {
+                    this.$swal("Hata", "SUPER_ADMIN rolüne sahip kullanıcının tipi değiştirilemez.", "error");
+                    this.isSaving = false;
+                    return;
+                }
+
+                const headers = { 'sid': this.sid };
+                const payload = { ...this.userToUpdate };
+                delete payload.username; // Username güncellenmeyeceği için payload'dan kaldır
+
+                const response = await axios.post("/api/user/UpdateUser", payload, { headers });
+
+                if (response.data && response.data.startsWith('Hata:')) {
+                    this.$swal("Hata", response.data, "error");
+                } else {
+                    this.$swal("Başarılı", response.data, "success")
+                        .then(() => {
+                            this.$router.push('/user/list');
+                        });
+                }
+            } catch (error) {
+                console.error("Kullanıcı güncellenirken hata:", error);
+                let errorMessage = "Kullanıcı güncellenirken bir hata oluştu.";
+                if (error.response && error.response.data && typeof error.response.data === 'string') {
+                    errorMessage = error.response.data;
+                } else if (error.message) {
+                    errorMessage = error.message;
+                }
+                this.$swal("Hata", errorMessage, "error");
+            } finally {
+                this.isSaving = false;
+            }
         }
-    },
-    computed: {
-        ...mapGetters(['getUserTypeList']),
-        ...mapGetters(['getStateList']),
-        ...mapGetters(['getUser']),
-        user() {
-			return this.getUser();
-		},
     }
-}
+};
 </script>
+
+<style scoped>
+.page-heading {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--bs-gray-900);
+}
+</style>

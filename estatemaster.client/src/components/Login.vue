@@ -19,6 +19,9 @@
                     <!--begin::Aside-->
                 </div>
                 <!--begin::Aside-->
+                <div class="foxy-welcome-box text-center">
+                    <img src="/assets/media/foxy/welcome_fox.png" alt="Hoşgeldiniz Tilkisi" class="foxy-img" />
+                </div>
                 <!--begin::Body-->
                 <div
                     class="d-flex flex-column-fluid flex-lg-row-auto justify-content-center justify-content-lg-end p-12 p-lg-20">
@@ -78,9 +81,21 @@
                                 </div>
                                 <!--end::Submit button-->
                                 <!--begin::Sign up-->
-                                <div class="text-gray-500 text-center fw-semibold fs-6">Henüz Kayıt Olmadın mı?
-                                    <a href="authentication/layouts/creative/sign-up.html" class="link-primary">Kayıt
-                                        Ol</a>
+                                <div class="d-flex flex-stack px-lg-10">
+                                    <div class="d-flex fw-semibold text-primary fs-base gap-5">
+                                        <div class="text-gray-500 text-center fw-semibold fs-6">
+                                            <router-link :to="{ name: 'SelfRegistration' }">
+                                                <span class="link-primary"> Kullanıcı Kaydı Oluştur</span>
+                                            </router-link>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex fw-semibold text-primary fs-base gap-5">
+                                        <div class="text-gray-500 text-center fw-semibold fs-6">
+                                            <router-link :to="{ name: 'CompanyCreate' }">
+                                                <span class="link-primary">Şirket Hesabı Oluştur</span>
+                                            </router-link>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!--end::Sign up-->
                             </form>
@@ -89,80 +104,7 @@
                         <!--end::Wrapper-->
                         <!--begin::Footer-->
                         <div class="d-flex flex-stack px-lg-10">
-                            <!--begin::Languages-->
-                            <div class="me-0">
-                                <!--begin::Toggle-->
-                                <button
-                                    class="btn btn-flex btn-link btn-color-gray-700 btn-active-color-primary rotate fs-base"
-                                    data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start"
-                                    data-kt-menu-offset="0px, 0px">
-                                    <img data-kt-element="current-lang-flag" class="w-20px h-20px rounded me-3"
-                                        src="/assets/media/flags/united-states.svg" alt="" />
-                                    <span data-kt-element="current-lang-name" class="me-1">English</span>
-                                    <i class="ki-duotone ki-down fs-5 text-muted rotate-180 m-0"></i>
-                                </button>
-                                <!--end::Toggle-->
-                                <!--begin::Menu-->
-                                <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-semibold w-200px py-4 fs-7"
-                                    data-kt-menu="true" id="kt_auth_lang_menu">
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-3">
-                                        <a href="#" class="menu-link d-flex px-5" data-kt-lang="English">
-                                            <span class="symbol symbol-20px me-4">
-                                                <img data-kt-element="lang-flag" class="rounded-1"
-                                                    src="/assets/media/flags/united-states.svg" alt="" />
-                                            </span>
-                                            <span data-kt-element="lang-name">English</span>
-                                        </a>
-                                    </div>
-                                    <!--end::Menu item-->
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-3">
-                                        <a href="#" class="menu-link d-flex px-5" data-kt-lang="Spanish">
-                                            <span class="symbol symbol-20px me-4">
-                                                <img data-kt-element="lang-flag" class="rounded-1"
-                                                    src="/assets/media/flags/spain.svg" alt="" />
-                                            </span>
-                                            <span data-kt-element="lang-name">Spanish</span>
-                                        </a>
-                                    </div>
-                                    <!--end::Menu item-->
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-3">
-                                        <a href="#" class="menu-link d-flex px-5" data-kt-lang="German">
-                                            <span class="symbol symbol-20px me-4">
-                                                <img data-kt-element="lang-flag" class="rounded-1"
-                                                    src="/assets/media/flags/germany.svg" alt="" />
-                                            </span>
-                                            <span data-kt-element="lang-name">German</span>
-                                        </a>
-                                    </div>
-                                    <!--end::Menu item-->
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-3">
-                                        <a href="#" class="menu-link d-flex px-5" data-kt-lang="Japanese">
-                                            <span class="symbol symbol-20px me-4">
-                                                <img data-kt-element="lang-flag" class="rounded-1"
-                                                    src="/assets/media/flags/japan.svg" alt="" />
-                                            </span>
-                                            <span data-kt-element="lang-name">Japanese</span>
-                                        </a>
-                                    </div>
-                                    <!--end::Menu item-->
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-3">
-                                        <a href="#" class="menu-link d-flex px-5" data-kt-lang="French">
-                                            <span class="symbol symbol-20px me-4">
-                                                <img data-kt-element="lang-flag" class="rounded-1"
-                                                    src="/assets/media/flags/france.svg" alt="" />
-                                            </span>
-                                            <span data-kt-element="lang-name">French</span>
-                                        </a>
-                                    </div>
-                                    <!--end::Menu item-->
-                                </div>
-                                <!--end::Menu-->
-                            </div>
+
                             <!--end::Languages-->
                             <!--begin::Links-->
                             <div class="d-flex fw-semibold text-primary fs-base gap-5">
@@ -183,10 +125,11 @@
     </div>
 </template>
 <script>
-import axios from 'axios' 
-import { mapActions } from "vuex"; 
-import SecureLS from "secure-ls";
-const ls = new SecureLS({ isCompression: true, encodingType: 'aes' });
+import axios from 'axios'
+import { mapActions } from "vuex";
+// SecureLS'i sadece Vuex modülünde kullanalım, burada direkt kullanmaya gerek yok
+// import SecureLS from "secure-ls"; 
+// const ls = new SecureLS({ isCompression: true, encodingType: 'aes' });
 
 export default {
     name: 'Login',
@@ -197,40 +140,55 @@ export default {
         }
     },
     methods: {
-        ...mapActions(["LogIn"]),
+        ...mapActions('auth', ["LogIn"]),
+
         async submit() {
-            const params = {
-                username: this.username,
-                password: this.password
-            };
-            await axios.post('/api/Auth/AuthUser', params, { 'Content-Type': 'application/json' })
-                .then((response) => {
-                    console.log(response)
-                    if (response.data.id != null && (response.data.error == null || response.data.error == 'undefined' || response.data.error == '')) {
-                        ls.set('user_' + response.data.session_id, response.data);
-                        sessionStorage.setItem('sid', response.data.session_id);
-                        window.location.href = "/";
-                    }
-                    else {
-                        this.$swal("Giriş Başarısız", "LÜtfen Girdiğiniz Bilgileri Kontrol Ediniz..!", 'error');
-                        sessionStorage.clear();
-                        return;
-                    }
-                })
-                .catch(function (error) {
-                    console.log(error);
-                    this.showError = true;
-                    this.$swal("Giriş Başarısız", "LÜtfen Girdiğiniz Bilgileri Kontrol Ediniz..!", 'error');
-                });
+            console.log("Submit metodu çalıştı. Kullanıcı adı:", this.username); // Yeni eklenen satır
+            const loginPayload = new FormData();
+            loginPayload.append("username", this.username);
+            loginPayload.append("password", this.password);
+
+            try {
+                const result = await this.LogIn(loginPayload);
+                console.log("LogIn action'ından dönen sonuç:", result); // Yeni eklenen satır
+
+                if (result.success) {
+                    this.$swal("Giriş Başarılı", result.message || "Hoşgeldiniz!", 'success').then(() => {
+                    });
+                     window.location.href = "/";
+                } else {
+                    this.$swal("Giriş Başarısız", result.message || "Bilinmeyen bir hata oluştu. Lütfen tekrar deneyiniz.", 'error');
+                }
+            } catch (error) {
+                console.error("Login işlemi sırasında beklenmedik bir hata oluştu:", error);
+                this.$swal("Hata", "Beklenmedik bir hata oluştu. Lütfen tekrar deneyiniz.", 'error');
+            }
         },
     }
 }
 </script>
+
+
 
 <style scoped>
 .backgroung-login {
     background-image: url('assets/media/auth/bg4.jpg');
     height: 100vh;
     background-size: cover;
+}
+
+.foxy-welcome-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: -271px;
+}
+
+.foxy-img {
+    width: 720px;
+    max-width: 100%;
+    margin-bottom: 16px;
+    filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.08));
 }
 </style>

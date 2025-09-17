@@ -1,195 +1,131 @@
 <template>
-    <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
-        <!--begin::Page-->
-        <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
-            <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
-                <!--begin::Main-->
-                <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
-                    <!--begin::Content wrapper-->
-                    <div class="d-flex flex-column flex-column-fluid">
-                        <!--begin::Toolbar-->
-                        <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
-                            <!--begin::Toolbar container-->
-                            <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
-                                <!--begin::Page title-->
-                                <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
-                                    <!--begin::Title-->
-                                    <h1
-                                        class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">
-                                        Kullanıcı Listesi</h1>
-                                    <!--end::Title-->
-                                    <!--begin::Breadcrumb-->
-                                    <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
-                                        <!--begin::Item-->
-                                        <li class="breadcrumb-item text-muted">
-                                            <a href="index.html" class="text-muted text-hover-primary">Anasayfa</a>
-                                        </li>
-                                        <!--end::Item-->
-                                        <!--begin::Item-->
-                                        <li class="breadcrumb-item">
-                                            <span class="bullet bg-gray-500 w-5px h-2px"></span>
-                                        </li>
-                                        <!--end::Item-->
-                                        <!--begin::Item-->
-                                        <li class="breadcrumb-item text-muted">Kullanıcı Yönetimi</li>
-                                        <!--end::Item-->
-                                        <!--begin::Item-->
-                                        <li class="breadcrumb-item">
-                                            <span class="bullet bg-gray-500 w-5px h-2px"></span>
-                                        </li>
-                                        <!--end::Item-->
-                                        <!--begin::Item-->
-                                        <li class="breadcrumb-item text-muted">Kullanıcı</li>
-                                        <!--end::Item-->
-                                    </ul>
-                                    <!--end::Breadcrumb-->
+    <div>
+        <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
+            <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
+                <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
+                    <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+                        <div class="d-flex flex-column flex-column-fluid">
+                            <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+                                <div id="kt_app_toolbar_container"
+                                    class="app-container container-xxl d-flex flex-stack">
+                                    <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+                                        <h1
+                                            class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">
+                                            Kullanıcı Listesi</h1>
+                                        <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+                                            <li class="breadcrumb-item text-muted">
+                                                <a href="index.html" class="text-muted text-hover-primary">Anasayfa</a>
+                                            </li>
+                                            <li class="breadcrumb-item">
+                                                <span class="bullet bg-gray-500 w-5px h-2px"></span>
+                                            </li>
+                                            <li class="breadcrumb-item text-muted">Kullanıcı Yönetimi</li>
+                                            <li class="breadcrumb-item">
+                                                <span class="bullet bg-gray-500 w-5px h-2px"></span>
+                                            </li>
+                                            <li class="breadcrumb-item text-muted">Kullanıcı Listesi</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <!--end::Page title-->
                             </div>
-                            <!--end::Toolbar container-->
-                        </div>
-                        <!--end::Toolbar-->
-                        <!--begin::Content-->
-                        <div id="kt_app_content" class="app-content flex-column-fluid">
-                            <!--begin::Content container-->
-                            <div id="kt_app_content_container" class="app-container container-xxl">
-                                <!--begin::Card-->
-                                <div class="card">
-                                    <!--begin::Card header-->
-                                    <div class="card-header border-0 pt-6">
-                                        <!--begin::Card title-->
-                                        <div class="card-title">
-                                            <!--begin::Search-->
-                                            <div class="d-flex align-items-center position-relative my-1">
-                                                <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-5">
-                                                    <span class="path1"></span>
-                                                    <span class="path2"></span>
-                                                </i>
-                                                <input type="text" data-kt-user-table-filter="search"
-                                                    class="form-control form-control-solid w-250px ps-13"
-                                                    placeholder="Kullanıcı Ara" />
-                                            </div>
-                                            <!--end::Search-->
-                                        </div>
-                                        <!--begin::Card title-->
-                                        <!--begin::Card toolbar-->
-                                        <div class="card-toolbar">
-                                            <!--begin::Toolbar-->
-                                            <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                                                <!--begin::Filter-->
-                                                <button type="button" class="btn btn-light-primary me-3"
-                                                    data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end"
-                                                    @click="getListUsers();">
-                                                    <i class="ki-duotone ki-filter fs-2">
+
+                            <div id="kt_app_content" class="app-content flex-column-fluid">
+                                <div id="kt_app_content_container" class="app-container container-xxl">
+                                    <div class="card">
+                                        <div class="card-header border-0 pt-6">
+                                            <div class="card-title">
+                                                <div class="d-flex align-items-center position-relative my-1">
+                                                    <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-5">
                                                         <span class="path1"></span>
                                                         <span class="path2"></span>
-                                                    </i>Listele
-                                                </button>
+                                                    </i>
+                                                    <input type="text" data-kt-user-table-filter="search"
+                                                        class="form-control form-control-solid w-250px ps-13"
+                                                        placeholder="Kullanıcı Ara" />
+                                                </div>
+                                            </div>
+                                            <div class="card-toolbar">
+                                                <div class="d-flex justify-content-end"
+                                                    data-kt-user-table-toolbar="base">
+                                                    <button type="button" class="btn btn-light-primary me-3"
+                                                        data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end"
+                                                        @click="getListUsers()">
+                                                        <i class="ki-duotone ki-filter fs-2">
+                                                            <span class="path1"></span>
+                                                            <span class="path2"></span>
+                                                        </i>Listele
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="card-body py-4">
-                                        <table class="table align-middle table-row-dashed fs-6 gy-5"
-                                            id="kt_table_users">
-                                            <thead>
-                                                <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
-                                                    <th class="min-w-125px">Kullanıcı</th>
-                                                    <th class="min-w-125px">Telefon</th>
-                                                    <th class="min-w-125px">Email</th>
-                                                    <th class="min-w-125px">Son Giriş</th>
-                                                    <th class="min-w-125px">Yaşadığı il</th>
-                                                    <th class="min-w-125px">Kullanıcı Tipi</th>
-                                                    <th class="min-w-125px">Oluşuturulma Tarihi</th>
-                                                    <th class="min-w-125px">Açıklama</th>
-                                                    <th class="min-w-125px">İşlemler</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="text-gray-600 fw-semibold">
-                                                <tr v-for="item of userList" v-bind:key="item">
-                                                    <td class="d-flex align-items-center">
-                                                        <div
-                                                            class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                                            <a href="apps/user-management/users/view.html">
-                                                                <div class="symbol-label">
-                                                                    <img src="/assets/media/avatars/300-1.jpg"
-                                                                        alt="Max Smith" class="w-100" />
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                        <div class="d-flex flex-column">
-                                                            <a href="apps/user-management/users/view.html"
-                                                                class="text-gray-800 text-hover-primary mb-1">{{
-                                                                    item.name }}
-                                                                {{ item.surname }}</a>
-                                                        </div>
-                                                    </td>
-                                                    <td> {{ item.phone }}</td>
-                                                    <td> {{ item.email }}</td>
-                                                    <td>
-                                                        <div class="badge badge-light fw-bold">3 days ago</div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="badge badge-light fw-bold">{{ item.state }}</div>
-                                                    </td>
-                                                    <td>
-                                                        <div v-if="item.userType == 'admin'"
-                                                            class="badge badge-success fw-bold">Admin</div>
-                                                        <div v-if="item.userType == 'modaretor'"
-                                                            class="badge badge-warning fw-bold">Yönetici</div>
-                                                        <div v-if="item.userType == 'saleperson'"
-                                                            class="badge badge-dark fw-bold">Emlak danışanı</div>
-                                                    </td>
-                                                    <td>{{ item.created_at }}</td>
-                                                    <td>{{ item.description }}</td>
-                                                    <td class="text-end">
-                                                        <div class="d-flex align-center-items-center gap-2 gap-lg-3">
-                                                            <router-link
-                                                                :to="{ name: 'UserUpdate', params: { id: item.id } }">
-                                                                <a href="#"
-                                                                    class="btn btn-warning btn-active-light-primary btn-flex btn-center btn-sm"
-                                                                    data-kt-menu-trigger="click"
-                                                                    data-kt-menu-placement="bottom-end">Düzenle
+                                        <div class="card-body py-4">
+                                            <table class="table align-middle table-row-dashed fs-6 gy-5"
+                                                id="kt_table_users">
+                                                <thead>
+                                                    <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
+                                                        <th class="min-w-125px">Kullanıcı</th>
+                                                        <th class="min-w-125px">Telefon</th>
+                                                        <th class="min-w-125px">Email</th>
+                                                        <th class="min-w-125px">Şehir</th>
+                                                        <th class="min-w-125px">Kullanıcı Tipi</th>
+                                                        <th class="min-w-125px">Oluşturulma Tarihi</th>
+                                                        <th class="min-w-125px">Açıklama</th>
+                                                        <th class="min-w-125px">İşlemler</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="text-gray-600 fw-semibold">
+                                                    <tr v-for="item of userList" v-bind:key="item.id">
+                                                        <td class="d-flex align-items-center">
+                                                            <div
+                                                                class="symbol symbol-circle symbol-50px overflow-hidden me-3">
+                                                                <a href="#">
+                                                                    <div class="symbol-label">
+                                                                    </div>
                                                                 </a>
-                                                            </router-link>
-                                                            <button class="btn btn-danger btn-flex btn-center btn-sm"
-                                                                @click="deleteUser(item.id)">Sil</button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="card-toolbar">
-                                        <!--begin::Toolbar-->
-                                        <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                                            <!--begin::Filter-->
-                                            <button type="button" class="btn btn-light-primary me-3"
-                                                data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end"
-                                                @click="showForm = true">
-                                                <i class="ki-duotone ki-filter fs-2">
-                                                    <span class="path1"></span>
-                                                    <span class="path2"></span>
-                                                </i>Ödeme Yap
-                                            </button>
+                                                            </div>
+                                                            <div class="d-flex flex-column">
+                                                                <a href="#"
+                                                                    class="text-gray-800 text-hover-primary mb-1">{{
+                                                                    item.name }}
+                                                                    {{ item.surname }}</a>
+                                                            </div>
+                                                        </td>
+                                                        <td>{{ item.phone }}</td>
+                                                        <td>{{ item.email }}</td>
+                                                        <td>
+                                                            <div class="badge badge-light fw-bold">{{ item.state }}
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div v-if="item.userType == 'Admin'"
+                                                                class="badge badge-success fw-bold">Admin</div>
+                                                            <div v-if="item.userType == 'Moderator'"
+                                                                class="badge badge-warning fw-bold">Yönetici</div>
+                                                            <div v-if="item.userType == 'Saleperson'"
+                                                                class="badge badge-dark fw-bold">Emlak danışanı</div>
+                                                        </td>
+                                                        <td>{{ item.created_at }}</td>
+                                                        <td>{{ item.description }}</td>
+                                                        <td class="text-end">
+                                                            <div
+                                                                class="d-flex align-center-items-center gap-2 gap-lg-3">
+                                                                <router-link
+                                                                    :to="{ name: 'UserUpdate', params: { id: item.id } }">
+                                                                    <a href="#"
+                                                                        class="btn btn-warning btn-active-light-primary btn-flex btn-center btn-sm"
+                                                                        data-kt-menu-trigger="click"
+                                                                        data-kt-menu-placement="bottom-end">Düzenle
+                                                                    </a>
+                                                                </router-link>
+                                                                <button
+                                                                    class="btn btn-danger btn-flex btn-center btn-sm"
+                                                                    @click="deleteUser(item.id)">Sil</button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
-                                    </div>
-                                    <div v-if="showForm">
-                                        <form @submit.prevent="submitPayment">
-                                            <label for="amount">Miktar:</label>
-                                            <input type="text" id="amount" v-model="amount" required />
-
-                                            <label for="cardNumber">Kart Numarası:</label>
-                                            <input type="text" id="cardNumber" v-model="cardNumber" required />
-
-                                            <label for="expiryDate">Son Kullanma Tarihi (MM/YY):</label>
-                                            <input type="text" id="expiryDate" v-model="expiryDate" required />
-
-                                            <label for="cvc">CVC:</label>
-                                            <input type="text" id="cvc" v-model="cvc" required />
-
-                                            <button type="submit">Ödeme Yap</button>
-                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -199,83 +135,68 @@
             </div>
         </div>
     </div>
-    <div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
-        <i class="ki-duotone ki-arrow-up">
-            <span class="path1"></span>
-            <span class="path2"></span>
-        </i>
-    </div>
-    <!--end:::Main-->
 </template>
 
 <script>
 import axios from 'axios';
+import SecureLS from "secure-ls";
 
 export default {
     name: "UserList",
     data() {
         return {
             userList: [],
-            showForm: false,
-            cardNumber: '',
-            expiryDate: '',
-            cvc: '',
-            amount: ''
+            sid: null
         };
     },
     created() {
-        axios.post('/api/user/GetUsers', { 'Content-Type': 'application/json' }).then((response) => {
-            this.userList = response.data;
-        })
+        const userData = this.$getUser();
+        this.sid = userData.session_id;
     },
     methods: {
         getListUsers() {
-            axios.post('/api/user/GetUsers', { 'Content-Type': 'application/json' }).then((response) => {
-                this.userList = response.data;
-            })
+              const headers = {
+                'Content-Type': 'application/json',
+                'sid': this.sid
+            };
+            axios.post('/api/user/GetUsers', null, { headers })
+                .then((response) => {
+                    this.userList = response.data;
+                }).catch(error => {
+                    console.error("Kullanıcı listesi getirilirken hata oluştu:", error);
+                    this.$swal("Hata", "Kullanıcı listesi getirilemedi. Oturumunuzun süresi dolmuş olabilir.", "error");
+                });
         },
         deleteUser(id) {
-            const params = {
-                id: id
-            }
-            axios.post('/api/user/DeleteUser', params, { 'Content-Type': 'application/json' }).then((response) => {
-                if (response.data.error == null || response.data.error == 'undefined' || response.data.error == '') {
-                    this.getListUsers();
-                    this.$swal('Başarılı', 'Kullanıcı silme işlemi başarılı', 'success')
-                }
-            })
-        },
-        async submitPayment() {
-            const paymentData = {
-                amount: this.amount, // Ödeme miktarı
-                currency: 'USD',
-                description: 'Payment for Order #12345',
-                cardNumber: this.cardNumber,
-                expiryDate: this.expiryDate,
-                cvc: this.cvc,
-                return_url: 'https://localhost:5173/user/list'
-            };
-
-            try {
-                const response = await axios.post('https://pay.crypto.com/api/payments', paymentData, {
-                    headers: {
-                        Authorization: 'Bearer sk_test_xwHUe2zAiZNpTjS3awx4CySd',
-                        'Content-Type': 'application/json'
+            this.$swal
+                .fire({
+                    title: "Bu kullanıcıyı silmek istediğinize emin misiniz?",
+                    confirmButtonColor: "#dc3545",
+                    showDenyButton: false,
+                    showCancelButton: true,
+                    confirmButtonText: "Sil",
+                    icon: 'warning'
+                })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        const headers = {
+                            'Content-Type': 'application/json',
+                            'sid': this.sid
+                        };
+                        const params = { id: id };
+                        axios.post('/api/user/DeleteUser', params, { headers }).then((response) => {
+                            if (response.data === "OK") {
+                                this.getListUsers();
+                                this.$swal('Başarılı', 'Kullanıcı silme işlemi başarılı', 'success');
+                            } else {
+                                this.$swal('Hata', response.data, 'error');
+                            }
+                        }).catch(error => {
+                            this.$swal('Hata', 'Kullanıcı silme işlemi sırasında bir hata oluştu.', 'error');
+                        });
                     }
                 });
-
-                console.log(response.data)
-                this.response = response.data;
-
-                // payment_url'e yönlendirme
-                window.location.href = response.data.payment_url;
-                this.showModal = false;
-            } catch (error) {
-                console.error(error);
-                alert('Ödeme başarısız!');
-            }
         }
-
     }
 }
 </script>

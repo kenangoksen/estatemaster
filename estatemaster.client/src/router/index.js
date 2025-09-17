@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import SecureLS from "secure-ls";  
-const ls = new SecureLS({ isCompression: true, encodingType: 'aes'  });
+import SecureLS from "secure-ls";
+const ls = new SecureLS({ isCompression: true, encodingType: 'aes' });
 
 import Home from '../views/front/Home.vue';
 import Overview from '@/components/UserProfile/Overview.vue';
@@ -12,6 +12,11 @@ import Login from '@/components/Login.vue';
 import PropertiesList from '@/components/Properties/List.vue';
 import PropertiesCreate from '@/components/Properties/Create.vue';
 import PropertiesUpdate from '@/components/Properties/Update.vue';
+import CustomerList from '@/components/Customers/List.vue';
+import CustomerCreate from '@/components/Customers/Create.vue';
+import CustomerUpadate from '@/components/Customers/Update.vue';
+import CompanyCreate from '@/components/Companies/Create.vue';
+import SelfRegistration from '@/components/Users/SelfRegistration.vue';
 
 const routes = [
    {
@@ -24,7 +29,7 @@ const routes = [
       path: "/Login",
       name: "Login",
       component: Login,
-      meta: {requiresAuth: false},
+      meta: { requiresAuth: false },
       props: true
    },
    {
@@ -80,6 +85,41 @@ const routes = [
       meta: { requiresAuth: true },
       props: true
    },
+   {
+      path: '/customer/list',
+      name: 'CustomerList',
+      component: CustomerList,
+      meta: { requiresAuth: true },
+      props: true
+   },
+   {
+      path: '/customer/create',
+      name: 'CustomerCreate',
+      component: CustomerCreate,
+      meta: { requiresAuth: true },
+      props: true
+   },
+   {
+      path: '/customer/update/:id',
+      name: 'CustomerUpadate',
+      component: CustomerUpadate,
+      meta: { requiresAuth: true },
+      props: true
+   },
+   {
+      path: '/company/create',
+      name: 'CompanyCreate',
+      component: CompanyCreate,
+      meta: { requiresAuth: false },
+      props: true
+   },
+   {
+      path: '/user/register',
+      name: 'SelfRegistration',
+      component: SelfRegistration,
+      meta: { requiresAuth: false },
+      props: true
+   }
 ];
 
 const router = createRouter({
@@ -88,7 +128,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-   var GetAuthStorage =  ls.get('user_' + sessionStorage.getItem('sid'));
+   var GetAuthStorage = ls.get('user_' + sessionStorage.getItem('sid'));
    if (to.matched.some(record => record.meta.requiresAuth)) {
       if (!GetAuthStorage) {
          next('/login');
@@ -107,6 +147,28 @@ router.afterEach((to, from) => {
    if (from.name === 'Home') {
       localStorage.removeItem('homePageRefreshed');
    }
-})
+});
+router.beforeEach((to, from, next) => {
+   // Kullanıcı oturum bilgisini SecureLS ile al
+   const sessionId = sessionStorage.getItem('sid');
+   const user = ls.get('user_' + sessionId);
+
+   // Giriş gerektiren bir sayfa mı?
+   if (to.matched.some(record => record.meta.requiresAuth)) {
+      // Kullanıcı login değilse login sayfasına yönlendir
+      if (!user) {
+         next('/login');
+      } else {
+         next();
+      }
+   } else {
+      // Login olmuş kullanıcı login sayfasına gitmek isterse ana sayfaya yönlendir
+      if (to.path === '/login' && user) {
+         next('/');
+      } else {
+         next();
+      }
+   }
+});
 
 export default router;
