@@ -110,14 +110,14 @@ namespace EstateMaster.Server.Models
         public string id { get; set; }
     }
 
-    public class SuccessResponse
+    public class SuccessResponseUser
     {
         public string Message { get; set; }
         public string UserId { get; set; }
     }
 
     // Hata yanıtı modeli
-    public class ErrorResponse
+    public class ErrorResponseUser
     {
         public string Message { get; set; }
         public string Code { get; set; } // Hata kodu eklenebilir (isteğe bağlı)

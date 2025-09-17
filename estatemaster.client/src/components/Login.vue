@@ -127,8 +127,9 @@
 <script>
 import axios from 'axios'
 import { mapActions } from "vuex";
-import SecureLS from "secure-ls";
-const ls = new SecureLS({ isCompression: true, encodingType: 'aes' });
+// SecureLS'i sadece Vuex modülünde kullanalım, burada direkt kullanmaya gerek yok
+// import SecureLS from "secure-ls"; 
+// const ls = new SecureLS({ isCompression: true, encodingType: 'aes' });
 
 export default {
     name: 'Login',
@@ -139,45 +140,35 @@ export default {
         }
     },
     methods: {
-        ...mapActions(["LogIn"]),
+        ...mapActions('auth', ["LogIn"]),
+
         async submit() {
-            const params = {
-                username: this.username,
-                password: this.password
-            };
-            await axios.post('/api/Auth/AuthUser', params, { 'Content-Type': 'application/json' })
-                .then((response) => {
-                    console.log(response)
-                    // API'den dönen yanıtın yapısını kontrol et
-                    if (response.data.id != null && (response.data.error == null || response.data.error === '')) {
-                        ls.set('user_' + response.data.session_id, response.data);
-                        sessionStorage.setItem('sid', response.data.session_id);
-                        window.location.href = "/";
-                    }
-                    else if (response.data.error) {
-                        // Backend'den gelen spesifik hata mesajını göster
-                        this.$swal("Giriş Başarısız", response.data.error, 'error');
-                        sessionStorage.clear();
-                        return;
-                    }
-                    else {
-                        this.$swal("Giriş Başarısız", "Bilinmeyen bir hata oluştu. Lütfen tekrar deneyiniz.", 'error');
-                        sessionStorage.clear();
-                        return;
-                    }
-                })
-                .catch(error => {
-                    console.log(error);
-                    let errorMessage = "Kullanıcı adı veya şifre hatalı.";
-                    if (error.response && error.response.data && error.response.data.error) {
-                        errorMessage = error.response.data.error;
-                    }
-                    this.$swal("Giriş Başarısız", errorMessage, 'error');
-                });
+            console.log("Submit metodu çalıştı. Kullanıcı adı:", this.username); // Yeni eklenen satır
+            const loginPayload = new FormData();
+            loginPayload.append("username", this.username);
+            loginPayload.append("password", this.password);
+
+            try {
+                const result = await this.LogIn(loginPayload);
+                console.log("LogIn action'ından dönen sonuç:", result); // Yeni eklenen satır
+
+                if (result.success) {
+                    this.$swal("Giriş Başarılı", result.message || "Hoşgeldiniz!", 'success').then(() => {
+                    });
+                     window.location.href = "/";
+                } else {
+                    this.$swal("Giriş Başarısız", result.message || "Bilinmeyen bir hata oluştu. Lütfen tekrar deneyiniz.", 'error');
+                }
+            } catch (error) {
+                console.error("Login işlemi sırasında beklenmedik bir hata oluştu:", error);
+                this.$swal("Hata", "Beklenmedik bir hata oluştu. Lütfen tekrar deneyiniz.", 'error');
+            }
         },
     }
 }
 </script>
+
+
 
 <style scoped>
 .backgroung-login {

@@ -29,7 +29,7 @@ namespace EstateMaster.Server.Controllers
 
             if (string.IsNullOrEmpty(sessionId))
             {
-                return Unauthorized(new ErrorResponse { Message = "Oturum bilgisi bulunamadı. Admin girişi gerekli.", Code = "AUTH-03" });
+                return Unauthorized(new ErrorResponseUser { Message = "Oturum bilgisi bulunamadı. Admin girişi gerekli.", Code = "AUTH-03" });
             }
 
             using (var connection = new MySqlConnection(appSettings.Database.ConnectionString))
@@ -98,7 +98,7 @@ namespace EstateMaster.Server.Controllers
                                 if (!string.IsNullOrEmpty(userIdString)) // Artık userIdString'i kontrol ediyoruz
                                 {
                                     // SP bir userId döndürdüyse, bu bir başarıdır.
-                                    return Ok(new SuccessResponse { Message = resultMessage ?? "Kullanıcı başarıyla oluşturuldu.", UserId = userIdString });
+                                    return Ok(new SuccessResponseUser { Message = resultMessage ?? "Kullanıcı başarıyla oluşturuldu.", UserId = userIdString });
                                 }
                                 else
                                 {
@@ -108,12 +108,12 @@ namespace EstateMaster.Server.Controllers
                                     {
                                         specificErrorMessage = "Kullanıcı oluşturulurken bir sorun oluştu veya kullanıcı ID'si dönmedi.";
                                     }
-                                    return BadRequest(new ErrorResponse { Message = specificErrorMessage, Code = "SP-01" });
+                                    return BadRequest(new ErrorResponseUser { Message = specificErrorMessage, Code = "SP-01" });
                                 }
                             }
                             else
                             {
-                                return StatusCode(500, new ErrorResponse { Message = "Kullanıcı oluşturma işlemi sırasında veritabanından yanıt alınamadı.", Code = "DB-01" });
+                                return StatusCode(500, new ErrorResponseUser { Message = "Kullanıcı oluşturma işlemi sırasında veritabanından yanıt alınamadı.", Code = "DB-01" });
                             }
                         }
                     }
@@ -121,12 +121,12 @@ namespace EstateMaster.Server.Controllers
                 catch (MySqlException ex)
                 {
                     // Loglama yapmak önemlidir: _logger.LogError(ex, "MySQL Hatası AdminCreateUser: {Message}", ex.Message);
-                    return StatusCode(500, new ErrorResponse { Message = $"Veritabanı hatası: {ex.Message}", Code = ex.SqlState ?? "DB-02" });
+                    return StatusCode(500, new ErrorResponseUser { Message = $"Veritabanı hatası: {ex.Message}", Code = ex.SqlState ?? "DB-02" });
                 }
                 catch (Exception ex)
                 {
                     // _logger.LogError(ex, "Beklenmedik Hata AdminCreateUser: {Message}", ex.Message);
-                    return StatusCode(500, new ErrorResponse { Message = $"Sunucu hatası: {ex.Message}", Code = "SERVER-01" });
+                    return StatusCode(500, new ErrorResponseUser { Message = $"Sunucu hatası: {ex.Message}", Code = "SERVER-01" });
                 }
                 finally
                 {
@@ -147,21 +147,21 @@ namespace EstateMaster.Server.Controllers
             // CompanyCode kontrolü - C# tarafında ilk validasyon
             if (string.IsNullOrEmpty(request.CompanyCode))
             {
-                return BadRequest(new ErrorResponse { Message = "Şirket kodu boş olamaz.", Code = "VALIDATION-01" });
+                return BadRequest(new ErrorResponseUser { Message = "Şirket kodu boş olamaz.", Code = "VALIDATION-01" });
             }
 
             // Diğer temel validasyonları da buraya ekleyebiliriz (örneğin email formatı, şifre karmaşıklığı)
             if (string.IsNullOrEmpty(request.username) || request.username.Length < 4)
             {
-                return BadRequest(new ErrorResponse { Message = "Kullanıcı adı en az 4 karakter olmalıdır.", Code = "VALIDATION-02" });
+                return BadRequest(new ErrorResponseUser { Message = "Kullanıcı adı en az 4 karakter olmalıdır.", Code = "VALIDATION-02" });
             }
             if (string.IsNullOrEmpty(request.email) || !System.Text.RegularExpressions.Regex.IsMatch(request.email, @"^[^\s@]+@[^\s@]+\.[^\s@]+$"))
             {
-                return BadRequest(new ErrorResponse { Message = "Lütfen geçerli bir e-posta adresi giriniz.", Code = "VALIDATION-03" });
+                return BadRequest(new ErrorResponseUser { Message = "Lütfen geçerli bir e-posta adresi giriniz.", Code = "VALIDATION-03" });
             }
             if (string.IsNullOrEmpty(request.password) || request.password.Length < 6)
             {
-                return BadRequest(new ErrorResponse { Message = "Şifre en az 6 karakter olmalıdır.", Code = "VALIDATION-04" });
+                return BadRequest(new ErrorResponseUser { Message = "Şifre en az 6 karakter olmalıdır.", Code = "VALIDATION-04" });
             }
 
 
@@ -222,7 +222,7 @@ namespace EstateMaster.Server.Controllers
                                 // Mantık: Eğer userIdString döndüyse başarılıdır, aksi halde hata.
                                 if (!string.IsNullOrEmpty(userIdString))
                                 {
-                                    return Ok(new SuccessResponse { Message = resultMessage ?? "Hesabınız başarıyla oluşturuldu.", UserId = userIdString });
+                                    return Ok(new SuccessResponseUser { Message = resultMessage ?? "Hesabınız başarıyla oluşturuldu.", UserId = userIdString });
                                 }
                                 else
                                 {
@@ -232,13 +232,13 @@ namespace EstateMaster.Server.Controllers
                                     {
                                         specificErrorMessage = "Hesabınız oluşturulurken bir sorun oluştu veya kullanıcı ID'si dönmedi.";
                                     }
-                                    return BadRequest(new ErrorResponse { Message = specificErrorMessage, Code = "SP-01" });
+                                    return BadRequest(new ErrorResponseUser { Message = specificErrorMessage, Code = "SP-01" });
                                 }
                             }
                             else
                             {
                                 // SP'den yanıt dönmemesi beklenmedik bir durumdur.
-                                return StatusCode(500, new ErrorResponse { Message = "Hesap oluşturma işlemi sırasında veritabanından yanıt alınamadı.", Code = "DB-01" });
+                                return StatusCode(500, new ErrorResponseUser { Message = "Hesap oluşturma işlemi sırasında veritabanından yanıt alınamadı.", Code = "DB-01" });
                             }
                         }
                     }
@@ -246,12 +246,12 @@ namespace EstateMaster.Server.Controllers
                 catch (MySqlException ex)
                 {
                     // _logger.LogError(ex, "MySQL Hatası CreateUserSelf: {Message}", ex.Message);
-                    return StatusCode(500, new ErrorResponse { Message = $"Veritabanı hatası: {ex.Message}", Code = ex.SqlState ?? "DB-02" });
+                    return StatusCode(500, new ErrorResponseUser { Message = $"Veritabanı hatası: {ex.Message}", Code = ex.SqlState ?? "DB-02" });
                 }
                 catch (Exception ex)
                 {
                     // _logger.LogError(ex, "Beklenmedik Hata CreateUserSelf: {Message}", ex.Message);
-                    return StatusCode(500, new ErrorResponse { Message = $"Sunucu hatası: {ex.Message}", Code = "SERVER-01" });
+                    return StatusCode(500, new ErrorResponseUser { Message = $"Sunucu hatası: {ex.Message}", Code = "SERVER-01" });
                 }
                 finally
                 {
